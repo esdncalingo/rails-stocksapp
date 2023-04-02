@@ -1,0 +1,12 @@
+<%= turbo_stream_from @user %>
+
+<%=turbo_stream.append "signup" do %>
+  <%=form.label "First Name"%>
+  <%=form.text_field :fname%>
+  <%=form.label "Middle Nane"%>
+  <%=form.text_field :mname%>
+  <%=form.label "Last Name"%>
+  <%=form.text_field :lname%>
+  <%=form.label "Email"%>
+  <%=form.text_field :email%>
+<%end%>

@@ -1,0 +1,21 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: danielc
+  password: postgres
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: rails_stocksapp_development
+
+test:
+  <<: *default
+  database: rails_stocksapp_test
+
+production:
+  <<: *default
+  database: rails_stocksapp_production
+  username: rails_stocksapp
+  password: <%= ENV["RAILS_STOCKSAPP_DATABASE_PASSWORD"] %>
