@@ -23,23 +23,16 @@ class AuthController < ApplicationController
         @user = Authentication.signup(user_params)
         
         format.turbo_stream do
-          render turbo_stream: turbo_stream.update("signup", partial: "auth/signup_next")
+          render turbo_stream: turbo_stream.update("signup", partial: "auth/form_user")
         end
       else
         render :signup, status: :unprocessable_entity
       end
     end
   end
-
-  #this if for testing purpose only
-  # def signup_next
-    
-  # end
-
+  
   def logout
   end
-
-  
 
   private
 
