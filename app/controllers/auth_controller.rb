@@ -10,9 +10,15 @@ class AuthController < ApplicationController
 
 
   def new_session
-    respond_to do |format|
-      @auth = Authentication.login(user_params)
-    end
+    
+      if user = Authentication.login(user_params)
+        print user
+        render json: { token: user.token }, status: 200
+      else
+        print "error password ??????"
+        render json: { not_found: true }, status: 403
+      end
+    
   end
 
   def new_account
