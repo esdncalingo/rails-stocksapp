@@ -10,6 +10,9 @@ class AuthController < ApplicationController
 
 
   def new_session
+    respond_to do |format|
+      @auth.login(user_params)
+    end
   end
 
   def new_account

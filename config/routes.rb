@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   root :to => "home#index"
 
   # authentication form
-  get "/sigin" => "auth#signin", as: :signin_page
+  get "/signin" => "auth#signin", as: :signin_page
   get "/signup" => "auth#signup", as: :signup_page
+  post "/signin" => "auth#new_session", as: :new_session
   post "/signup" => "auth#new_account", as: :new_account
 
   # WIP for auth
