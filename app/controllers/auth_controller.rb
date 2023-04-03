@@ -11,13 +11,11 @@ class AuthController < ApplicationController
 
   def new_session
     
-      if user = Authentication.login(user_params)
-        print user
-        render json: { token: user.token }, status: 200
-      else
-        print "error password ??????"
-        render json: { not_found: true }, status: 403
-      end
+    if user = Authentication.login(user_params)
+      render json: { token: user.token }, status: 200
+    else
+      render json: { not_found: true }, status: 403
+    end
     
   end
 
@@ -53,7 +51,7 @@ class AuthController < ApplicationController
   private
 
   def user_params
-    params.permit(:email, :password)
+    params.permit(:username, :password)
   end
 
   def signup_params
