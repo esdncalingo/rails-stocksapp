@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :contacts
       t.string :address
       t.integer :usertype_id
+      t.integer :auth_id
 
       t.timestamps
     end

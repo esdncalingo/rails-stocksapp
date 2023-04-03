@@ -18,7 +18,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_024610) do
     t.string "username"
     t.string "password"
     t.string "token"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -37,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_024610) do
     t.string "contacts"
     t.string "address"
     t.integer "usertype_id"
+    t.integer "auth_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
