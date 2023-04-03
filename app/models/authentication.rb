@@ -12,7 +12,7 @@ class Authentication < ApplicationRecord
   def self.login(login_params)
     account = find_by(username: login_params[:username])
 
-    if user.present?
+    if account.present?
         return account if Password.new(account.password) == login_params[:password]
     end
 end

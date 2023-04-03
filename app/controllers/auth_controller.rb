@@ -11,7 +11,7 @@ class AuthController < ApplicationController
 
   def new_session
     respond_to do |format|
-      @auth.login(user_params)
+      @auth = Authentication.login(user_params)
     end
   end
 
@@ -47,7 +47,7 @@ class AuthController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password)
+    params.permit(:email, :password)
   end
 
   def signup_params
