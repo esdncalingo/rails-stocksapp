@@ -2,20 +2,20 @@
 
 one:
   email: MyString
-  username: MyString
-  password: MyString
   fname: MyString
   mname: MyString
   lname: MyString
-  user_typeid: 1
-  token: MyString
+  contacts: MyString
+  address: MyString
+  usertype_id: 1
+  auth_id: 1
 
 two:
   email: MyString
-  username: MyString
-  password: MyString
   fname: MyString
   mname: MyString
   lname: MyString
-  user_typeid: 1
-  token: MyString
+  contacts: MyString
+  address: MyString
+  usertype_id: 1
+  auth_id: 1

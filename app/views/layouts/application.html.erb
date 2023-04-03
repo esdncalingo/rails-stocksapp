@@ -11,9 +11,15 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="bg-zinc-500">
+
+    <% flash.each do |type, message| %>
+      <div>
+        <%= message %>
+      </div>
+    <% end %>
     
-      <%= yield %>
+    <%= yield %>
     
   </body>
 </html>

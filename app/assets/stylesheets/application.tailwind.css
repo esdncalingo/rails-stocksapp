@@ -6,7 +6,15 @@
 
 @layer components {
   .btn-primary {
-    @apply py-2 px-4 bg-blue-500 rounded-xl drop-shadow-sm text-slate-200;
+    @apply py-2 px-4 bg-blue-500 hover:bg-blue-700 rounded-sm drop-shadow-md text-white font-bold;
+  }
+
+  .form-label {
+    @apply block text-gray-700 font-bold mb-2;
+  }
+
+  .form-inputbox {
+    @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline;
   }
 }
 

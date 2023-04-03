@@ -1,2 +1,0 @@
-class AccType < ApplicationRecord
-end
