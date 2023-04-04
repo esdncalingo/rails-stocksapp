@@ -1,4 +1,4 @@
-<%=form_with(model: @user, html: { class: "w-full max-w-sm mx-auto" }) do |form|%>
+<%=form_with(model: @auth, html: { class: "w-full max-w-sm mx-auto" }) do |form|%>
   <div class="mb-4">
     <%=form.label "Username", class: "form-label"%>
     <%=form.text_field :username, class: "form-inputbox"%>
@@ -15,6 +15,7 @@
   </div>
 
   <div class="flex items-center justify-between">
-    <%= button_to "Next", signup_nextpage_path,class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+    <%= form.submit "Next", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
   </div>
+
 <%end%>

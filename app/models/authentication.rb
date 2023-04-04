@@ -4,6 +4,7 @@ class Authentication < ApplicationRecord
   has_one :user
   has_one :user_type, :through => :user
   validates :username, uniqueness: true
+  validates :username, :password, presence: true
 
   after_create :generate_token
 

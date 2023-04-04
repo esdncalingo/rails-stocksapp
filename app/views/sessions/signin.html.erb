@@ -9,7 +9,14 @@
     <%=form.password_field :password, class: "form-inputbox"%>
   </div>
  
-  <div class="flex items-center justify-between">
-    <%= button_to "Next", new_session_path,class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+  <div class="flex items-center justify-between mb-4">
+    <%= form.submit "Next", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
   </div>
+
+  <div class="flex flex-col mb-4">
+    <%= link_to "Sign Up", new_account_path %>
+    <span>Forgot your password?</span>
+  </div>
+
+  
 <%end%>

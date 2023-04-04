@@ -4,9 +4,14 @@ Rails.application.routes.draw do
   # Session routes
   get "/signin" => "sessions#signin", as: :signin_page
   get "/signup" => "sessions#signup", as: :signup_page
+  get "/userinfo" => "sessions#userinfo", as: :userinfo
   post "/signin" => "sessions#new_session", as: :new_session
   post "/signup" => "sessions#new_account", as: :new_account
+  post "/userinfo" => "sessions#new_userinfo", as: :new_userinfo
   post "/signout" => "sessions#signout", as: :signout
+
+  # Users Information
+
 
   # Homepage
   get "/home" => "home#index"

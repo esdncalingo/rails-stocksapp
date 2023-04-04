@@ -5,11 +5,15 @@ class SessionsController < ApplicationController
   end
 
   def signup
+    @user = User.new
+  end
+
+  def userinfo
   end
 
   def new_session
     respond_to do |format|
-      if user = Authentication.login(user_params)
+      if user = Authentication.login(auth_params)
         session[:gen_token] = user.token
         format.html { redirect_to home_path }
         format.json { render json: { token: user.token }, status: 200 }
@@ -21,14 +25,27 @@ class SessionsController < ApplicationController
 
   def new_account
     respond_to do |format|
-      if (user_params[:password] === params[:password_confirmation])
-        @user = Authentication.signup(user_params)
+      if (auth_params[:password] === params[:password_confirmation])
+        @user = Authentication.signup(auth_params)
         
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.update("signup", partial: "auth/form_user")
-        end
+        format.html { redirect_to userinfo_path }
       else
         render :signup, status: :unprocessable_entity
+      end
+    end
+  end
+
+  def new_userinfo
+    respond_to do |format|
+    @user = User.new(user_params)
+    @user.usertype_id = 2,
+    @user.auth_id = Authentication.last.id
+
+    
+      if @user.save
+        format.html { redirect_to signin_page_path }
+      else
+        render :userinfo, status: :unprocessable_entity
       end
     end
   end
@@ -40,8 +57,12 @@ class SessionsController < ApplicationController
 
   private
 
-  def user_params
+  def auth_params
     params.permit(:username, :password)
+  end
+
+  def user_params
+    params.permit(:fname, :mname, :lname, :email, :contacts, :address, :usertype_id, :auth_id)
   end
 
 end
