@@ -33,9 +33,8 @@ class SessionsController < ApplicationController
     end
   end
   
-  def logout
-    # current_user.token = ""
-    # current_user.save
+  def signout
+    session[:gen_token] = nil
   end
 
   private
