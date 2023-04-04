@@ -1,5 +1,5 @@
-class AuthController < ApplicationController
-    
+class SessionsController < ApplicationController
+
   def signin
     @auth = Authentication.new
   end
@@ -10,7 +10,7 @@ class AuthController < ApplicationController
   def new_session
     respond_to do |format|
       if user = Authentication.login(user_params)
-        #request.headers['Authorization'] = user
+        session[:gen_token] = user.token
         format.html { redirect_to home_path }
         format.json { render json: { token: user.token }, status: 200 }
       else

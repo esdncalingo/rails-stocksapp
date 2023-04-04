@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
   
 
   def current_user
-    token = request.headers['Authorization']
+    #token = request.headers['Authorization']
+    token = session[:gen_token]
 
     if token.present?
       user ||= Authentication.find_by(token: token)
