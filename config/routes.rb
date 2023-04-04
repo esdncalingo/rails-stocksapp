@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "/signup" => "sessions#signup", as: :signup_page
   post "/signin" => "sessions#new_session", as: :new_session
   post "/signup" => "sessions#new_account", as: :new_account
-  post "/signout" => "sessions#signout"
+  post "/signout" => "sessions#signout", as: :signout
 
   # Homepage
   get "/home" => "home#index"

@@ -35,6 +35,7 @@ class SessionsController < ApplicationController
   
   def signout
     session[:gen_token] = nil
+    redirect_to new_session_path
   end
 
   private
