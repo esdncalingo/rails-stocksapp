@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
       secret_token: 'sk_5b436cad7697420cb38608baba594b33',
     )
   end
-
+  
   def current_user
     token = session[:gen_token]
     print token
