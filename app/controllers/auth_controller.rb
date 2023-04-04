@@ -8,13 +8,15 @@ class AuthController < ApplicationController
   end
 
   def new_session
-    
-    if user = Authentication.login(user_params)
-      render json: { token: user.token }, status: 200
-    else
-      render json: { not_found: true }, status: 403
+    respond_to do |format|
+      if user = Authentication.login(user_params)
+        #request.headers['Authorization'] = user
+        format.html { redirect_to home_path }
+        format.json { render json: { token: user.token }, status: 200 }
+      else
+        format.html { render json: { not_found: true }, status: 403 }
+      end
     end
-    
   end
 
   def new_account
@@ -32,6 +34,8 @@ class AuthController < ApplicationController
   end
   
   def logout
+    # current_user.token = ""
+    # current_user.save
   end
 
   private

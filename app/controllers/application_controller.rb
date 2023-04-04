@@ -12,15 +12,19 @@ class ApplicationController < ActionController::Base
     token = request.headers['Authorization']
 
     if token.present?
-      user = Authentication.find_by(token: token)
+      user ||= Authentication.find_by(token: token)
     end
   end
 
   def authenticate_user
     if current_user.nil?
-      #redirect_to root
+      redirect_to root
       render json: { unauthenticated: true }, status: 403
     end
+  end
+
+  def require_user
+    redirect_to "/signin" unless current_user
   end
 
 end

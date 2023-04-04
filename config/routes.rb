@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root :to => "home#index"
+  root "home#index"
 
   # authentication form
   get "/signin" => "auth#signin", as: :signin_page
@@ -7,9 +7,8 @@ Rails.application.routes.draw do
   post "/signin" => "auth#new_session", as: :new_session
   post "/signup" => "auth#new_account", as: :new_account
 
-  # WIP for auth
-  post "/signup/info" => "auth#signup_next", as: :signup_nextpage
-
+  # Homepage
+  get "/home" => "home#index"
   post "/sample" => "home#sample", as: :sample_page
 
   # stocks 
