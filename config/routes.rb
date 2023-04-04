@@ -11,4 +11,7 @@ Rails.application.routes.draw do
   post "/signup/info" => "auth#signup_next", as: :signup_nextpage
 
   post "/sample" => "home#sample", as: :sample_page
+
+  # stocks 
+  get "/stocks/show" => "stocks#show", as: :stocks_page
 end
