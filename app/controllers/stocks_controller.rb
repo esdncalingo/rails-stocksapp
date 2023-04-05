@@ -7,7 +7,9 @@ class StocksController < ApplicationController
     @selected_company = company.company_name
 
     response = Faraday.get('https://api.iex.cloud/v1/data/CORE/REF_DATA?token=pk_ed7475c0c153436587bd10b8f1da9916')
-    
+
+    # top 10 list
+    # response = Faraday.get(https://cloud.iexapis.com/v1/stock/market/list/mostactive?token=pk_06f0670b09884fe5aa66d394e4263f00)
  
   #     conn = Faraday.new(:url => 'https://rest.coinapi.io') 
 
@@ -15,6 +17,7 @@ class StocksController < ApplicationController
   #     response = conn.get '/v1/assets/', params do |request|
   #       request.headers["X-CoinAPI-Key"] = '8CDEDC13-5ABA-45BD-95A6-3740729F2722'
   #     end
+
 
 
     puts response.body.kind_of?(Array)
