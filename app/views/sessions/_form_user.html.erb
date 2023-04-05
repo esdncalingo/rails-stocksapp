@@ -1,6 +1,6 @@
 
 <%= form_with(scope: @user, url: new_userinfo_path, html: { class: "w-full max-w-sm mx-auto" }) do |form| %>
-
+  <%= form.hidden_field( :id, :value => params[:id])%>
   <div class="mb-4">
     <%=form.label "First Name", class: "form-label"%>
     <%=form.text_field :fname, class: "form-inputbox"%>
@@ -15,11 +15,6 @@
     <%=form.label "Last Name", class: "form-label"%>
     <%=form.text_field :lname, class: "form-inputbox"%>
   </div>
-
-  <div class="mb-4">
-    <%=form.label "Email", class: "form-label"%>
-    <%=form.text_field :email, class: "form-inputbox"%>
-  </div>  
 
   <div class="mb-4">
     <%=form.label "Contacts", class: "form-label"%>

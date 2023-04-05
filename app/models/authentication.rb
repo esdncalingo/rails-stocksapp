@@ -1,8 +1,8 @@
 class Authentication < ApplicationRecord
   include BCrypt
 
-  has_one :user
-  has_one :user_type, :through => :user
+  belongs_to :user
+
   validates :username, uniqueness: true
   validates :username, :password, presence: true
 
@@ -17,9 +17,10 @@ class Authentication < ApplicationRecord
   end
 
   def self.signup(signup_params)
+    user = User.find_by(email: signup_params[:email])
     password_hash = Password.create(signup_params[:password])
 
-    create(username: signup_params[:username], password: password_hash)
+    create(user_id: user.id, username: signup_params[:username], password: password_hash)
   end
 
   def generate_token

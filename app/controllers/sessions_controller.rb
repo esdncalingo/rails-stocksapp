@@ -1,11 +1,9 @@
 class SessionsController < ApplicationController
 
   def signin
-    @auth = Authentication.new
   end
 
   def signup
-    @user = User.new
   end
 
   def userinfo
@@ -28,23 +26,19 @@ class SessionsController < ApplicationController
   def new_account
     respond_to do |format|
       if (auth_params[:password] === params[:password_confirmation])
-        @user = Authentication.signup(auth_params)
+        @user = User.create_user(auth_params)
         
-        format.html { redirect_to new_userinfo_path }
+        format.html { redirect_to new_userinfo_path(id: @user.id) }
       else
         render :signup, status: :unprocessable_entity
       end
     end
   end
 
-  #user information
+  # additional user information
   def new_userinfo
-    pp user_params
     @user = User.signup(user_params)
-    
-    # if @user.save
-    #   format.html { redirect_to signin_page_path }
-    # end
+    redirect_to new_session_path
   end
 
   #logout
@@ -56,11 +50,11 @@ class SessionsController < ApplicationController
   private
 
   def auth_params
-    params.permit(:username, :password)
+    params.permit(:username, :password, :email)
   end
 
   def user_params
-    params.permit(:fname, :mname, :lname, :email, :contacts, :address, :usertype_id, :auth_id)
+    params.permit(:fname, :mname, :lname, :contacts, :address, :id)
   end
 
 end

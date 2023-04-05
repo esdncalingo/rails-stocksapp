@@ -1,17 +1,29 @@
 class User < ApplicationRecord
-  # belongs_to :user_type
-  # belongs_to :authentication
+  has_one :atuhentication
+  has_many :logins
 
-  def self.signup(params)
-    create( fname: params[:fname],
-            mname: params[:mname],
-            lname: params[:lname],
-            email: params[:email],
-            contacts: params[:contacts],
-            address: params[:address],
-            usertype_id: 2,
-            auth_id: Authentication.last.id
-    ).save
+  validates :email, uniqueness: true
+  validates :email, presence: true
+
+  # user_level { 1 = trader, 2 = admin }
+
+  def self.create_user(params)
+    @user = new
+    @user.email = params[:email]
+    @user.user_level = 1
+    @user.save
+
+    Authentication.signup(params)
+  end
+
+  def self.signup(user_params)
+    user = find(user_params[:id])
+    user.update( fname: user_params[:fname],
+            mname: user_params[:mname],
+            lname: user_params[:lname],
+            contacts: user_params[:contacts],
+            address: user_params[:address],
+    )
   end
 
 end

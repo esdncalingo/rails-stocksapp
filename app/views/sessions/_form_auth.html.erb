@@ -1,4 +1,10 @@
 <%=form_with(model: @auth, html: { class: "w-full max-w-sm mx-auto" }) do |form|%>
+  
+  <div class="mb-4">
+    <%=form.label "Email", class: "form-label"%>
+    <%=form.text_field :email, class: "form-inputbox"%>
+  </div>  
+  
   <div class="mb-4">
     <%=form.label "Username", class: "form-label"%>
     <%=form.text_field :username, class: "form-inputbox"%>
