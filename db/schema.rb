@@ -34,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_024025) do
     t.string "lname"
     t.string "contacts"
     t.string "address"
+    t.string "status"
     t.integer "user_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

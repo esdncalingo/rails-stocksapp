@@ -8,10 +8,12 @@ class User < ApplicationRecord
   # user_level { 1 = trader, 2 = admin }
 
   def self.create_user(params)
-    @user = new
-    @user.email = params[:email]
-    @user.user_level = 1
-    @user.save
+    new(
+      email: params[:email],
+      status: "pending",
+      user_level: 1
+    ).save
+    
 
     Authentication.signup(params)
   end
