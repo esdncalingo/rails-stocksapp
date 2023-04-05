@@ -8,7 +8,8 @@
   .btn-primary {
     @apply py-2 px-4 bg-[#0b0f16] ring-[#f890e7] ring-2 text-[#f890e7]
     hover:ring-[#03e9f4] hover:text-white hover:-translate-y-1 hover:drop-shadow-[0_5px_5px_rgba(3,233,244,1.25)]
-    rounded-md drop-shadow-md font-bold min-w-[120px];
+    rounded-md drop-shadow-md font-bold min-w-[120px] transition-all ease-in duration-300
+    active:translate-y-1 active:bg-[#03e9f4] active:shadow-[#03e9f4] shadow-lg;
   }
 
   .form-label {
@@ -19,5 +20,3 @@
     @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none;  /*focus:shadow-outline;*/
   }
 }
-
-

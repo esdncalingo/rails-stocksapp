@@ -1,4 +1,4 @@
-<%=form_with(model: @authentication, html: { class: "flex flex-col rounded-md w-full max-w-sm mx-auto ring-[#f890e7] ring-2" }) do |form|%>
+<%=form_with(model: @authentication, html: { class: "flex flex-col rounded-md w-full max-w-sm mx-auto ring-[#f890e7] ring-2 select-none" }) do |form|%>
   <div class="p-4">
     <span class="text-white text-4xl font-bold">Login</span>
   </div>
@@ -15,7 +15,7 @@
     </div>
 
     <div class="mb-16">
-      <span class="text-[#f890e7] text-xs">Forgot your password?</span>
+      <span class="text-[#f890e7] text-xs hover:text-[#03e9f4] transition-all ease-in duration-300 cursor-pointer">Forgot your password?</span>
     </div>
   
     <div class="flex items-center justify-between mb-8 self-center">
@@ -24,7 +24,10 @@
   </div>
   
   <div class="flex flex-col p-4 bg-[#2d3b5a] rounded-b-md">
-    <%= link_to "Sign Up", new_account_path, class: "text-[#03e9f4] text-sm self-center" %>
+    <%= link_to "Sign Up", new_account_path, 
+      class: "text-[#03e9f4] text-sm self-center hover:text-[#05bdc7] 
+        transition-all ease-in duration-300" 
+    %>
   </div>
 
 <%end%>
