@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_one :atuhentication
+  has_one :authentication
   has_many :logins
 
   validates :email, uniqueness: true
@@ -21,10 +21,10 @@ class User < ApplicationRecord
   def self.signup(user_params)
     user = find(user_params[:id])
     user.update( fname: user_params[:fname],
-            mname: user_params[:mname],
-            lname: user_params[:lname],
-            contacts: user_params[:contacts],
-            address: user_params[:address],
+      mname: user_params[:mname],
+      lname: user_params[:lname],
+      contacts: user_params[:contacts],
+      address: user_params[:address],
     )
   end
 
