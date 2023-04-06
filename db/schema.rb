@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_024025) do
     t.string "username"
     t.string "password"
     t.string "token"
+    t.boolean "is_active"
   end
 
   create_table "logins", force: :cascade do |t|

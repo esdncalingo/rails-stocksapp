@@ -25,8 +25,10 @@ class SessionsController < ApplicationController
 
   #logout
   def signout
+    user = Authentication.find_by(token: session[:gen_token])
+    user.update(is_active: false)
+    Login.time_out(user.user_id)
     session[:gen_token] = nil
-    Login.time_out(1)
     redirect_to new_session_path
   end
 

@@ -13,7 +13,6 @@ class Login < ApplicationRecord
     update(
       logout_time: Time.current.utc.to_datetime
     )
-    
   end
 
 end
