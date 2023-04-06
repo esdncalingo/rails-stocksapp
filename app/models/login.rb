@@ -9,8 +9,8 @@ class Login < ApplicationRecord
   end
 
   def self.time_out(user_id)
-    where(user_id: user_id).last
-    update(
+    user = where(user_id: user_id).last
+    user.update(
       logout_time: Time.current.utc.to_datetime
     )
   end
