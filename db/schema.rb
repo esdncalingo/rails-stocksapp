@@ -23,8 +23,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_024025) do
 
   create_table "logins", force: :cascade do |t|
     t.integer "user_id"
-    t.date "login_time"
-    t.date "logout_time"
+    t.datetime "login_time"
+    t.datetime "logout_time"
   end
 
   create_table "users", force: :cascade do |t|

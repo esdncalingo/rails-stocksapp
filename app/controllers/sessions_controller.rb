@@ -14,12 +14,20 @@ class SessionsController < ApplicationController
     respond_to do |format|
       if user = Authentication.login(auth_params)
         session[:gen_token] = user.token
+        Login.time_in(user.user_id)
         format.html { redirect_to home_path }
         format.json { render json: { token: user.token }, status: 200 }
       else
         format.html { render json: { not_found: true }, status: 403 }
       end
     end
+  end
+
+  #logout
+  def signout
+    session[:gen_token] = nil
+    Login.time_out(1)
+    redirect_to new_session_path
   end
 
   #signup
@@ -38,12 +46,6 @@ class SessionsController < ApplicationController
   # additional user information
   def new_userinfo
     @user = User.signup(user_params)
-    redirect_to new_session_path
-  end
-
-  #logout
-  def signout
-    session[:gen_token] = nil
     redirect_to new_session_path
   end
 
