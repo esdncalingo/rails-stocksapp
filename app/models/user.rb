@@ -11,13 +11,11 @@ class User < ApplicationRecord
     new(
       email: params[:email],
       status: "pending",
-      user_level: 1
     ).save
     
-
     Authentication.signup(params)
   end
-
+  
   def self.signup(user_params)
     user = find(user_params[:id])
     user.update( fname: user_params[:fname],

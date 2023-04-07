@@ -25,7 +25,7 @@ class Authentication < ApplicationRecord
     user = User.find_by(email: signup_params[:email])
     password_hash = Password.create(signup_params[:password])
 
-    create(user_id: user.id, username: signup_params[:username], password: password_hash)
+    create(user_id: user.id, username: signup_params[:username], password: password_hash, user_level: 1)
   end
 
   def generate_token

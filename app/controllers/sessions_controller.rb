@@ -13,10 +13,17 @@ class SessionsController < ApplicationController
   def new_session
     respond_to do |format|
       if user = Authentication.login(auth_params)
-        session[:gen_token] = user.token
-        Login.time_in(user.user_id)
-        format.html { redirect_to home_path }
-        format.json { render json: { token: user.token }, status: 200 }
+        if user.user_level === 2
+          session[:gen_token] = user.token
+          Login.time_in(user.user_id)
+          format.html { redirect_to admin_path }
+          format.json { render json: { token: user.token }, status: 200 }
+        else
+          session[:gen_token] = user.token
+          Login.time_in(user.user_id)
+          format.html { redirect_to home_path }
+          format.json { render json: { token: user.token }, status: 200 }
+        end
       else
         format.html { render json: { not_found: true }, status: 403 }
       end
@@ -52,6 +59,9 @@ class SessionsController < ApplicationController
   end
 
   private
+  def admin_params
+    params.permit(:username, :password)
+  end
 
   def auth_params
     params.permit(:username, :password, :email)

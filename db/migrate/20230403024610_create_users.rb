@@ -8,7 +8,6 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :contacts
       t.string :address
       t.string :status
-      t.integer :user_level
 
       t.timestamps
     end

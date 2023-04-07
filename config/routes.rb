@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   post "/userinfo" => "sessions#new_userinfo", as: :new_userinfo
   post "/signout" => "sessions#signout", as: :signout
 
+
+  # Admin routes
+  get "/admin" => "admins#index"
+
   # Users Information
 
 

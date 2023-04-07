@@ -17,9 +17,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def is_active
-  end
-
   def require_user
     redirect_to "/signin" unless current_user
   end

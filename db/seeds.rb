@@ -6,4 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-admin = Admin.create(username: "admin",password: "$2a$12$nA27CkWOi5GfzXfXr3loWucayKDIawNNLQ8C4r.iJ0NhpA3ikAB/C")
+User.new(email: "admin@email.com", fname: "Daniel", mname: "Nav", lname: "Calingo").save
+Authentication.signup(email: "admin@email.com", username: "admin", password: "12345678")
+admin = Authentication.find_by(username: "admin")
+admin.update(user_level: 2)
