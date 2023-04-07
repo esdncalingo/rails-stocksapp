@@ -1,0 +1,17 @@
+.nav-bar {
+ padding: 1.3rem;
+ color: #ccc;
+ font-size: 1.3rem;
+ letter-spacing: 0.2rem;
+ font-family:  'Manrope', Quicksand, sans-serif;
+ display: flex;
+ flex-direction: row-reverse;
+}
+
+.nav-items:hover {
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+}
