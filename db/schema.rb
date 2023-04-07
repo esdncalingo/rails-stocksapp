@@ -14,6 +14,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_024025) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "accounts", primary_key: "user_id", id: :serial, force: :cascade do |t|
+    t.string "username", limit: 50, null: false
+    t.string "password", limit: 50, null: false
+    t.string "email", limit: 255, null: false
+    t.datetime "created_on", precision: nil, null: false
+    t.datetime "last_login", precision: nil
+    t.index ["email"], name: "accounts_email_key", unique: true
+    t.index ["username"], name: "accounts_username_key", unique: true
+  end
+
   create_table "authentications", force: :cascade do |t|
     t.integer "user_id"
     t.string "username"
@@ -25,6 +35,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_024025) do
     t.integer "user_id"
     t.date "login_time"
     t.date "logout_time"
+  end
+
+  create_table "user_types", force: :cascade do |t|
+    t.string "privileged"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

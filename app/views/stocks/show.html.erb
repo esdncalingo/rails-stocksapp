@@ -1,1 +1,11 @@
-<p><%=@master_list%></p>
+    <div >
+      <% @master_list.each do |stocks|%>
+        <div class="flex">
+          <div class="active-stocks"><%= stocks["companyName"]%></div>
+           <div class="active-stocks"><%= "#{(stocks["iexMarketPercent"] * 100).round(2)} %"%></div>
+           <!-- <%# <div class="table-cell"><%= "#{stocks.iexMarketPercent * 100} %"%></div> %> -->
+          
+          
+        </div>
+      <%end%>
+    </div>

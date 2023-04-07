@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './partials/navigation.css';
+@import './partials/sidepanel.css';
 
 
 
@@ -19,4 +21,5 @@
   .form-inputbox {
     @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none;  /*focus:shadow-outline;*/
   }
+
 }
