@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   #before_action :authenticate_user
   before_action :require_user
   before_action :initialize_iex_client
+  before_action :is_admin
 
   def index
     #store in global variable stocks masterlist

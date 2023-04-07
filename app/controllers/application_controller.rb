@@ -21,4 +21,12 @@ class ApplicationController < ActionController::Base
     redirect_to "/signin" unless current_user
   end
 
+  def is_admin
+    admin = session[:is_admin]
+
+    if admin
+      redirect_to "/admin"
+    end
+  end
+
 end
