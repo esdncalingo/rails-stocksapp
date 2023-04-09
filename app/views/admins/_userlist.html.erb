@@ -1,11 +1,16 @@
-<div class="grid grid-cols-[20px_300px_200px_100px] bg-slate-500 bg-opacity-20 mb-2 p-2 border-solid border-2 border-[#f890e7] rounded-md">
+<div class="grid grid-cols-[20px_300px_200px_100px] bg-slate-500 bg-opacity-20 mb-2 p-2 border-solid border-[1px] border-[#f890e7] rounded-md
+  hover:border-[#03e9f4] hover:drop-shadow-[0_5px_5px_rgba(3,233,244,1.25)] transition-all duration-300 select-none">
   <span class="text-white">
     <%= index + 1 %>
   </span>
   
-  <span class="text-white">
-    <i class="fa-solid fa-user"></i>
-    <%= user.lname %>, <%= user.fname %> <%= user.mname %>
+  <span class="flex text-white">
+    <div class="h-[25px] w-[25px] flex justify-center items-center rounded-full border-white border-[1px]">
+      <i class="fa-solid fa-user "></i>
+    </div>
+    <div class="ml-2">
+      <%= user.lname %>, <%= user.fname %> <%= user.mname %>
+    </div>
   </span>
   
   <span class="text-white">
