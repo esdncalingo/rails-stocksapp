@@ -1,12 +1,14 @@
 <%= turbo_stream.update "usertable" do %>
-  <table>
-  <tr>
-    <th>Email</th>
-    <th>Name</th>
-    <th>Status</th>
-  </tr>
-  <% @user.each do |user|%>
-    <%= render "userlist", user: user %>
-  <% end %>
-</table>
+  <div>
+    <div class="grid grid-cols-[20px_300px_200px_100px] p-2">
+      <span></span>
+      <span class="text-white font-bold ml-6">Name</span>
+      <span class="text-white font-bold ml-2">Email</span>
+      <span class="text-white font-bold ml-2">Status</span>
+    </div>
+
+    <% @user.each_with_index do |user, index|%>
+      <%= render "userlist", user: user, index: index %>
+    <% end %>
+  </div>
 <% end %>

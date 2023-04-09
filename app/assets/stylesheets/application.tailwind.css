@@ -41,6 +41,6 @@ body {
   @apply h-screen;
 }
 
-th {
+th, td {
   @apply text-white;
 }

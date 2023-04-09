@@ -1,17 +1,18 @@
 
-<div class="flex h-[100%]">
-  <%= turbo_frame_tag "sidepanel", class: "flex flex-col bg-indigo-500 bg-opacity-20" do %>
+<div class="flex h-[100%] w-[100%]">
+  <%= button_to "Logout", signout_path, class: "text-white" %>
+  <%= turbo_frame_tag "sidepanel", class: "flex flex-col bg-indigo-500 bg-opacity-20
+    p-4" do %>
     <%= render partial: "sidepanel" %>
   <% end %>
 
-  <div>
+  <div class="p-4 w-[80%]">
     <%= turbo_frame_tag "searchbar" do %>
       <%= render partial: "searchbar" %>
     <% end %>
 
     <div class="flex flex-col justify-center items-center">
-      <span class="text-white text-5xl">ADMIN PAGE</span>
-      <%= button_to "Logout", signout_path, class: "btn-primary" %>
+      <span class="text-white text-5xl">Stock App Page</span>
     </div>
 
 

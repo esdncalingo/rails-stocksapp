@@ -1,5 +1,18 @@
-<tr>
-  <td><%= user.email %></td>
-  <td><%= user.fname %></td>
-  <td><%= user.status %></td>
-</tr>
+<div class="grid grid-cols-[20px_300px_200px_100px] bg-slate-500 bg-opacity-20 mb-2 p-2 border-solid border-2 border-[#f890e7] rounded-md">
+  <span class="text-white">
+    <%= index + 1 %>
+  </span>
+  
+  <span class="text-white">
+    <i class="fa-solid fa-user"></i>
+    <%= user.lname %>, <%= user.fname %> <%= user.mname %>
+  </span>
+  
+  <span class="text-white">
+    <%= user.email %>
+  </span>
+  
+  <span class="text-white">
+    <%= user.status %>
+  </span>
+</div>
