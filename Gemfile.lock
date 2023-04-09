@@ -114,6 +114,9 @@ GEM
     faraday-retry (1.0.3)
     faraday_middleware (1.2.0)
       faraday (~> 1.0)
+    ffi (1.15.5)
+    font-awesome-sass (6.4.0)
+      sassc (~> 2.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     hashie (5.0.0)
@@ -205,6 +208,8 @@ GEM
     rexml (3.2.5)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     selenium-webdriver (4.8.6)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -254,6 +259,7 @@ DEPENDENCIES
   capybara
   debug
   faraday
+  font-awesome-sass (~> 6.4.0)
   iex-ruby-client
   importmap-rails
   jbuilder
