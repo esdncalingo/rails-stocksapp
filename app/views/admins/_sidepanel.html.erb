@@ -1,6 +1,14 @@
-<%= turbo_stream.update "sidepanel" do %>
-  <span class="text-white">X this is sidepanel</span>
-  <span class="text-white">X Notification</span>
-  <span class="text-white">X Traders</span>
+<%= turbo_stream.prepend "sidepanel" do %>
+  <span class="text-white text-xl font-bold mb-4">Sidepanel</span>
+  <div>
+    <i class="fa-solid fa-bell"></i>
+    <span class="text-white">Notification</span>
+  </div>
+
+  <div>
+    <i class="fa-sharp fa-solid fa-users"></i>
+    <span class="text-white">Traders</span>
+  </div>
+  
   <span class="text-white mt-auto">Minimize Menu</span>
 <% end %>
