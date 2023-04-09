@@ -1,0 +1,12 @@
+<%= turbo_stream.update "usertable" do %>
+  <table>
+  <tr>
+    <th>Email</th>
+    <th>Name</th>
+    <th>Status</th>
+  </tr>
+  <% @user.each do |user|%>
+    <%= render "userlist", user: user %>
+  <% end %>
+</table>
+<% end %>

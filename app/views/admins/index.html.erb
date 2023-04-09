@@ -1,1 +1,18 @@
-<span>ADMIN PAGE</span>
+
+<div class="flex h-[100%]">
+  <%= turbo_frame_tag "sidepanel", class: "flex flex-col bg-indigo-500 bg-opacity-20" do %>
+    <%= render partial: "sidepanel" %>
+  <% end %>
+
+  <div>
+    <div class="flex flex-col justify-center items-center">
+      <span class="text-white text-5xl">ADMIN PAGE</span>
+      <%= button_to "Logout", signout_path, class: "btn-primary" %>
+    </div>
+
+
+    <%= turbo_frame_tag "usertable", class: "flex flex-col" do %>
+      <%= render partial: "usertable" %>
+    <% end %>
+  </div>
+</div>

@@ -36,3 +36,11 @@
 
 
 }
+
+body {
+  @apply h-screen;
+}
+
+th {
+  @apply text-white;
+}
