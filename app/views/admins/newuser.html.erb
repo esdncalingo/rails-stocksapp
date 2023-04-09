@@ -1,0 +1,32 @@
+
+<%= form_with(scope: @user, url: new_userinfo_path, html: { class: "w-full max-w-sm mx-auto" }) do |form| %>
+  <%= form.hidden_field( :id, :value => params[:id])%>
+  <div class="mb-4">
+    <%=form.label "First Name", class: "form-label"%>
+    <%=form.text_field :fname, class: "form-inputbox"%>
+  </div>
+
+  <div class="mb-4">
+    <%=form.label "Middle Nane", class: "form-label"%>
+    <%=form.text_field :mname, class: "form-inputbox"%>
+  </div>  
+  
+  <div class="mb-4">
+    <%=form.label "Last Name", class: "form-label"%>
+    <%=form.text_field :lname, class: "form-inputbox"%>
+  </div>
+
+  <div class="mb-4">
+    <%=form.label "Contacts", class: "form-label"%>
+    <%=form.text_field :contacts, class: "form-inputbox"%>
+  </div>
+
+  <div class="mb-4">
+    <%=form.label "Address", class: "form-label"%>
+    <%=form.text_field :address, class: "form-inputbox"%>
+  </div>  
+
+  <div class="flex items-center justify-between">
+    <%= form.submit "Signup", class: "btn-primary" %>
+  </div>
+<%end%>
