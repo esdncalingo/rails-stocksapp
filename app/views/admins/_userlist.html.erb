@@ -1,4 +1,4 @@
-<div class="grid grid-cols-[20px_300px_200px_100px] bg-slate-500 bg-opacity-20 mb-2 p-2 border-solid border-[1px] border-[#f890e7] rounded-md
+<div class="grid grid-cols-[20px_300px_200px_100px_175px] bg-slate-500 bg-opacity-20 mb-2 p-2 border-solid border-[1px] border-[#f890e7] rounded-md
   hover:border-[#03e9f4] hover:drop-shadow-[0_5px_5px_rgba(3,233,244,1.25)] transition-all duration-300 select-none">
   <span class="text-white">
     <%= index + 1 %>
@@ -17,7 +17,21 @@
     <%= user.email %>
   </span>
   
-  <span class="text-white">
+  <span class="text-white border-r-[1px] border-[#f890e7]">
     <%= user.status %>
   </span>
+
+  <div class="flex gap-4 ml-2 border-r-[1px] border-[#f890e7]">
+    <span class="text-white">
+      view
+    </span>
+
+    <span class="text-white">
+      edit
+    </span>
+
+    <span class="text-white">
+      activate
+    </span>
+  </div>
 </div>
