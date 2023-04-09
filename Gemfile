@@ -30,6 +30,8 @@ gem "tailwindcss-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem "font-awesome-sass", "~> 6.4.0"
+
 # Debugging Tool
 # gem 'pry', '~> 0.13.1'
 

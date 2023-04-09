@@ -5,6 +5,10 @@
   <% end %>
 
   <div>
+    <%= turbo_frame_tag "searchbar" do %>
+      <%= render partial: "searchbar" %>
+    <% end %>
+
     <div class="flex flex-col justify-center items-center">
       <span class="text-white text-5xl">ADMIN PAGE</span>
       <%= button_to "Logout", signout_path, class: "btn-primary" %>
