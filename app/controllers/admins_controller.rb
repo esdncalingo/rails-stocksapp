@@ -10,7 +10,7 @@ class AdminsController < ApplicationController
     
     respond_to do |format|
       user = User.find_by(email: params[:email])
-      if user.update(status: "activated")
+      if user.update(status: "approved")
         format.turbo_stream { render turbo_stream:
           turbo_stream.update("usertable", partial: "admins/usertable", locals: { user: @user })
         }
