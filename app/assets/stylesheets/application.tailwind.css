@@ -44,3 +44,8 @@ body {
 th, td {
   @apply text-white;
 }
+
+.user-list {
+  @apply grid grid-cols-[20px_300px_200px_100px_175px] bg-slate-500 bg-opacity-20 mb-2 p-2 border-solid border-[1px] border-[#f890e7] rounded-md
+  hover:border-[#03e9f4] hover:drop-shadow-[0_5px_5px_rgba(3,233,244,1.25)] transition-all duration-300 select-none;
+}
