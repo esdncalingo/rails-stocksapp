@@ -1,6 +1,6 @@
 
 <div class="flex h-[100%] w-[100%]">
-  <%= button_to raw('<i class="fa-solid fa-door-open"></i>'), signout_path, class: "text-white h-[40px] w-[40px]" %>
+  <%= button_to raw('<i class="fa-solid fa-door-open"></i>'), signout_path, class: "text-white h-[40px] w-[40px] bg-[#0b0f16]" %>
   <%= turbo_frame_tag "sidepanel", class: "flex flex-col bg-indigo-500 bg-opacity-20
     p-4 min-w-[200px]" do %>
     <%= render partial: "sidepanel" %>

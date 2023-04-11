@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   # Admin routes
   get "/admin" => "admins#index"
+  get "/admin/edituser" => "admins#edit_user", as: :edit_user
   post "/activate" => "admins#activate_user", as: :activate_user
 
   # Users Information

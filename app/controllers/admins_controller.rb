@@ -2,11 +2,15 @@ class AdminsController < ApplicationController
   before_action :require_user
 
   def index
-    @user = User.where(status: "pending")
+    @user = User.order(created_at: :desc).where(status: "pending")
+  end
+
+  def edit_user
+  
   end
 
   def activate_user
-    @user = User.where(status: "pending")
+    @user = User.order(created_at: :desc).where(status: "pending")
     
     respond_to do |format|
       user = User.find_by(email: params[:email])

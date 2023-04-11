@@ -34,6 +34,7 @@ gem "font-awesome-sass", "~> 6.4.0"
 
 # Debugging Tool
 # gem 'pry', '~> 0.13.1'
+gem 'pry-byebug'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
