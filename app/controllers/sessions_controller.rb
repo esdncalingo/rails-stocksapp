@@ -13,14 +13,14 @@ class SessionsController < ApplicationController
   def new_session
     respond_to do |format|
       if user = Authentication.login(auth_params)
+        session[:gen_token] = user.token
+
         if user.user_level === 2 # --- admin ---
-          session[:gen_token] = user.token
           session[:is_admin] = true
           Login.time_in(user.user_id)
           format.html { redirect_to admin_path }
           format.json { render json: { token: user.token }, status: 200 }
         else # --- trader ---
-          session[:gen_token] = user.token
           Login.time_in(user.user_id)
           format.html { redirect_to home_path }
           format.json { render json: { token: user.token }, status: 200 }

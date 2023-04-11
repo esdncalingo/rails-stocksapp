@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
   
   def current_user
     token = session[:gen_token]
-    is_active = session[:user_active]
 
     if token.present?
       user ||= Authentication.find_by(token: token)
@@ -18,6 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
+    
     admin = session[:is_admin]
 
     if admin
