@@ -1,40 +1,41 @@
-<%=form_with(model: @auth, html: { class: "form-1" }) do |form|%>
 
-  <div class="p-4">
-    <span class="text-white text-4xl font-bold">Sign up</span>
-  </div>
-  
-  <div class="flex flex-col p-6">
-    <div class="mb-4">
-      <%=form.label "Email", class: "form-label"%>
-      <%=form.text_field :email, class: "form-inputbox"%>
-    </div>  
-    
-    <div class="mb-4">
-      <%=form.label "Username", class: "form-label"%>
-      <%=form.text_field :username, class: "form-inputbox"%>
+  <%=form_with(model: @auth, html: { class: "form-1" }) do |form|%>
+
+    <div class="p-4">
+      <span class="text-white text-4xl font-bold">Sign up</span>
     </div>
     
-    <div class="mb-4">
-      <%=form.label "Password", class: "form-label"%>
-      <%=form.password_field :password, class: "form-inputbox"%>
-    </div>
-    
-    <div class="mb-8">
-      <%=form.label "Confirm Password", class: "form-label"%>
-      <%=form.password_field :password_confirmation, class: "form-inputbox"%>
+    <div class="flex flex-col p-6">
+      <div class="mb-4">
+        <%=form.label "Email", class: "form-label"%>
+        <%=form.text_field :email, class: "form-inputbox"%>
+      </div>  
+      
+      <div class="mb-4">
+        <%=form.label "Username", class: "form-label"%>
+        <%=form.text_field :username, class: "form-inputbox"%>
+      </div>
+      
+      <div class="mb-4">
+        <%=form.label "Password", class: "form-label"%>
+        <%=form.password_field :password, class: "form-inputbox"%>
+      </div>
+      
+      <div class="mb-8">
+        <%=form.label "Confirm Password", class: "form-label"%>
+        <%=form.password_field :password_confirmation, class: "form-inputbox"%>
+      </div>
+
+      <div class="flex items-center justify-between mb-4 self-center">
+        <%= form.submit "Next", class: "btn-primary" %>
+      </div>
     </div>
 
-    <div class="flex items-center justify-between mb-4 self-center">
-      <%= form.submit "Next", class: "btn-primary" %>
+    <div class="flex flex-col p-4 bg-[#2d3b5a] rounded-b-md">
+      <%= link_to "Back", signin_page_path, 
+        class: "text-[#03e9f4] text-sm self-center hover:text-[#05bdc7] 
+          transition-all ease-in duration-300" 
+      %>
     </div>
-  </div>
 
-  <div class="flex flex-col p-4 bg-[#2d3b5a] rounded-b-md">
-    <%= link_to "Back", signin_page_path, 
-      class: "text-[#03e9f4] text-sm self-center hover:text-[#05bdc7] 
-        transition-all ease-in duration-300" 
-    %>
-  </div>
-
-<%end%>
+  <%end%>
