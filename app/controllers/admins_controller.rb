@@ -6,7 +6,9 @@ class AdminsController < ApplicationController
   end
 
   def edit_user
-  
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   def activate_user
