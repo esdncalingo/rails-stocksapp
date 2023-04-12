@@ -4,6 +4,10 @@
 /* @import './partials/navigation.css'; */
 @import './partials/index.css';
 
+@font-face {
+  font-family: 'Slant';
+  src: url('SLANT.TTF');
+}
 
 
 @layer components {
