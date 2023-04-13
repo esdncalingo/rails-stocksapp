@@ -79,3 +79,4 @@ end
 
 gem 'iex-ruby-client'
 gem 'faraday'
+gem "rails_charts"

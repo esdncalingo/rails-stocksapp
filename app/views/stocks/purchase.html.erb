@@ -1,0 +1,31 @@
+
+
+
+<div class="flex">
+  <div>
+    <%= form_with url: stocks_details_path, method: :get, :id => "drop_down_id"  do |form| %>
+      <%= form.select( 
+        :stock_name,
+        $stocks_master.map{|s| [ s['name']] },
+          {},
+          { 
+            :class => 'primary-drop-down',
+            :onChange => 'this.form.submit();'        
+          })
+      %>
+    <% end %>
+  </div>
+  <div>
+    <% if @stock_info%>
+      <p style="color:#ccc" >Stock Code: <%=@stock_info["code"]%></p>
+      <p style="color:#ccc" >Stock Name: <%=@stock_info["company_name"]%></p>
+      <p style="color:#ccc" >CEO: <%=@stock_info["ceo"]%></p>
+      <p style="color:#ccc" >Exchange: <%=@stock_info["exchange"]%></p>
+      <p style="color:#ccc" >Industry: <%=@stock_info["industry"]%></p>
+       <p style="color:#ccc" >Price: <%=@stock_info["latest_price"]%></p>
+      <p style="color:#ccc" >Percentage Change: <%=@stock_info["change_percent"]%></p>
+      
+    <% end %>
+
+  </div>
+</div>

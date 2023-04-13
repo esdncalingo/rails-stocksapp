@@ -1,8 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import './partials/navigation.css';
-@import './partials/sidepanel.css';
+/* @import './partials/navigation.css'; */
+@import './partials/index.css';
 
 
 
@@ -21,5 +21,18 @@
   .form-inputbox {
     @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none;  /*focus:shadow-outline;*/
   }
+
+  .primary-drop-down {
+    @apply px-3 py-2 mx-2 rounded-md ;
+    font-size: 0.8rem
+    /* focus: outline-none */
+    /* cursor: pointer !important; */
+    
+  }
+  .primary-drop-down > option{   
+   background-color: #0b0f16;
+   color:#ccc;   
+  }
+
 
 }

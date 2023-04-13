@@ -1,11 +1,111 @@
-    <div >
-      <% @master_list.each do |stocks|%>
-        <div class="flex">
-          <div class="active-stocks"><%= stocks["companyName"]%></div>
-           <div class="active-stocks"><%= "#{(stocks["iexMarketPercent"] * 100).round(2)} %"%></div>
-           <!-- <%# <div class="table-cell"><%= "#{stocks.iexMarketPercent * 100} %"%></div> %> -->
-          
-          
-        </div>
-      <%end%>
+  <div>
+    <%= form_with url: stocks_page_path, method: :get, :id => "stock_code"  do |form| %>
+       <%= form.select( 
+          :stock_code,
+          $stocks_master.map{|s| [ s['symbol']] },
+          {},
+          { 
+            :class => 'primary-drop-down',      
+            :onChange => 'this.form.submit();'        
+          })
+        %>
+      <% end %>
     </div>
+<div class="flex  p-2">
+  <div class="flex flex-col" >    
+    <% @most_active_list.each do |stocks|%>
+      <div class="flex">
+        <div class="active-stocks">
+          <a href="?stock_code=<%= stocks["symbol"]%>"><%= stocks["companyName"]%></a>
+        </div>
+          <%if stocks["iexMarketPercent"] != nil%>          
+            <div class="active-stocks"><%= "#{(stocks["iexMarketPercent"] * 100).round(2)} %" %></div>   
+          <%end%>      
+        </div>
+    <%end%>
+  </div> 
+  <div class="flex" style="width: 60% !important;">
+    <%= candlestick_chart( @chart_data,
+        class: 'box',
+        theme: 'sakura',
+        options: {
+          series: {
+            # itemStyle: {
+            #   color: '#f890e7', #loss
+            #   color0: '#03e9f4', #gain
+            #   borderColor: '#f890e7',
+            #   borderColor0: '#03e9f4'
+            # }
+          },
+           title: {
+            text: @stock_name
+          },
+          xAxis: {
+            axisTick: {
+              alignWithLabel: true
+            },
+            # boundaryGap: false,
+            axisLine: { onZero: false },
+            splitLine: { show: false },
+            min: 'dataMin',
+            max: 'dataMax'
+          },
+          yAxis: {
+            scale: true,
+            splitArea: {
+              show: false
+            }
+          },          
+          dataZoom: [
+            {
+              type: 'inside',
+              start: 50,
+              end: 100
+            },
+            {
+              show: true,
+              type: 'slider',
+              top: '90%',
+              start: 50,
+              end: 100
+            }
+          ],
+        },
+         
+        )
+      %>
+  </div> 
+  <div class="transact-stocks  flex flex-col p-2 " style="width: 20%;" >
+    <div class="flex justify-between">
+      <div class="py-2" name="price-lbl">
+        Price : 
+      </div>   
+      <div class="" name="price-output">
+        <%= @stock_price%>
+      </div> 
+    </div>
+    <div class="flex justify-between">
+      <div class="py-2" name="qty-lbl">
+        Qty : 
+      </div>  
+      <div name="qty-output">
+        <input class="transact-qty" type="number" />
+      </div>   
+    </div>
+    <div class="flex justify-between">
+      <div class="py-2" name="qty-lbl">
+        Currency : 
+      </div>  
+      <div name="qty-output">
+        *currency 
+      </div>   
+    </div>    
+  </div> 
+
+</div>
+
+<!-- 
+<div>
+  <%= button_to "Buy Stocks", purchase_stocks_path, method: :get,class: "btn-primary" %>
+</div>
+-->
