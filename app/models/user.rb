@@ -26,4 +26,14 @@ class User < ApplicationRecord
     )
   end
 
+  def self.patch(user_params)
+    user = find_by(email: user_params[:email])
+    user.update(email: user_params[:email],
+      fname: user_params[:fname],
+      mname: user_params[:mname],
+      lname: user_params[:lname],
+      contacts: user_params[:contacts],
+      address: user_params[:address],
+    )
+  end
 end
