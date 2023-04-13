@@ -12,18 +12,26 @@ class ApplicationController < ActionController::Base
     token = session[:gen_token]
 
     if token.present?
-      user ||= Authentication.find_by(token: token)
+      user = Authentication.find_by(token: token)
+      user.user
     end
   end
 
   def require_user
-    
+
+    token = session[:gen_token]
     admin = session[:is_admin]
 
+    if token.present?
+      user ||= Authentication.find_by(token: token)
+    end
+    
     if admin
-      redirect_to "/admin" unless current_user
+      redirect_to "/admin" unless user
+    elsif user
+      redirect_to "/home"
     else
-      redirect_to "/signin" unless current_user
+      redirect_to "/signin" unless user
     end
     
   end

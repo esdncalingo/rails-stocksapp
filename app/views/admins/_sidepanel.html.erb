@@ -5,10 +5,32 @@
     <span class="text-white">Notification</span>
   </div>
 
-  <div class="flex gap-2 items-center">
-    <span class="w-[20px]"><i class="fa-sharp fa-solid fa-users"></i></span>
-    <span class="text-white">Traders</span>
+  <div class="flex flex-col gap-2">
+    <div class="flex gap-2 items-center">
+      <span class="w-[20px]"><i class="fa-sharp fa-solid fa-users"></i></span>
+      <span class="text-white">Traders</span>
+    </div>
+    <ul>
+      <li>
+        <span class="w-[20px]"><i class="fa-sharp fa-solid fa-users"></i></span>
+        <span class="text-white">Pending</span>
+      </li>
+    </ul>
   </div>
-  
-  <span class="text-white mt-auto">Minimize Menu</span>
+
+  <div class="flex gap-2 items-center">
+    <span class="w-[20px]"><i class="fa-solid fa-envelope"></i></i></span>
+    <span class="text-white">Messages</span>
+  </div>
+
+
+  <!-- temporary hidden -->
+  <div class="mt-auto hidden">
+    <input type="checkbox" id="sidepanel-2" class="peer/sidepanel-2">
+    <label for="sidepanel-2" class="peer/sidepanel-2 select-none cursor-pointer
+    text-white ">
+      Minimize Menu
+    </label>
+    <span class="peer-checked/sidepanel-2:hidden block">to be hidden</span>
+  </div>
 <% end %>

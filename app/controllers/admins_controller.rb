@@ -4,6 +4,7 @@ class AdminsController < ApplicationController
 
   def index
     @user = User.order(created_at: :desc).where(status: "pending")
+    @current_user = current_user
   end
 
   def new_user
@@ -27,9 +28,9 @@ class AdminsController < ApplicationController
   end
 
   def update_user
-
-    User.patch(params.require('user').permit(:email, :fname, :mname, :lname, :contacts, :address))
-
+    User
+    .patch(params.require('user')
+    .permit(:email, :fname, :mname, :lname, :contacts, :address))
   end
 
   def activate_user
