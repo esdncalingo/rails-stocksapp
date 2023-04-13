@@ -1,0 +1,45 @@
+<%= turbo_stream.update "dashboard" do %>
+<%= form_with(scope: @user, url: update_user_path, method: :patch, html: { class: "form-1" }) do |form| %>
+
+  <div class="p-4">
+    <span class="text-white text-4xl font-bold">Trader Details</span>
+  </div>
+
+  <div class="flex flex-col p-6">
+    <div class="mb-4">
+      <%=form.label "Email", class: "form-label"%>
+      <%=form.text_field :email, class: "form-inputbox"%>
+    </div>
+
+    <div class="mb-4">
+      <%=form.label "First Name", class: "form-label"%>
+      <%=form.text_field :fname, class: "form-inputbox"%>
+    </div>
+
+    <div class="mb-4">
+      <%=form.label "Middle Name", class: "form-label"%>
+      <%=form.text_field :mname, class: "form-inputbox"%>
+    </div>  
+    
+    <div class="mb-4">
+      <%=form.label "Last Name", class: "form-label"%>
+      <%=form.text_field :lname, class: "form-inputbox"%>
+    </div>
+
+    <div class="mb-4">
+      <%=form.label "Contacts", class: "form-label"%>
+      <%=form.text_field :contacts, class: "form-inputbox"%>
+    </div>
+
+    <div class="mb-8">
+      <%=form.label "Address", class: "form-label"%>
+      <%=form.text_field :address, class: "form-inputbox"%>
+    </div>  
+
+    <div class="flex items-center justify-between self-center mb-4">
+      <%= form.submit "Update",class: "btn-primary" %>
+    </div>
+  </div>
+
+<%end%>
+<% end %>

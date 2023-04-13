@@ -27,4 +27,14 @@ class ApplicationController < ActionController::Base
     end
     
   end
+
+  def redirect_user
+    admin = session[:is_admin]
+
+    if admin
+      redirect_to "/admin"
+    elsif current_user
+      redirect_to "/home"
+    end
+  end
 end

@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_action :redirect_user, only: [:signin, :signup, :userinfo]
 
   def signin
   end
@@ -49,9 +50,9 @@ class SessionsController < ApplicationController
   def new_account
     respond_to do |format|
       if (auth_params[:password] === params[:password_confirmation])
-        @user = User.create_user(auth_params)
-        
-        format.html { redirect_to new_userinfo_path(id: @user.id) }
+        if @user = User.create_user(auth_params)
+          format.html { redirect_to new_userinfo_path(id: @user.id) }
+        end
       else
         render :signup, status: :unprocessable_entity
       end

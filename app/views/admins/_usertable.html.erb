@@ -7,7 +7,7 @@
       <span class="text-white font-bold ml-2">Status</span>
       <span class="text-white font-bold ml-2">Date</span>
       <span class="text-white font-bold ml-2">Action</span>
-      <button class="btn-create">Create Trader</button>
+      <%= button_to "Create Trader" , new_user_path, class: "btn-create"%>
     </div>
 
     <% @user.each_with_index do |user, index|%>

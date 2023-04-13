@@ -36,6 +36,7 @@ gem "font-awesome-sass", "~> 6.4.0"
 # gem 'pry', '~> 0.13.1'
 gem 'pry-byebug'
 
+gem 'mailslurp_client', '~> 15.17', '>= 15.17.5'
 
 gem "rails_charts"
 # Use Redis adapter to run Action Cable in production
@@ -84,3 +85,4 @@ end
 
 gem 'iex-ruby-client'
 gem 'faraday'
+gem "typhoeus", "~> 1.4"

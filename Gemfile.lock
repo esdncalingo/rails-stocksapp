@@ -91,6 +91,8 @@ GEM
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     erubi (1.12.0)
+    ethon (0.16.0)
+      ffi (>= 1.15.0)
     faraday (1.10.3)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -146,6 +148,7 @@ GEM
       net-imap
       net-pop
       net-smtp
+    mailslurp_client (15.17.5)
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
@@ -239,6 +242,8 @@ GEM
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
+    typhoeus (1.4.0)
+      ethon (>= 0.9.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     web-console (4.2.0)
@@ -271,6 +276,7 @@ DEPENDENCIES
   iex-ruby-client
   importmap-rails
   jbuilder
+  mailslurp_client (~> 15.17, >= 15.17.5)
   pg (~> 1.1)
   pry-byebug
   puma (~> 5.0)
@@ -281,6 +287,7 @@ DEPENDENCIES
   stimulus-rails
   tailwindcss-rails
   turbo-rails
+  typhoeus (~> 1.4)
   tzinfo-data
   web-console
   webdrivers
