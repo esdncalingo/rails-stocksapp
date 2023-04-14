@@ -5,9 +5,32 @@
     <%= button_to "Home", admin_path %>
   </div>
 
-  <div class="flex gap-2">
-    <span class="w-[20px]"><i class="fa-solid fa-user-group"></i></span>
-    <%= button_to "Users", admin_userpage_path %>
+  <div class="flex flex-col">
+    <input type="checkbox" id="useractions" class="peer/useractions hidden">
+    <label for="useractions" class="peer/useractions select-none cursor-pointer">
+      <i class="fa-solid fa-user-group"></i>
+      Users
+      <i class="fa-solid fa-sort-down"></i>
+    </label>
+
+    <div class="px-2 hidden peer-checked/useractions:block">
+
+      <div class="flex gap-2">
+        <%= button_to "- List of Users", admin_userpage_path %>
+      </div>
+
+      <div class="flex gap-2">
+        <%= button_to "- Create New User", new_user_path %>
+      </div>
+
+      <div class="flex gap-2">
+        <%= button_to "- Active Users", admin_user_active_path %>
+      </div>
+
+      <div class="flex gap-2">
+        <%= button_to "- Waiting Users",  admin_user_waiting_path %>
+      </div>
+    </div>
   </div>
 
   <div class="flex gap-2 items-center">

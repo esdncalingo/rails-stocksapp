@@ -69,11 +69,11 @@ th, td {
 }
 
 .table-header {
-  @apply grid grid-cols-[20px_300px_200px_100px_250px_auto_120px] p-2;
+  @apply grid grid-cols-[20px_300px_200px_100px_auto_175px] p-2 text-white font-bold;
 }
 
 .user-list {
-  @apply grid grid-cols-[20px_300px_200px_100px_250px_175px_auto] bg-slate-500 bg-opacity-20 mb-2 p-2 border-solid border-[1px] border-[#f890e7] rounded-md
+  @apply grid grid-cols-[20px_300px_200px_100px_auto_175px] bg-slate-500 bg-opacity-20 mb-2 p-2 border-solid border-[1px] border-[#f890e7] rounded-md
   hover:border-[#03e9f4] hover:drop-shadow-[0_5px_5px_rgba(3,233,244,1.25)] transition-all duration-300 select-none min-w-[820px] -skew-x-12;
 }
 

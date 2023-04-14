@@ -50,8 +50,30 @@ class AdminsController < ApplicationController
   end
 
   def userpage
+    @user = User.order(created_at: :desc)
+    @current_user = current_user
+  end
+
+  def waiting_list
     @user = User.order(created_at: :desc).where(status: "pending")
     @current_user = current_user
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream:
+        turbo_stream.update("dashboard", partial: "admins/users/userlist", locals: { user: @user })
+      }
+    end
+  end
+
+  def active_users 
+    @user = User.joins(:authentication).where( authentication: { is_active: true })
+    @current_user = current_user
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream:
+        turbo_stream.update("dashboard", partial: "admins/users/userlist", locals: { user: @user })
+      }
+    end
   end
 
   private # -----------------------------------
