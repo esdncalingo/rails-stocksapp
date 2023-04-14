@@ -57,7 +57,7 @@
 }
 
 body {
-  @apply h-screen;
+  @apply h-screen w-screen;
 }
 
 th, td {

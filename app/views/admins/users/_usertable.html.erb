@@ -9,7 +9,7 @@
       <span class="text-center ml-2">Action</span>
     </div>
 
-    <% @user.each_with_index do |user, index|%>
+    <% $user.each_with_index do |user, index|%>
       <%= render "admins/users/users", user: user, index: index %>
     <% end %>
   </div>
