@@ -2,15 +2,12 @@ class HomeController < ApplicationController
   #before_action :authenticate_user
   before_action :require_user
   before_action :initialize_iex_client
-  before_action :is_admin
 
   def index
     #store in global variable stocks masterlist
     response = Faraday.get('https://api.iex.cloud/v1/data/CORE/REF_DATA?token=pk_ed7475c0c153436587bd10b8f1da9916') 
     $stocks_master = JSON.parse(response.body)   
     # $stocks_master = response
-    # $stocks_master = JSON.parse(response.body)   
-    $stocks_master = response
     
     userauth = Authentication.find_by(token: session[:gen_token])
     pending = userauth.user.status === "pending" ? true : false
@@ -35,22 +32,23 @@ class HomeController < ApplicationController
     #inbox1 = inbox_controller.create_inbox_with_options({ inboxType: 'SMTP_INBOX' })
     #inbox2 = inbox_controller.create_inbox
 
-    binding.pry
-    smtp_access = inbox_controller.get_imap_smtp_access({ inbox_id: inbox1.id })
+    
+    smtp_access = inbox_controller.get_imap_smtp_access({ inbox_id: "800226e1-87f4-4b5f-8f89-9b609f0c1bb1" })
 
     message = <<~MESSAGE_END
-      From: #{inbox1.email_address}
-      To: #{inbox2.email_address}
-      Subject: Testing lang boss
+      From: "800226e1-87f4-4b5f-8f89-9b609f0c1bb1@mailslurp.mx"
+      To: "miamitrades@zohomail.com"
+      Subject: Testing lang
 
       This is a test galing sa mailslurp
     MESSAGE_END
 
+    binding.pry
     # configure NET SMTP with plain auth
     Net::SMTP.start(smtp_access.smtp_server_host, smtp_access.smtp_server_port, 'greeting.your.domain',
                 smtp_access.smtp_username, smtp_access.smtp_password, :plain) do |smtp|
       # send email
-      smtp.send_message message, inbox1.email_address, inbox2.email_address
+      smtp.send_message message, "800226e1-87f4-4b5f-8f89-9b609f0c1bb1@mailslurp.mx", "miamitrades@zohomail.com"
     end
 
 

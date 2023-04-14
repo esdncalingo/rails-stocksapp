@@ -28,8 +28,6 @@ class ApplicationController < ActionController::Base
     
     if admin
       redirect_to "/admin" unless user
-    elsif user
-      redirect_to "/home"
     else
       redirect_to "/signin" unless user
     end

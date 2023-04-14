@@ -11,13 +11,18 @@ Rails.application.routes.draw do
   post "/signout" => "sessions#signout", as: :signout
 
 
-  # Admin routes
+  # Admin Dashboard
   get "/admin" => "admins#index"
+  # --Pages
+  post "/admin" => "admins#homepage"
+  post "/admin/userpage" => "admins#userpage"
+  # --- Users
+  
   post "/admin/user" => "admins#edit_user", as: :edit_user
   patch "/admin/user" => "admins#update_user", as: :update_user
   post "/admin/user/new" => "admins#new_user", as: :new_user
   post "/admin/user/create" => "admins#create_user", as: :create_user
-  post "/activate" => "admins#activate_user", as: :activate_user
+  post "/admin/user/activate" => "admins#activate_user", as: :activate_user
 
   # Users Information
 

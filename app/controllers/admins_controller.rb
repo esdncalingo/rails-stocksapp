@@ -3,8 +3,6 @@ class AdminsController < ApplicationController
   before_action :set_user, only: [:update_user, :edit_user]
 
   def index
-    @user = User.order(created_at: :desc).where(status: "pending")
-    @current_user = current_user
   end
 
   def new_user
@@ -44,6 +42,16 @@ class AdminsController < ApplicationController
         }
       end
     end
+  end
+
+  # ----- Dashboard -----
+
+  def homepage
+  end
+
+  def userpage
+    @user = User.order(created_at: :desc).where(status: "pending")
+    @current_user = current_user
   end
 
   private # -----------------------------------
