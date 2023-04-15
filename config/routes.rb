@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post "/admin/user/new" => "admins#new_user", as: :new_user
   post "/admin/user/create" => "admins#create_user", as: :create_user
   post "/admin/user/activate" => "admins#activate_user", as: :activate_user
+  post "/admin/user/search" => "admins#search_user"
   # ---- Users View
   post "/admin/user/waiting" => "admins#waiting_list"
   post "/admin/user/active" => "admins#active_users"

@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "ud#{user.id}" do %>
 <div class="user-list">
-  <span class="text-white">
+  <span class="text-white ml-1">
     <%= user.id %>
   </span>
   
@@ -31,7 +31,7 @@
     <%= button_to "edit", edit_user_path(email: user.email), 
     class: "text-white" %>
 
-    <%= button_to "approve", activate_user_path(email: user.email) , class: "text-white" %>
+    <%= button_to "approve", activate_user_path(email: user.email) , :disabled => user.status === "approved", class: "text-white disabled:opacity-50 disabled:line-through" %>
   </div>
 </div>
 <% end %>

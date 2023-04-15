@@ -1,4 +1,4 @@
-<%= turbo_stream.update "usertable" do %>
+
   <div>
     <div class="table-header">
       <span></span>
@@ -6,11 +6,11 @@
       <span class="ml-2">Email</span>
       <span class="ml-2">Status</span>
       <span class="ml-2">Date</span>
-      <span class="text-center ml-2">Action</span>
+      <span class="text-center">Action</span>
     </div>
 
-    <% $user.each_with_index do |user, index|%>
+    <% @user.each_with_index do |user, index|%>
       <%= render "admins/users/users", user: user, index: index %>
     <% end %>
   </div>
-<% end %>
+

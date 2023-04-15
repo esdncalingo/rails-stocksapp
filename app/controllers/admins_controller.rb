@@ -1,7 +1,7 @@
 class AdminsController < ApplicationController
   before_action :require_user
   before_action :set_user, only: [:update_user, :edit_user, :show_user]
-  before_action :user_display, only: [:userpage, :waiting_list, :active_users]
+  before_action :user_display, only: [:userpage, :waiting_list, :active_users, :search_user]
 
   def index; end
 
@@ -44,7 +44,10 @@ class AdminsController < ApplicationController
       user = User.find_by(email: params[:email])
       if user.update(status: "approved")
         format.turbo_stream { render turbo_stream:
-          turbo_stream.update("ud#{user.id}", partial: "admins/users/users", locals: { user: user })
+          [
+            turbo_stream.update("ud#{user.id}", partial: "admins/users/users", locals: { user: user }),
+            turbo_stream.remove("ud#{user.id}")
+          ]
         }
       end
     end
@@ -57,18 +60,28 @@ class AdminsController < ApplicationController
   def waiting_list
     respond_to do |format|
       format.turbo_stream { render turbo_stream:
-        turbo_stream.update("dashboard", partial: "admins/users/userlist", locals: { user: $user })
+        turbo_stream.update("dashboard", partial: "admins/users/userlist", locals: { user: @user })
       }
     end
   end
 
   def active_users 
-    @current_user = current_user
-  
     respond_to do |format|
       format.turbo_stream { render turbo_stream:
-        turbo_stream.update("dashboard", partial: "admins/users/userlist", locals: { user: $user })
+        turbo_stream.update("dashboard", partial: "admins/users/userlist", locals: { user: @user })
       }
+    end
+  end
+
+  def search_user
+    #binding.pry
+    @user =  User.where('fname LIKE (?) OR lname LIKE (?) OR mname LIKE (?)', "%#{params[:user_search]}%", "%#{params[:user_search]}%", "%#{params[:user_search]}%")
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.update("usertable", partial: "admins/users/usertable",locals: {user: @user})
+        ]
+      end
     end
   end
 
@@ -86,11 +99,11 @@ class AdminsController < ApplicationController
     @current_user = current_user
     case params[:action]
     when "userpage"
-      $user = User.order(created_at: :desc)
+      @user = User.order(created_at: :desc)
     when "waiting_list"
-      $user = User.order(created_at: :desc).where(status: "pending")
+      @user = User.order(created_at: :desc).where(status: "pending")
     when "active_users"
-      $user = User.joins(:authentication).where( authentication: { is_active: true })
+      @user = User.joins(:authentication).where( authentication: { is_active: true })
     end
   end
 end

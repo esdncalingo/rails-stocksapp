@@ -1,8 +1,9 @@
 <div class="searchbar">
-  <form action="">
-    <input type="text" class="h-[30px] min-w-[500px]">
+  
+  <%= form_with url: admin_user_search_path do |form| %>
+    <%= form.search_field :user_search, oninput: "this.form.requestSubmit()",class: "h-[30px] min-w-[500px]" %>
     <button class="h-[30px] w-[40px] bg-slate-500"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
-  </form>
+  <% end %>
 
   <span class="flex gap-2 text-white ml-auto justify-center items-center">
     <div class="bg-slate-500 bg-opacity-30 rounded-full px-2">
