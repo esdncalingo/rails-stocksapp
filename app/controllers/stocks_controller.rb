@@ -19,12 +19,18 @@ class StocksController < ApplicationController
   $most_active_list = JSON.parse(response.body)
   
 
-  if !stocks_params['stock_code']    
-    if @most_active_list.count == 0 
-      selected_code = $stocks_master.first['symbol']
-    else
-      selected_code = @most_active_list.first['symbol']
-    end
+  # if !stocks_params['stock_code']    
+  #   if @most_active_list.count == 0 
+  #     selected_code = $stocks_master .first['symbol']
+  #   else
+  #     selected_code = @most_active_list.first['symbol']
+  #   end
+  # else
+  #   selected_code = stocks_params['stock_code']   
+  # end
+
+  if stocks_params['stock_code']    
+    selected_code = stocks_params['stock_code'] 
   else
     selected_code = default_selected
   end
