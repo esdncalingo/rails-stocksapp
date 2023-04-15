@@ -16,31 +16,84 @@ class StocksController < ApplicationController
   #     end
 
 
-  @most_active_list = JSON.parse(response.body)
-  selected_code = nil
+  $most_active_list = JSON.parse(response.body)
+  
 
-  if !stocks_params['stock_code']    
-    if @most_active_list.count == 0 
-      selected_code = $stocks_master .first['symbol']
-    else
-      selected_code = @most_active_list.first['symbol']
-    end
+  # if !stocks_params['stock_code']    
+  #   if @most_active_list.count == 0 
+  #     selected_code = $stocks_master .first['symbol']
+  #   else
+  #     selected_code = @most_active_list.first['symbol']
+  #   end
+  # else
+  #   selected_code = stocks_params['stock_code']   
+  # end
+
+  if stocks_params['stock_code']    
+    selected_code = stocks_params['stock_code'] 
   else
-    selected_code = stocks_params['stock_code']   
+    selected_code = default_selected
   end
     
     @chart_data = get_chart_data(selected_code)
-    stock_details = get_stock_details(selected_code)
-    @stock_name = stock_details["name"]
-    @stock_price = stock_details["latest_price"]
-    @stock_currency = stock_details["currency"]
+    @stock_details = get_stock_details(selected_code)
+    @stock_name = @stock_details["name"]
+    @stock_price = @stock_details["latest_price"]
+    @stock_currency = @stock_details["currency"]
     # @selected_stock = @client.company(selected_code).company_name
   
    
   end
 
-  def purchase       
-    # @stock_info = get_stock_details
+  # def buy_stocks          
+  #   if stocks_params['stock_code']    
+  #     selected_code = stocks_params['stock_code'] 
+  #   else
+  #     selected_code = default_selected
+  #   end
+  #   puts stocks_params['stock_code']
+  #   puts stocks_params['qty']
+  # end
+
+  def transact    
+    latest_price = get_stock_details(stocks_params['stock_code'])['latest_price']
+    authentication = Authentication.find_by("token": session[:gen_token]) 
+    user_balance = Transaction.where("user_id" == authentication['user_id']) 
+    user_balance = Transaction.where("user_id" == authentication['user_id']).reduce() {  |init, curr| 
+      init['amount'] += curr['amount']
+    } 
+   valid_transaction = true
+  #  pp user_balance
+    debugger
+    if params[:commit] == 'Buy'
+      transaction = "Buy"
+      latest_price = latest_price * -1
+      # if (latest_price.to_f * stocks_params['qty'].to_f) > user_balance #condition for balance validation
+      #   valid_transaction = false
+      # end
+    elsif params[:commit] == 'Sell'
+      transaction = "Sell"
+      
+    end
+
+    # if valid_transaction #condition for balance validation
+      @new_transaction = Transaction.new(
+        "user_id": authentication['user_id'],
+        "qty": stocks_params['qty'],
+        "price": latest_price,
+        "amount": latest_price.to_d * stocks_params['qty'].to_d,
+        "transaction_type": transaction,
+        "stock_code": stocks_params['stock_code'],
+        "crypto_code": "",
+      )
+
+      if @new_transaction.save
+        head :ok   
+      end
+    # end #condition for balance validation
+  end
+
+  def search 
   end
 
  
@@ -51,13 +104,19 @@ class StocksController < ApplicationController
     redirect_to "/" if !$stocks_master 
   end
 
+  def default_selected
+    if $most_active_list.count == 0 
+      selected_code = $stocks_master .first['symbol']
+    else
+      selected_code = $most_active_list.first['symbol']
+    end
+  end
+
   def stocks_params
-    params.permit(:stock_code, :stock_name, :authenticity_token)  
+    params.permit(:stock_code, :stock_name, :qty, :commit, :authenticity_token)  
   end
 
   def get_chart_data(stock_symbol)
-
-    pp   @client.chart('AACIU')
     # puts stock_symbol    
     chart = @client.chart(stock_symbol)
     chart_arr = chart.reduce([]) { |init, curr| 
