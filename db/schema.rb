@@ -29,11 +29,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_204147) do
     t.datetime "logout_time"
   end
 
-  create_table "todos", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "transactions", force: :cascade do |t|
     t.integer "user_id"
     t.integer "qty", default: 0
@@ -53,6 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_204147) do
     t.string "lname"
     t.string "contacts"
     t.string "address"
+    t.float "wallet"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

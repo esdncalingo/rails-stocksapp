@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_action :require_user
+  before_action :require_admin
   before_action :set_user, only: [:update_user, :edit_user, :show_user]
   before_action :user_display, only: [:userpage, :waiting_list, :active_users, :search_user]
 
@@ -14,7 +14,7 @@ class AdminsController < ApplicationController
   end
 
   def create_user
-    User.create(user_params).save
+    User.admin_create_user(user_params)
   end
 
   def edit_user

@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :redirect_user, only: [:signin, :signup, :userinfo]
+  #before_action :redirect_user, only: [:signin, :signup, :userinfo]
 
   def signin
   end
