@@ -4,9 +4,11 @@ class HomeController < ApplicationController
   before_action :initialize_iex_client
 
   def index
+    # URL: https://cloud.iexapis.com/v1
     #store in global variable stocks masterlist
-    response = Faraday.get('https://api.iex.cloud/v1/data/CORE/REF_DATA?token=pk_ed7475c0c153436587bd10b8f1da9916') 
-    $stocks_master = JSON.parse(response.body)   
+    response = Faraday.get('https://cloud.iexapis.com/v1/stock/market/list/mostactive?token=pk_06f0670b09884fe5aa66d394e4263f00') 
+    @most_active = JSON.parse(response.body)   
+
     # $stocks_master = response
     
     userauth = Authentication.find_by(token: session[:gen_token])
@@ -20,6 +22,7 @@ class HomeController < ApplicationController
   def pending
   end
 
+  # -------------------- Testing Purpose Only
   def sample 
 
     # configure mailslurp client globally with API key (or pass each controller a client instance)

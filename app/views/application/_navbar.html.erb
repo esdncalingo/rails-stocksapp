@@ -1,5 +1,32 @@
-<div id="navbar" class="flex pt-8 px-8 gap-4">
-  <span class="text-white">Buy Stocks</span>
-  <span class="text-white">Contact Us</span>
-  <span class="text-white">About</span>
+<div id="navbar" class="flex py-4 px-8 gap-4 bg-[#0b0f16] items-center">
+  
+  <span class="text-2xl font-bold font-slant miami font-outline-1 select-none">MiamiTrades</span>
+  <div>
+    <span class="navtext">Buy Stocks</span>
+    <span class="w-[30px] h-[30px] text-white cursor-pointer"><i class="fa-solid fa-caret-down"></i></span>
+  </div>
+
+  <div>
+    <span class="navtext">Markets</span>
+    <span class="w-[30px] h-[30px] text-white cursor-pointer"><i class="fa-solid fa-caret-down"></i></span>
+  </div>
+
+  <div>
+    <span class="navtext">Trade</span>
+    <span class="w-[30px] h-[30px] text-white cursor-pointer"><i class="fa-solid fa-caret-down"></i></span>
+  </div>
+
+  <div class="flex gap-4 ml-auto items-center">
+    <div>
+      <span class="navtext">Wallet</span>
+      <span class="w-[30px] h-[30px] text-white cursor-pointer"><i class="fa-solid fa-caret-down"></i></span>
+    </div>
+
+    <div>
+      <span class="navtext">Orders</span>
+      <span class="w-[30px] h-[30px] text-white cursor-pointer"><i class="fa-solid fa-caret-down"></i></span>
+    </div>
+    <span class="bg-white h-[20px] w-[1px]"></span>
+    <%= button_to "Logout", signout_path, class: "text-[#f890e7] hover:text-[#03e9f4] transition duration-300 ease-in" %>
+  </div>
 </div>

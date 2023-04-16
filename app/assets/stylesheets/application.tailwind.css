@@ -64,6 +64,10 @@ th, td {
   @apply text-white;
 }
 
+.navtext {
+  @apply text-white transition-all duration-100 ease-in hover:text-[#f890e7] cursor-pointer;
+}
+
 .form-1 {
   @apply flex flex-col rounded-md min-w-[400px] ring-[#f890e7] ring-2 select-none;
 }
