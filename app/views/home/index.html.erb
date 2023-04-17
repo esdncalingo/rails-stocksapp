@@ -4,9 +4,21 @@
 
   <div id="container" class="flex flex-col justify-center items-center px-8">
 
-    <%= turbo_frame_tag "news", class: "w-[965px] pt-8" do %>
+    <%= turbo_frame_tag "mainview", class: "flex flex-col justify-center items-center 
+    h-[400px] w-full min-w-[970px] bg-[#0b0f16] mt-8 rounded-md select-none" do %>
+      <div class="min-w-[965px] flex flex-col">
+        <span class="text-white text-4xl font-extrabold">Maximize Your Trading Power </span>
+        <span class="text-white mb-8 text-2xl">Load Your Account Balance Today</span>
+        
+        <div class="self-start">
+          <%= button_to "Load Account", home_deposit_path, method: :get, data: {turbo: false}, class: "btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= turbo_frame_tag "news", class: "w-[965px] pt-12" do %>
       <div class="self-start mb-4 p-4 flex items-center">
-        <span class="text-4xl text-white font-bold ">Latest News</span>
+        <span class="text-4xl text-white font-bold">Latest News</span>
       </div>
 
       <div class="flex flex-col gap-[1px] max-h-[250px] overflow-auto">
@@ -17,7 +29,7 @@
 
     <% end %>
     
-    <%= turbo_frame_tag "mostpopular", class: "pt-8" do %>
+    <%= turbo_frame_tag "mostpopular", class: "pt-12" do %>
       <div class="self-start mb-4 p-4 flex items-center">
         <span class="text-4xl text-white font-bold ">Most active companies</span>
         <span class="text-gray-500 ml-auto cursor-pointer transition-all duration-100 ease-in hover:text-[#03e9f4] hover:underline">View more markets</span>

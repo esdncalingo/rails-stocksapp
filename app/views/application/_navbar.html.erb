@@ -1,19 +1,17 @@
 <div id="navbar" class="flex py-4 px-8 gap-4 bg-[#0b0f16] items-center">
   
-  <span class="text-2xl font-bold font-slant miami font-outline-1 select-none">MiamiTrades</span>
+  <%= link_to raw('<span class="text-2xl font-bold font-slant miami font-outline-1 select-none">MiamiTrades</span>'), home_path %>  
+
   <div>
-    <span class="navtext">Buy Stocks</span>
-    <span class="w-[30px] h-[30px] text-white cursor-pointer"><i class="fa-solid fa-caret-down"></i></span>
+    <%= link_to raw('<span class="navtext">Buy Stocks</span>'), home_buy_sell_path %>
   </div>
 
   <div>
-    <span class="navtext">Markets</span>
-    <span class="w-[30px] h-[30px] text-white cursor-pointer"><i class="fa-solid fa-caret-down"></i></span>
+    <%= link_to raw('<span class="navtext">Markets</span>'), home_market_path %>
   </div>
 
   <div>
-    <span class="navtext">Trade</span>
-    <span class="w-[30px] h-[30px] text-white cursor-pointer"><i class="fa-solid fa-caret-down"></i></span>
+    <%= link_to raw('<span class="navtext">Trade</span>'), home_trade_path %>
   </div>
 
   <div class="flex gap-4 ml-auto items-center">
@@ -27,6 +25,6 @@
       <span class="w-[30px] h-[30px] text-white cursor-pointer"><i class="fa-solid fa-caret-down"></i></span>
     </div>
     <span class="bg-white h-[20px] w-[1px]"></span>
-    <%= button_to "Logout", signout_path, class: "text-[#f890e7] hover:text-[#03e9f4] transition duration-300 ease-in" %>
+    <%= button_to "Logout", signout_path, data: { turbo: true }, class: "text-[#f890e7] hover:text-[#03e9f4] transition duration-300 ease-in" %>
   </div>
 </div>

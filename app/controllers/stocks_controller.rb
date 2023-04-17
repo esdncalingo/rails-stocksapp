@@ -54,7 +54,6 @@ class StocksController < ApplicationController
 
 
  
-
   private 
 
   def verify_stock_master
@@ -99,7 +98,8 @@ class StocksController < ApplicationController
       latest_price: "",
       change_percent: ""
     }
-
+    response = Faraday.get('https://api.iex.cloud/v1/data/CORE/REF_DATA?token=pk_06f0670b09884fe5aa66d394e4263f00')
+    $stocks_master = JSON.parse(response.body)
     stock_data =  $stocks_master.find { |s| s['name'] == stocks_params['stock_name']}
     
     client = @iex_client.company(stock_symbol)

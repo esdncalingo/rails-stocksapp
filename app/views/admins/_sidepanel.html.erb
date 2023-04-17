@@ -16,19 +16,19 @@
     <div class="pl-8 hidden peer-checked/useractions:block">
 
       <div class="flex gap-2">
-        <%= button_to "List of Users", admin_userpage_path %>
+        <%= button_to "List of Users", admin_userpage_path, data: { turbo: true } %>
       </div>
 
       <div class="flex gap-2">
-        <%= button_to "Create New User", new_user_path %>
+        <%= button_to "Create New User", new_user_path, data: { turbo: true } %>
       </div>
 
       <div class="flex gap-2">
-        <%= button_to "Active Users", admin_user_active_path %>
+        <%= button_to "Active Users", admin_user_active_path, data: { turbo: true } %>
       </div>
 
       <div class="flex gap-2">
-        <%= button_to "Waiting Users",  admin_user_waiting_path %>
+        <%= button_to "Waiting Users",  admin_user_waiting_path, data: { turbo: true } %>
       </div>
     </div>
   </div>

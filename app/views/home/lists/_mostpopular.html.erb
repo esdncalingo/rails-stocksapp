@@ -5,6 +5,6 @@
   </div>
 
   <span class="min-w-[200px] text-white text-center">$<%= company["latestPrice"] %></span>
-  <span class="min-w-[200px] text-center <%= company["change"] >= 0 ? 'text-green-500' : 'text-red-500' %>"><%= company["change"] %></span>
+  <span class="min-w-[200px] text-center <%= company["change"] >= 0 ? 'text-green-500' : 'text-red-500' %>"><%= company["change"] %>%</span>
   <span class="min-w-[200px] text-white text-right"><%= number_to_currency(company["marketCap"]) %></span>
 </div>

@@ -33,6 +33,10 @@ Rails.application.routes.draw do
   # Homepage
   get "/home" => "home#index"
   get "/pending" => "home#pending", as: :pending_page
+  get "/home/deposit" => "home#deposit"
+  get "/home/buy-sell" => "home#buysell"
+  get "/home/market" => "home#market"
+  get "/home/trade" => "home#trade"
 
   # stocks 
   get "/stocks/show" => "stocks#show", as: :stocks_page
