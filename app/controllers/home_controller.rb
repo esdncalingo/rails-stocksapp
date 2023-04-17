@@ -9,6 +9,9 @@ class HomeController < ApplicationController
     response = Faraday.get('https://cloud.iexapis.com/v1/stock/market/list/mostactive?token=pk_06f0670b09884fe5aa66d394e4263f00') 
     @most_active = JSON.parse(response.body)   
 
+    response = Faraday.get('https://cloud.iexapis.com/v1/stock/market/batch?types=news&range=1m&last=5&token=pk_06f0670b09884fe5aa66d394e4263f00')
+    @news = JSON.parse(response.body)
+
     # $stocks_master = response
     
     userauth = Authentication.find_by(token: session[:gen_token])
