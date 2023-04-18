@@ -1,13 +1,14 @@
 class StocksController < ApplicationController
   before_action :initialize_iex_client
-  before_action :verify_stock_master
+  # before_action :verify_stock_master
   
 
   def show
-    # response = Faraday.get('https://api.iex.cloud/v1/data/CORE/REF_DATA?token=pk_ed7475c0c153436587bd10b8f1da9916')
+    response = Faraday.get('https://api.iex.cloud/v1/data/CORE/REF_DATA?token=pk_ed7475c0c153436587bd10b8f1da9916')
+    $stocks_master = JSON.parse(response.body)
     # top 10 list
     response = Faraday.get('https://cloud.iexapis.com/v1/stock/market/list/mostactive?token=pk_ed7475c0c153436587bd10b8f1da9916')
- 
+    logo = @iex_client.logo("TSLA")
   #     conn = Faraday.new(:url => 'https://rest.coinapi.io') 
 
   #     # send request
@@ -17,17 +18,9 @@ class StocksController < ApplicationController
 
 
   $most_active_list = JSON.parse(response.body)
-  
+  # @user_balance = TransactionRepository.get_updated_balance(Authentication.find_by("token": session[:gen_token])['user_id']  )
+  @user_balance = Transaction::Balance.get_updated_balance(Authentication.find_by("token": session[:gen_token])['user_id']  )
 
-  # if !stocks_params['stock_code']    
-  #   if @most_active_list.count == 0 
-  #     selected_code = $stocks_master .first['symbol']
-  #   else
-  #     selected_code = @most_active_list.first['symbol']
-  #   end
-  # else
-  #   selected_code = stocks_params['stock_code']   
-  # end
 
   if stocks_params['stock_code']    
     selected_code = stocks_params['stock_code'] 
@@ -39,62 +32,9 @@ class StocksController < ApplicationController
     @stock_details = get_stock_details(selected_code)
     @stock_name = @stock_details["name"]
     @stock_price = @stock_details["latest_price"]
-    @stock_currency = @stock_details["currency"]
-    # @selected_stock = @client.company(selected_code).company_name
-  
-   
+    @stock_currency = @stock_details["currency"]    
   end
 
-  # def buy_stocks          
-  #   if stocks_params['stock_code']    
-  #     selected_code = stocks_params['stock_code'] 
-  #   else
-  #     selected_code = default_selected
-  #   end
-  #   puts stocks_params['stock_code']
-  #   puts stocks_params['qty']
-  # end
-
-  def transact    
-    latest_price = get_stock_details(stocks_params['stock_code'])['latest_price']
-    authentication = Authentication.find_by("token": session[:gen_token]) 
-    user_balance = Transaction.where("user_id" == authentication['user_id']) 
-    user_balance = Transaction.where("user_id" == authentication['user_id']).reduce() {  |init, curr| 
-      init['amount'] += curr['amount']
-    } 
-   valid_transaction = true
-  #  pp user_balance
-    debugger
-    if params[:commit] == 'Buy'
-      transaction = "Buy"
-      latest_price = latest_price * -1
-      # if (latest_price.to_f * stocks_params['qty'].to_f) > user_balance #condition for balance validation
-      #   valid_transaction = false
-      # end
-    elsif params[:commit] == 'Sell'
-      transaction = "Sell"
-      
-    end
-
-    # if valid_transaction #condition for balance validation
-      @new_transaction = Transaction.new(
-        "user_id": authentication['user_id'],
-        "qty": stocks_params['qty'],
-        "price": latest_price,
-        "amount": latest_price.to_d * stocks_params['qty'].to_d,
-        "transaction_type": transaction,
-        "stock_code": stocks_params['stock_code'],
-        "crypto_code": "",
-      )
-
-      if @new_transaction.save
-        head :ok   
-      end
-    # end #condition for balance validation
-  end
-
-  def search 
-  end
 
  
 
@@ -118,7 +58,7 @@ class StocksController < ApplicationController
 
   def get_chart_data(stock_symbol)
     # puts stock_symbol    
-    chart = @client.chart(stock_symbol)
+    chart = @iex_client.chart(stock_symbol)
     chart_arr = chart.reduce([]) { |init, curr| 
       init.push([curr['label'], curr['open'], curr['close'], curr['high'], curr['low']]);     
     }.inject({}) do |res, k|
@@ -145,10 +85,10 @@ class StocksController < ApplicationController
 
     stock_data =  $stocks_master.find { |s| s['name'] == stocks_params['stock_name']}
     
-    client = @client.company(stock_symbol)
-    logo = @client.logo(stock_symbol)
-    quote = @client.quote(stock_symbol)
-    income_statements = @client.income(stock_symbol)
+    client = @iex_client.company(stock_symbol)
+    logo = @iex_client.logo(stock_symbol)
+    quote = @iex_client.quote(stock_symbol)
+    income_statements = @iex_client.income(stock_symbol)
     
     stock_details["code"] = client.symbol
     stock_details["name"] = client.company_name 
@@ -162,4 +102,5 @@ class StocksController < ApplicationController
     
     return stock_details
   end  
+  
 end

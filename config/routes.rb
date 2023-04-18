@@ -39,4 +39,7 @@ Rails.application.routes.draw do
   post "/stocks/purchase:stock_code" => "stocks#transact", as: :transact_stocks
   # post "/stocks/purchase" => "stocks#details", as: :stocks_details
   post "/stocks/search" => "stocks#search", as: :search_stocks
+  #transactions
+
+  post "/transact/record" => "transactions#record", as: :record_transaction
 end

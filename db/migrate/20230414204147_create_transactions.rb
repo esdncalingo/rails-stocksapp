@@ -5,7 +5,7 @@ class CreateTransactions < ActiveRecord::Migration[7.0]
       t.integer :qty, :default => 0
       t.float :price, :default => 0
       t.float :amount, :default => 0
-      t.string :transaction_type # ----- buy , sell, deposit, withdraw
+      t.string :kind # ----- buy , sell, deposit, withdraw
       t.string :stock_code, :default => ""
       t.string :crypto_code, :default => ""
       t.timestamps 

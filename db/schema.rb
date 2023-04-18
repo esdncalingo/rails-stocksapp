@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_14_204147) do
     t.integer "qty", default: 0
     t.float "price", default: 0.0
     t.float "amount", default: 0.0
-    t.string "transaction_type"
+    t.string "kind"
     t.string "stock_code", default: ""
     t.string "crypto_code", default: ""
     t.datetime "created_at", null: false
