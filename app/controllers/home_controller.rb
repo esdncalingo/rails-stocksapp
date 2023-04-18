@@ -37,6 +37,12 @@ class HomeController < ApplicationController
   def trade
   end
 
+  # ------ balance transactions ------
+
+  def add_balance
+
+  end
+
   # -------------------- Testing Purpose Only
   def sample 
 
