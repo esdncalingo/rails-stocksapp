@@ -29,6 +29,9 @@ class HomeController < ApplicationController
   end
 
   def buysell
+    # --- /stock/{symbol}
+    response = Faraday.get('https://cloud.iexapis.com/v1/stock/aapl/batch?types=quote,logo&token=pk_06f0670b09884fe5aa66d394e4263f00')
+    @company = JSON.parse(response.body)
   end
 
   def market

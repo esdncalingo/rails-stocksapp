@@ -1,1 +1,47 @@
 <%= render "navbar" %>
+
+<div class="flex justify-center items-center pt-8">
+
+  <div class="flex flex-col gap-4 min-w-[500px] p-4">
+    
+    <div class="flex mb-4 justify-center select-none"> 
+      <div class="flex justify-center w-[50%] cursor-pointer group/buy">
+        <span class="text-white text-2xl font-bold transition-all duration-100 ease-in group-hover/buy:text-[#03e9f4]">Buy</span>
+      </div>
+      <div class="flex justify-center w-[50%] cursor-pointer group/sell">
+        <span class="text-white text-2xl font-bold transition-all duration-100 ease-in group-hover/sell:text-[#f890e7]">Sell</span>
+      </div>
+    </div>
+
+    <div class="flex items-center bg-[#0b0f16] p-4 rounded-lg">
+      <div>
+        <%= image_tag(@company['logo']['url'], class: "w-[60px] h-[60px] select-none") %>
+      </div>
+
+      <div class="flex flex-col ml-4">
+        <span class="text-gray-500"><%= @company['quote']['symbol'] %></span>
+        <span class="text-gray-500"><%= @company['quote']['companyName'] %></span>
+      </div>
+
+      <div class="ml-auto">
+        <span class="text-gray-500 text-2xl">Price: <%= @company['quote']['latestPrice'] %></span>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2 bg-[#0b0f16] p-4 rounded-lg mb-8">
+      <div class="flex text-gray-500 mb-4">
+        <span>Spend</span>
+        <span class="ml-auto">Cash Balance: 0.00</span>
+      </div>
+
+      <div>
+        <input type="text" placeholder="0.00" class="bg-transparent border-none text-gray-500 p-0">
+      </div>
+    </div>
+
+    <div class="self-center">
+      <%= button_to "Continue", "", class: "btn-primary" %>
+    </div>
+  </div>
+
+</div>
