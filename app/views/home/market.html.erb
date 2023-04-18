@@ -1,1 +1,28 @@
 <%= render "navbar" %>
+
+<div class="flex flex-col mx-[40px]">
+
+  <div class="flex gap-8 justify-center pt-12">
+    <%= turbo_frame_tag "top_mostactive" do %>
+      <% @mostactive.each do |comp| %>
+        <%= render "home/lists/top5", company: comp %>
+      <% end %>
+    <% end %>
+
+    <%= turbo_frame_tag "top_gainers" do %>
+      <% @gainers.each do |comp| %>
+        <%= render "home/lists/top5", company: comp %>
+      <% end %>
+    <% end %>
+
+    <%= turbo_frame_tag "top_losers" do %>
+      <% @losers.each do |comp| %>
+        <%= render "home/lists/top5", company: comp %>
+      <% end %>
+    <% end %>
+
+  </div>
+
+  <%= @testingmarket %>
+
+</div>

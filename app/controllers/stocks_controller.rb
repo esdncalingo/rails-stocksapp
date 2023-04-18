@@ -1,6 +1,6 @@
 class StocksController < ApplicationController
   before_action :initialize_iex_client
-  # before_action :verify_stock_master
+  #before_action :verify_stock_master
   
 
   def show

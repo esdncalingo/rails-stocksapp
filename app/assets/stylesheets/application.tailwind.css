@@ -73,7 +73,7 @@
 }
 
 body {
-  @apply h-screen w-screen;
+  @apply h-screen w-full;
 }
 
 th, td {

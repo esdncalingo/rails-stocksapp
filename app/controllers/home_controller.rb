@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   #before_action :authenticate_user
   before_action :require_user
-  before_action :initialize_iex_client
+  before_action :iex_initializer
 
   def index
     # URL: https://cloud.iexapis.com/v1
@@ -35,6 +35,20 @@ class HomeController < ApplicationController
   end
 
   def market
+    #response = Faraday.get('https://api.iex.cloud/v1/data/CORE/REF_DATA?token=pk_06f0670b09884fe5aa66d394e4263f00')
+    #@stocks_master = JSON.parse(response.body)
+
+    @testingmarket = @iex_client.company('TSLA')
+
+    response = Faraday.get('https://cloud.iexapis.com/v1//stock/market/list/mostactive?token=pk_06f0670b09884fe5aa66d394e4263f00&listLimit=5')
+    @mostactive = JSON.parse(response.body)
+
+    response = Faraday.get('https://cloud.iexapis.com/v1//stock/market/list/gainers?token=pk_06f0670b09884fe5aa66d394e4263f00&listLimit=5')
+    @gainers = JSON.parse(response.body)
+
+    response = Faraday.get('https://cloud.iexapis.com/v1//stock/market/list/losers?token=pk_06f0670b09884fe5aa66d394e4263f00&listLimit=5')
+    @losers = JSON.parse(response.body)
+
   end
 
   def trade
@@ -80,6 +94,12 @@ class HomeController < ApplicationController
 
 
     
+  end
+
+  private
+
+  def iex_initializer
+    @iex_client = IEX::Api::Client.new
   end
 
 end

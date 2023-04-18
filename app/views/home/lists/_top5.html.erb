@@ -1,0 +1,9 @@
+<div class="flex p-[2px] items-center">
+  <div class="flex flex-col w-[180px]">
+    <span class="text-white font-bold text-sm"><%= company["companyName"] %>   </span>
+    <span class="text-gray-500 text-sm"><%= company["symbol"] %></span>
+  </div>
+
+  <span class="min-w-[70px] text-white text-center text-sm">$<%= company["latestPrice"] %></span>
+  <span class="min-w-[70px] text-center text-sm <%= company["change"] >= 0 ? 'text-green-500' : 'text-red-500' %>"><%= company["change"] %>%</span>
+</div>
