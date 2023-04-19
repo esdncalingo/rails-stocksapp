@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   #before_action :authenticate_user
   before_action :require_user
-  before_action :iex_initializer
+  before_action :initialize_iex_client
 
   def index
     # URL: https://cloud.iexapis.com/v1
@@ -22,10 +22,6 @@ class HomeController < ApplicationController
   end
 
   def pending
-  end
-
-  # ------ Load Balance ------
-  def deposit
   end
 
   def buysell
@@ -57,7 +53,7 @@ class HomeController < ApplicationController
   # ------ balance transactions ------
 
   def add_balance
-
+    TransactionRepository.deposit(current_user.id, params[:amount])
   end
 
   # -------------------- Testing Purpose Only
@@ -94,12 +90,6 @@ class HomeController < ApplicationController
 
 
     
-  end
-
-  private
-
-  def iex_initializer
-    @iex_client = IEX::Api::Client.new
   end
 
 end

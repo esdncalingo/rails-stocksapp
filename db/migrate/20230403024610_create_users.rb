@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :lname
       t.string :contacts
       t.string :address
-      t.float :wallet
+      t.float :balance, :default => 0
       t.string :status
 
       t.timestamps

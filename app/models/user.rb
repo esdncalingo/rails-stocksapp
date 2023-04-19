@@ -55,8 +55,4 @@ class User < ApplicationRecord
     self.address ? self.address.downcase! : ""
   end
 
-  # ----- transcations ------
-  def update_balance
-    
-  end
 end

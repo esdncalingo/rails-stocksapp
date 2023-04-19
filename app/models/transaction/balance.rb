@@ -6,7 +6,7 @@ class Transaction
 
       # my_account = User.find_by("user_id" == user_id)
       # my_account['balance'] = user_balance
-      return user_balance 
+      user_balance 
     end
   end
 end 
