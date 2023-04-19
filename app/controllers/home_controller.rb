@@ -54,6 +54,7 @@ class HomeController < ApplicationController
 
   def add_balance
     TransactionRepository.deposit(current_user.id, params[:amount])
+    TransactionRepository.record_transaction(current_user.id, params)
   end
 
   # -------------------- Testing Purpose Only

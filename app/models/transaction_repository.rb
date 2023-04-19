@@ -5,15 +5,17 @@ class TransactionRepository
     user.balance 
   end
 
-  def self.record_transaction(user_id, qty, price, amount, kind, stock_code, crypto_code)
+  def self.record_transaction(user_id, params)
+    amount = params[:amount].gsub(/[^\d\.]/, '').to_f
+
     new_transaction = Transaction.new(
       "user_id": user_id,
-      "qty": qty,
-      "price": price,
+      "qty": params[:qty] ? params[:qty] : 0 ,
+      "price": params[:price] ? params[:price] : 0,
       "amount": amount,
-      "kind": kind,
-      "stock_code": stock_code,
-      "crypto_code": crypto_code,
+      "kind": params[:commit],
+      "stock_code": params[:stock_code],
+      "crypto_code": params[:crypto_code],
     )
 
     if new_transaction.save
