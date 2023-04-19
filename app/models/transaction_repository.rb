@@ -1,6 +1,6 @@
 class TransactionRepository 
 
-  def self.get_updated_balance(user_id)      
+  def self.show_balance(user_id)      
     user = User.find(user_id)
     user.balance 
   end
@@ -29,44 +29,6 @@ class TransactionRepository
       return true
     else 
       return new_transaction.errors_full_messages
-    end
-  end
-
-  def self.buy(user_id, params)
-    amount = params[:amount].gsub(/[^\d\.]/, '').to_f
-    
-    if amount > 0
-      user = User.find(user_id)
-      user_balance = user.balance - amount
-      user.update(balance: user_balance)
-      record_transaction(user_id, params)
-    else
-      # --- error:  ---
-    end
-  end
-
-  def self.sell(user_id, params) 
-    amount = params[:amount].gsub(/[^\d\.]/, '').to_f
-    binding.pry
-    if amount > 0
-      user = User.find(user_id)
-      user_balance = user.balance + amount
-      user.update(balance: user_balance)
-      record_transaction(user_id, params)
-    else
-      # --- error:  ---
-    end
-  end
-
-  def self.deposit(user_id, amount)
-    amount = amount.gsub(/[^\d\.]/, '').to_f
-    
-    if amount > 0
-      user = User.find(user_id)
-      user_balance = user.balance + amount
-      user.update(balance: user_balance)
-    else
-      # --- error: amount input is lessthan the requirements ---
     end
   end
   

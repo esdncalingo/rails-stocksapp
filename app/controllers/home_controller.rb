@@ -53,7 +53,7 @@ class HomeController < ApplicationController
   # ------ balance transactions ------
 
   def add_balance
-    TransactionRepository.deposit(current_user.id, params[:amount])
+    Transaction::Generator.deposit(current_user.id, params[:amount])
     TransactionRepository.record_transaction(current_user.id, params)
   end
 
@@ -61,15 +61,17 @@ class HomeController < ApplicationController
     # --- params[:commit] Buy or Sell
     case params[:commit]
     when "Buy"
-      TransactionRepository.buy(current_user.id, params)
+      Transaction::Generator.buy(current_user.id, params)
     when "Sell"
-      TransactionRepository.sell(current_user.id, params)
+      Transaction::Generator.sell(current_user.id, params)
     end
     user = User.find(current_user.id)   
+    onhand = Transaction::Inventory.stock_count(current_user.id, 'AAPL')
     respond_to do |format|
-      format.turbo_stream { render turbo_stream:
-        turbo_stream.update("balance", number_to_currency(user.balance))
-      }
+      format.turbo_stream { render turbo_stream: [
+        turbo_stream.update("balance", number_to_currency(user.balance)),
+        turbo_stream.update("onhand", onhand)
+      ]}
     end
   end
 
@@ -111,6 +113,7 @@ class HomeController < ApplicationController
   def company_dashboard
     @quote = @iex_client.quote('AAPL')
     @logo = @iex_client.logo('AAPL')['url']
-    @balance = TransactionRepository.get_updated_balance(current_user.id)
+    @balance = TransactionRepository.show_balance(current_user.id)
+    @onhand = Transaction::Inventory.stock_count(current_user.id, 'AAPL')
   end
 end

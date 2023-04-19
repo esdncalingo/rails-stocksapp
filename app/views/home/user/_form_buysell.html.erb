@@ -19,9 +19,14 @@
   </div>
 
   <div class="flex flex-col bg-[#0b0f16] p-4 rounded-lg mb-8">
-    <div class="flex text-gray-500 mb-4">
+    <div class="flex text-gray-500 mb-2">
       <span>Cash Balance: </span>
       <span id="balance" class="ml-4"><%= number_to_currency(@balance) %></span>
+    </div>
+
+    <div class="flex text-gray-500 mb-4">
+      <span>Stocks on Hand: </span>
+      <span id="onhand" class="ml-4"><%= @onhand %></span>
     </div>
 
     <div class="flex text-gray-500 mb-2">
