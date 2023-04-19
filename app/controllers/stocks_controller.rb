@@ -5,7 +5,9 @@ class StocksController < ApplicationController
 
   def show
     response = Faraday.get('https://api.iex.cloud/v1/data/CORE/REF_DATA?token=pk_ed7475c0c153436587bd10b8f1da9916')
+    # pp response.body
     $stocks_master = JSON.parse(response.body)
+    # $stocks_master = response
     # top 10 list
     response = Faraday.get('https://cloud.iexapis.com/v1/stock/market/list/mostactive?token=pk_ed7475c0c153436587bd10b8f1da9916')
     logo = @iex_client.logo("TSLA")
@@ -20,6 +22,7 @@ class StocksController < ApplicationController
   $most_active_list = JSON.parse(response.body)
   # @user_balance = TransactionRepository.get_updated_balance(Authentication.find_by("token": session[:gen_token])['user_id']  )
   @user_balance = Transaction::Balance.get_updated_balance(Authentication.find_by("token": session[:gen_token])['user_id']  )
+  @on_hand =  Transaction::Inventory.update(Authentication.find_by("token": session[:gen_token])['user_id'],  stocks_params['stock_code'])
 
 
   if stocks_params['stock_code']    
@@ -33,6 +36,18 @@ class StocksController < ApplicationController
     @stock_name = @stock_details["name"]
     @stock_price = @stock_details["latest_price"]
     @stock_currency = @stock_details["currency"]    
+  end
+
+  def profile
+   
+    if !stocks_params['stock_code']
+      stock_code = default_selected
+    else
+      stock_code = stocks_params['stock_code'] 
+    end
+    @stock_info = StocksRepository.stock_details(stock_code)
+    @on_hand =  Transaction::Inventory.update(Authentication.find_by("token": session[:gen_token])['user_id'],  stocks_params['stock_code'])
+    # @stock_info = Stocks::Profile.details(stock_code)
   end
 
 

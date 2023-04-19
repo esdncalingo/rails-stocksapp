@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   # stocks 
   get "/stocks/show" => "stocks#show", as: :stocks_page
+  get "/stocks/profile" => "stocks#profile", as: :stocks_profile
   post "/stocks/purchase:stock_code" => "stocks#transact", as: :transact_stocks
   # post "/stocks/purchase" => "stocks#details", as: :stocks_details
   post "/stocks/search" => "stocks#search", as: :search_stocks

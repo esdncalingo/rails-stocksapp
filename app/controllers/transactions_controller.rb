@@ -8,7 +8,8 @@ class TransactionsController < ApplicationController
 
     #get user latest balance      
     # user_balance = wallet
-    user_balance = TransactionRepository.get_updated_balance(authentication['user_id'])
+    user_balance = Transaction::Balance.get_updated_balance(authentication['user_id'])
+    on_hand =  Transaction::Inventory.update(Authentication.find_by("token": session[:gen_token])['user_id'],  transaction_params['stock_code'])
 
     #implement computations
     valid_transaction = true
@@ -26,6 +27,9 @@ class TransactionsController < ApplicationController
       end
       transaction_amount = transaction_amount > 0 ? transaction_amount * -1 : transaction_amount   
     elsif transaction_kind == 'Sell' || transaction_kind == 'Deposit'
+      if transaction_kind == 'Sell' && transaction_qty > on_hand
+        valid_transaction = false
+      end
       transaction_qty = transaction_qty.to_i > 0 ? transaction_qty.to_i * -1 : transaction_qty.to_i              
     end
 
