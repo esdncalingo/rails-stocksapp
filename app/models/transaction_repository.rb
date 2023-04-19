@@ -14,7 +14,7 @@ class TransactionRepository
       "price": params[:price] ? params[:price] : 0,
       "amount": amount,
       "kind": params[:commit],
-      "stock_code": params[:stock_code],
+      "stock_code": params[:symbol],
       "crypto_code": params[:crypto_code],
     )
 
@@ -22,6 +22,32 @@ class TransactionRepository
       return true
     else 
       return new_transaction.errors_full_messages
+    end
+  end
+
+  def self.buy(user_id, params)
+    amount = params[:amount].gsub(/[^\d\.]/, '').to_f
+    
+    if amount > 0
+      user = User.find(user_id)
+      user_balance = user.balance - amount
+      user.update(balance: user_balance)
+      record_transaction(user_id, params)
+    else
+      # --- error:  ---
+    end
+  end
+
+  def self.sell(user_id, params) 
+    amount = params[:amount].gsub(/[^\d\.]/, '').to_f
+    
+    if amount > 0
+      user = User.find(user_id)
+      user_balance = user.balance + amount
+      user.update(balance: user_balance)
+      record_transaction(user_id, params)
+    else
+      # --- error:  ---
     end
   end
 

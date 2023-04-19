@@ -107,3 +107,11 @@ th, td {
 .searchbar {
   @apply flex border-[#f890e7] border-[1px] p-2 mb-8 min-w-[820px];
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+   -webkit-transition-delay: 9999s;
+   transition-delay: 9999s;
+}

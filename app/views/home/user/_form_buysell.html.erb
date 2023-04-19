@@ -1,0 +1,55 @@
+
+<%= form_with(scope: @user, url: home_buy_sell_path, method: :post, class: "flex flex-col gap-4 min-w-[500px] p-4") do |form| %>
+  <input type="hidden" name="symbol" value="<%= @quote['symbol'] %>"/>
+  <input type="hidden" name="price" value="<%= @quote['latest_price'] %>"/>
+  <div class="flex items-center bg-[#0b0f16] p-4 rounded-lg">
+    <div>
+      <%= image_tag(@logo, class: "w-[60px] h-[60px] select-none") %>
+    </div>
+
+    <div class="flex flex-col ml-4">
+      <span name="symbol" class="text-gray-500"><%= @quote['symbol'] %></span>
+      <span class="text-gray-500"><%= @quote['company_name'] %></span>
+    </div>
+
+    <div class="ml-auto">
+      <span class="text-gray-500 text-2xl">Price: <%= @quote['latest_price'] %></span>
+    </div>
+  </div>
+
+  <div class="flex flex-col bg-[#0b0f16] p-4 rounded-lg mb-8">
+    <div class="flex text-gray-500 mb-4">
+      <span>Cash Balance: </span>
+      <span id="balance" class="ml-4"><%= number_to_currency(@balance) %></span>
+    </div>
+
+    <div class="flex text-gray-500 mb-2">
+      <span class="w-[50%]">Amount</span>
+      <span class="">Quantity</span>
+    </div>
+
+    <div class="flex">
+      <input type="text" name="amount" placeholder="0.00" class="bg-transparent border-none text-gray-500 p-0 w-[50%] focus:ring-0">
+      <input type="text" name="qty" placeholder="0" class="bg-transparent border-none text-gray-500 p-0 focus:ring-0">
+    </div>
+  </div>
+
+  <div class="flex mb-4 justify-center select-none gap-2"> 
+    <div class="flex justify-center p-4 w-[50%] cursor-pointer group/buy bg-[#0b0f16] 
+    transition-all duration-300 ease-in hover:drop-shadow-[0_4px_4px_rgba(3,233,244,1.25)]">
+      <%= form.submit "Buy", 
+        class: "text-white text-2xl font-bold transition-all duration-100 ease-in  
+          group-hover/buy:text-[#03e9f4] " 
+      %>
+    </div>
+
+    <div class="flex justify-center p-4 w-[50%] cursor-pointer bg-[#0b0f16] group/sell
+    transition-all duration-300 ease-in hover:drop-shadow-[0_4px_4px_rgba(248,144,231,1)]">
+      <%= form.submit "Sell", 
+        class: "text-white text-2xl font-bold transition-all duration-100 ease-in 
+          group-hover/sell:text-[#f890e7]" 
+      %>
+    </div>
+  </div>
+
+  <% end %>

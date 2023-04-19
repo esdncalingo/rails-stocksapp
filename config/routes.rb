@@ -27,9 +27,6 @@ Rails.application.routes.draw do
   post "/admin/user/waiting" => "admins#waiting_list"
   post "/admin/user/active" => "admins#active_users"
 
-  # Users Information
-
-
   # Homepage
   get "/home" => "home#index"
   get "/pending" => "home#pending", as: :pending_page
@@ -40,14 +37,15 @@ Rails.application.routes.draw do
   get "/home/trade" => "home#trade"
   # --- btn actions
   post "/home/deposit/addbalance" => "home#add_balance"
+  post "/home/buy-sell" => "home#user_buysell"
 
-  # stocks 
+  # Stocks 
   get "/stocks/show" => "stocks#show", as: :stocks_page
   get "/stocks/profile" => "stocks#profile", as: :stocks_profile
   post "/stocks/purchase:stock_code" => "stocks#transact", as: :transact_stocks
   # post "/stocks/purchase" => "stocks#details", as: :stocks_details
   post "/stocks/search" => "stocks#search", as: :search_stocks
-  #transactions
-
+ 
+  # Transactions
   post "/transact/record" => "transactions#record", as: :record_transaction
 end

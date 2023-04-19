@@ -1,7 +1,9 @@
 class HomeController < ApplicationController
+  include ActionView::Helpers::NumberHelper
   #before_action :authenticate_user
   before_action :require_user
   before_action :initialize_iex_client
+  before_action :company_dashboard
 
   def index
     # URL: https://cloud.iexapis.com/v1
@@ -25,9 +27,7 @@ class HomeController < ApplicationController
   end
 
   def buysell
-    # --- /stock/{symbol}
-    response = Faraday.get('https://cloud.iexapis.com/v1/stock/aapl/batch?types=quote,logo&token=pk_06f0670b09884fe5aa66d394e4263f00')
-    @company = JSON.parse(response.body)
+    
   end
 
   def market
@@ -55,6 +55,22 @@ class HomeController < ApplicationController
   def add_balance
     TransactionRepository.deposit(current_user.id, params[:amount])
     TransactionRepository.record_transaction(current_user.id, params)
+  end
+
+  def user_buysell
+    # --- params[:commit] Buy or Sell
+    case params[:commit]
+    when "Buy"
+      TransactionRepository.buy(current_user.id, params)
+    when "Sell"
+      TransactionRepository.sell(current_user.id, params)
+    end
+    user = User.find(current_user.id)   
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream:
+        turbo_stream.update("balance", number_to_currency(user.balance))
+      }
+    end
   end
 
   # -------------------- Testing Purpose Only
@@ -87,10 +103,14 @@ class HomeController < ApplicationController
                 smtp_access.smtp_username, smtp_access.smtp_password, :plain) do |smtp|
       # send email
       smtp.send_message message, "800226e1-87f4-4b5f-8f89-9b609f0c1bb1@mailslurp.mx", "miamitrades@zohomail.com"
-    end
-
-
-    
+    end 
   end
 
+  private
+
+  def company_dashboard
+    @quote = @iex_client.quote('AAPL')
+    @logo = @iex_client.logo('AAPL')['url']
+    @balance = TransactionRepository.get_updated_balance(current_user.id)
+  end
 end
