@@ -12,8 +12,9 @@
       <span class="text-gray-500"><%= @quote['company_name'] %></span>
     </div>
 
-    <div class="ml-auto">
-      <span class="text-gray-500 text-2xl">Price: <%= @quote['latest_price'] %></span>
+    <div class="ml-auto text-gray-500 text-2xl">
+      <span>Price: </span>
+      <span id="price"><%= @quote['latest_price'] %></span>
     </div>
   </div>
 
@@ -29,8 +30,25 @@
     </div>
 
     <div class="flex">
-      <input type="text" name="amount" placeholder="0.00" class="bg-transparent border-none text-gray-500 p-0 w-[50%] focus:ring-0">
-      <input type="text" name="qty" placeholder="0" class="bg-transparent border-none text-gray-500 p-0 focus:ring-0">
+      <input 
+        type="text" 
+        id="amount" 
+        name="amount" 
+        placeholder="0.00" 
+        class="bg-transparent border-none text-gray-500 p-0 w-[50%] focus:ring-0"
+        data-controller="amount"
+        data-action="amount#change"
+      >
+
+      <input 
+        type="text" 
+        id="qty" 
+        name="qty" 
+        placeholder="0" 
+        class="bg-transparent border-none text-gray-500 p-0 focus:ring-0"
+        data-controller="qty"
+        data-action="qty#change"
+        >
     </div>
   </div>
 
