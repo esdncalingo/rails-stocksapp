@@ -8,9 +8,16 @@ class TransactionRepository
   def self.record_transaction(user_id, params)
     amount = params[:amount].gsub(/[^\d\.]/, '').to_f
 
+    case params[:commit]
+    when "Buy"
+      qty = params[:qty]
+    when "Sell"
+      qty = params[:qty].to_f * -1
+    end
+
     new_transaction = Transaction.new(
       "user_id": user_id,
-      "qty": params[:qty] ? params[:qty] : 0 ,
+      "qty": qty ,
       "price": params[:price] ? params[:price] : 0,
       "amount": amount,
       "kind": params[:commit],
@@ -40,7 +47,7 @@ class TransactionRepository
 
   def self.sell(user_id, params) 
     amount = params[:amount].gsub(/[^\d\.]/, '').to_f
-    
+    binding.pry
     if amount > 0
       user = User.find(user_id)
       user_balance = user.balance + amount
