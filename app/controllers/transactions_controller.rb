@@ -34,7 +34,7 @@ class TransactionsController < ApplicationController
     end
 
     # record transaction
-    if valid_transaction #condition for balance validation
+    # if valid_transaction #condition for balance validation
         @new_transaction = TransactionRepository.record_transaction(
           authentication['user_id'],
           transaction_qty,
@@ -47,9 +47,9 @@ class TransactionsController < ApplicationController
         if @new_transaction
           head :ok   
         end
-    else  #condition for balance validation
-      format.html { render json: { not_found: true }, status: 403 } #condition for balance validation
-    end #condition for balance validation
+    # else  #condition for balance validation
+    #   format.html { render json: { not_found: true }, status: 403 } #condition for balance validation
+    # end #condition for balance validation
   end
 
   private

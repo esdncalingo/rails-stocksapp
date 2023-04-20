@@ -47,6 +47,8 @@ class StocksController < ApplicationController
     end
     @stock_info = StocksRepository.stock_details(stock_code)
     @on_hand =  Transaction::Inventory.update(Authentication.find_by("token": session[:gen_token])['user_id'],  stocks_params['stock_code'])
+    @portfolio= Transaction::Portfolio.display(Authentication.find_by("token": session[:gen_token])['user_id'])
+    # print @portfolio
     # @stock_info = Stocks::Profile.details(stock_code)
   end
 

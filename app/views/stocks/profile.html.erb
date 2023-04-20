@@ -1,7 +1,5 @@
 
-
-
-<div class="flex">
+<!-- <div class="flex">
   <div>
     <%= form_with url: stocks_profile_path, method: :get, :id => "drop_down_id"  do |form| %>
       <%= form.select( 
@@ -33,6 +31,31 @@
       </div>
       
     <% end %>
+
+  </div>
+</div> -->
+<div style="color: #ccc">
+  <div class="flex flex-col">
+    <%# <div class="flex">
+      <div class="py-2">Logo</div>
+      <div class="py-2">Code</div>
+      <div class="py-2">Name</div>
+      <div class="py-2">Qty</div>
+      <div class="py-2">Price</div>
+      <div class="py-2">% Change</div>
+    </div> %>
+    <% @portfolio.each do | data |%>
+      <div class="flex">
+      <div class="p-2">
+        <img src=<%= data["logo"]%> style="height:100px; width:100px">
+      </div>
+      <div class="p-2"><%=data["code"]%></div>
+      <div class="p-2"><%=data["name"]%></div>
+      <div class="p-2"><%=data["qty"]%></div>
+      <div class="p-2"><%=data["latest_price"]%></div>
+      <div class="p-2">% <%=data["change_percent"]%></div>
+    </div>
+    <%end%>
 
   </div>
 </div>
