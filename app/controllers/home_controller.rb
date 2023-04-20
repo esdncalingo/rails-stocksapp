@@ -1,9 +1,11 @@
 class HomeController < ApplicationController
   include ActionView::Helpers::NumberHelper
-  #before_action :authenticate_user
   before_action :require_user
   before_action :initialize_iex_client
+  before_action :initialize_stocks_master
   before_action :company_dashboard
+
+  helper_method :get_logo
 
   def index
     # URL: https://cloud.iexapis.com/v1
@@ -14,7 +16,6 @@ class HomeController < ApplicationController
     response = Faraday.get('https://cloud.iexapis.com/v1/stock/market/batch?types=news&range=1m&last=5&token=pk_06f0670b09884fe5aa66d394e4263f00')
     @news = JSON.parse(response.body)
 
-    
     userauth = Authentication.find_by(token: session[:gen_token])
     pending = userauth.user.status === "pending" ? true : false
 
@@ -27,7 +28,8 @@ class HomeController < ApplicationController
   end
 
   def buysell
-    
+    @chart_data = get_chart_data('AAPL')
+    @paginated_items = Kaminari.paginate_array($stocks_master).page(1).per(10)
   end
 
   def market
@@ -116,4 +118,20 @@ class HomeController < ApplicationController
     @balance = TransactionRepository.show_balance(current_user.id)
     @onhand = Transaction::Inventory.stock_count(current_user.id, 'AAPL')
   end
+
+  def get_logo(stock_symbol)
+    @logo = @iex_client.logo(stock_symbol)['url']
+  end
+  
+  def get_chart_data(stock_symbol)
+    # puts stock_symbol    
+    chart = @iex_client.chart(stock_symbol)
+    chart_arr = chart.reduce([]) { |init, curr| 
+      init.push([curr['label'], curr['open'], curr['close'], curr['high'], curr['low']]);     
+    }.inject({}) do |res, k|
+        res[k[0]] = k[1..-1]
+        res
+      end
+  end
+  
 end

@@ -1,0 +1,57 @@
+
+<%= candlestick_chart( @chart_data,
+    width: '1000px',
+    theme: 'sakura',
+    options: {
+      series: {
+        # itemStyle: {
+        #   color: '#f890e7', #loss
+        #   color0: '#03e9f4', #gain
+        #   borderColor: '#f890e7',
+        #   borderColor0: '#03e9f4'
+        # }
+      },
+        title: {
+        text: @stock_name
+      },
+      xAxis: {
+        axisTick: {
+          alignWithLabel: false
+        },
+        boundaryGap: false,
+        axisLine: { onZero: false },
+        splitLine: { show: false },
+        min: 'dataMin',
+        max: 'dataMax'
+      },
+      yAxis: {
+        scale: true,
+        splitArea: {
+          show: false
+        }
+      },          
+      dataZoom: [
+        {
+          type: 'inside',
+          start: 1,
+          end: 100
+        },
+        {
+          show: true,
+          type: 'slider',
+          top: '90%',
+          start: 20,
+          end: 100
+        }
+      ],
+      grid: [
+        {
+          left: 40,
+          right: 20,
+          top: 40,
+        },
+      ],
+    },
+      
+    )
+  %>

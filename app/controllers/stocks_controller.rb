@@ -5,7 +5,6 @@ class StocksController < ApplicationController
 
   def show
     response = Faraday.get('https://api.iex.cloud/v1/data/CORE/REF_DATA?token=pk_ed7475c0c153436587bd10b8f1da9916')
-    # pp response.body
     $stocks_master = JSON.parse(response.body)
     # $stocks_master = response
     # top 10 list

@@ -108,6 +108,10 @@ th, td {
   @apply flex border-[#f890e7] border-[1px] p-2 mb-8 min-w-[820px];
 }
 
+.col {
+  flex: 1;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

@@ -4,6 +4,13 @@ class ApplicationController < ActionController::Base
   def initialize_iex_client
     @iex_client = IEX::Api::Client.new
   end
+
+  def initialize_stocks_master
+    if ($stocks_master.blank?)
+      file = File.read('./app/helpers/stock_master.json')
+      $stocks_master = JSON.parse(file)
+    end
+  end
   
   def current_user
     token = session[:gen_token]

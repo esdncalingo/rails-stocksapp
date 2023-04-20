@@ -140,6 +140,18 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     loofah (2.20.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -259,6 +271,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (3.3.1)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.7)
@@ -276,6 +289,7 @@ DEPENDENCIES
   iex-ruby-client
   importmap-rails
   jbuilder
+  kaminari
   mailslurp_client (~> 15.17, >= 15.17.5)
   pg (~> 1.1)
   pry-byebug
@@ -291,6 +305,7 @@ DEPENDENCIES
   tzinfo-data
   web-console
   webdrivers
+  will_paginate (~> 3.3)
 
 RUBY VERSION
    ruby 3.2.0p0

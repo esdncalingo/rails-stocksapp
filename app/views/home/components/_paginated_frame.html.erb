@@ -1,0 +1,17 @@
+<div class="flex bg-[#0b0f16] gap-2 p-2">
+
+  <div>
+    <%= image_tag(get_logo(item['symbol']), class: "w-[60px] h-[60px] select-none") %>
+  </div>
+
+  <div class="col text-white flex flex-col min-w-[400px]">
+    <span><%= item['name'] %></span>
+    <span class="text-gray-500"><%= item['symbol'] %></span>
+  </div>
+  
+  <div class="col text-white">
+    <span><%= item['currency'] %></span>
+  </div>
+
+</div>
+  

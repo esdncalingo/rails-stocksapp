@@ -32,12 +32,16 @@ gem "jbuilder"
 
 gem "font-awesome-sass", "~> 6.4.0"
 
+gem 'will_paginate', '~> 3.3'
+gem 'kaminari'
+
 # Debugging Tool
 # gem 'pry', '~> 0.13.1'
 gem 'pry-byebug'
 
 gem 'mailslurp_client', '~> 15.17', '>= 15.17.5'
 
+# railsjazz
 gem "rails_charts"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
