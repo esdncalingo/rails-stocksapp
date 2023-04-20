@@ -16,7 +16,7 @@
       <%= render "home/components/paginated_frame", 
         item: item, 
         url: check_url(item['symbol']), 
-        quote: get_quote(item['symbol'])
+        quote: check_quote(item['symbol'])
       %>
     <% end %>
   </div>

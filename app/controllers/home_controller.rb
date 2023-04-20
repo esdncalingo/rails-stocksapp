@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   before_action :initialize_stocks_master
   before_action :company_dashboard
 
-  helper_method :get_logo, :get_quote, :check_url
+  helper_method :get_logo, :get_quote, :check_url, :check_quote
 
   def index
     # URL: https://cloud.iexapis.com/v1
@@ -67,7 +67,10 @@ class HomeController < ApplicationController
       Transaction::Generator.sell(current_user.id, params)
     end
     user = User.find(current_user.id)   
-    onhand = Transaction::Inventory.stock_count(current_user.id, 'AAPL')
+
+    symbol = params[:symbol] ? params[:symbol] : 'TSLA'
+
+    onhand = Transaction::Inventory.stock_count(current_user.id, symbol)
     respond_to do |format|
       format.turbo_stream { render turbo_stream: [
         turbo_stream.update("balance", number_to_currency(user.balance)),
@@ -127,6 +130,20 @@ class HomeController < ApplicationController
         newarray['url'] = @iex_client.logo(stock_symbol)['url']
         $stocks_master.find { |item| item['symbol'] == stock_symbol ? item.replace(newarray) : '' }
         File.write('./app/helpers/stock_master.json', JSON.dump($stocks_master))
+        newarray['url']
+      end
+    end
+  end
+
+  def check_quote(stock_symbol)
+    if newarray = $stocks_master.find { |item| item['symbol'] == stock_symbol }
+      if newarray['quote']
+        newarray['quote']
+      else
+        newarray['quote'] = @iex_client.quote(stock_symbol)
+        $stocks_master.find { |item| item['symbol'] == stock_symbol ? item.replace(newarray) : '' }
+        File.write('./app/helpers/stock_master.json', JSON.dump($stocks_master))
+        newarray['quote']
       end
     end
   end
