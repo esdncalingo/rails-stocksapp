@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   before_action :initialize_stocks_master
   before_action :company_dashboard
 
-  helper_method :get_logo
+  helper_method :get_logo, :get_quote, :check_url
 
   def index
     # URL: https://cloud.iexapis.com/v1
@@ -28,7 +28,6 @@ class HomeController < ApplicationController
   end
 
   def buysell
-    @chart_data = get_chart_data('AAPL')
     @paginated_items = Kaminari.paginate_array($stocks_master).page(1).per(10)
   end
 
@@ -111,18 +110,36 @@ class HomeController < ApplicationController
   end
 
   private
-
-  def company_dashboard
-    @quote = @iex_client.quote('AAPL')
-    @logo = @iex_client.logo('AAPL')['url']
-    @balance = TransactionRepository.show_balance(current_user.id)
-    @onhand = Transaction::Inventory.stock_count(current_user.id, 'AAPL')
-  end
-
+# ---------- Helpers ----------
   def get_logo(stock_symbol)
-    @logo = @iex_client.logo(stock_symbol)['url']
+    @iex_client.logo(stock_symbol)['url']
   end
-  
+
+  def get_quote(stock_symbol)
+    @iex_client.quote(stock_symbol)
+  end 
+
+  def check_url(stock_symbol)
+    if newarray = $stocks_master.find { |item| item['symbol'] == stock_symbol }
+      if newarray['url']
+        newarray['url']
+      else
+        newarray['url'] = @iex_client.logo(stock_symbol)['url']
+        $stocks_master.find { |item| item['symbol'] == stock_symbol ? item.replace(newarray) : '' }
+        File.write('./app/helpers/stock_master.json', JSON.dump($stocks_master))
+      end
+    end
+  end
+#-----------------------------
+  def company_dashboard
+    symbol = params[:symbol] ? params[:symbol] : 'TSLA'
+    @quote = @iex_client.quote(symbol)
+    @logo = @iex_client.logo(symbol)['url']
+    @chart_data = get_chart_data(symbol)
+    @balance = TransactionRepository.show_balance(current_user.id)
+    @onhand = Transaction::Inventory.stock_count(current_user.id, symbol)
+  end
+
   def get_chart_data(stock_symbol)
     # puts stock_symbol    
     chart = @iex_client.chart(stock_symbol)

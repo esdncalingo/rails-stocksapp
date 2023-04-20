@@ -4,70 +4,80 @@
         "name": "Agilent Technologies Inc.",
         "type": "cs",
         "currency": "USD",
-        "region": "US"
+        "region": "US",
+        "url": "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/A.png"
     },
     {
         "symbol": "AA",
         "name": "Alcoa Corp",
         "type": "cs",
         "currency": "USD",
-        "region": "US"
+        "region": "US",
+        "url": "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/AA.png"
     },
     {
         "symbol": "AAC",
         "name": "Ares Acquisition Corporation - Class A",
         "type": "cs",
         "currency": "USD",
-        "region": "US"
+        "region": "US",
+        "url": "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/AAC.png"
     },
     {
         "symbol": "AACI",
         "name": "Armada Acquisition Corp I",
         "type": "cs",
         "currency": "USD",
-        "region": "US"
+        "region": "US",
+        "url": "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/AACI.png"
     },
     {
         "symbol": "AADI",
         "name": "Aadi Bioscience Inc",
         "type": "cs",
         "currency": "USD",
-        "region": "US"
+        "region": "US",
+        "url": "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/AADI.png"
     },
     {
         "symbol": "AAIC",
         "name": "Arlington Asset Investment Corp - Class A",
         "type": "cs",
         "currency": "USD",
-        "region": "US"
+        "region": "US",
+        "url": "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/AAIC.png"
     },
     {
         "symbol": "AAL",
         "name": "American Airlines Group Inc",
         "type": "cs",
         "currency": "USD",
-        "region": "US"
+        "region": "US",
+        "url": "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/AAL.png"
     },
     {
         "symbol": "AAMC",
         "name": "Altisource Asset Management Corp",
         "type": "cs",
         "currency": "USD",
-        "region": "US"
+        "region": "US",
+        "url": "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/AAMC.png"
     },
     {
         "symbol": "AAME",
         "name": "Atlantic American Corp.",
         "type": "cs",
         "currency": "USD",
-        "region": "US"
+        "region": "US",
+        "url": "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/AAME.png"
     },
     {
         "symbol": "AAN",
         "name": "Aarons Company Inc (The)",
         "type": "cs",
         "currency": "USD",
-        "region": "US"
+        "region": "US",
+        "url": "https://storage.googleapis.com/iexcloud-hl37opg/api/logos/AAN.png"
     },
     {
         "symbol": "AAOI",

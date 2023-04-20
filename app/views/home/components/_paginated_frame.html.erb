@@ -1,17 +1,24 @@
+<%= link_to home_buy_sell_path(symbol: item['symbol']) do %>
 <div class="flex bg-[#0b0f16] gap-2 p-2">
+  
+  <div class="flex flex-1 gap-2 min-w-[300px]">
+    <div>
+      <%= image_tag(url, class: "w-[60px] h-[60px] select-none") %>
+    </div>
 
-  <div>
-    <%= image_tag(get_logo(item['symbol']), class: "w-[60px] h-[60px] select-none") %>
-  </div>
-
-  <div class="col text-white flex flex-col min-w-[400px]">
-    <span><%= item['name'] %></span>
-    <span class="text-gray-500"><%= item['symbol'] %></span>
+    <div class="text-white flex flex-col">
+      <span><%= item['name'] %></span>
+      <span class="text-gray-500"><%= item['symbol'] %></span>
+    </div>
   </div>
   
-  <div class="col text-white">
+  <div class="flex-1 text-white">
     <span><%= item['currency'] %></span>
   </div>
 
+  <div class="flex-1 text-white">
+    <span class="<%=quote['change_percent'] >= 0 ? 'text-green-500' : 'text-red-500'%>"><%= quote['change_percent_s'] %></span>
+  </div>
+
 </div>
-  
+<% end %>
