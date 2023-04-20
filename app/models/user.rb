@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_one :authentication
   has_many :logins
+  has_many :transactions
 
   before_validation :convert_downcase
   validates :email, uniqueness: true

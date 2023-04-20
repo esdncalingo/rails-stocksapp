@@ -16,14 +16,17 @@
 
   <div class="flex gap-4 ml-auto items-center">
     <div>
+      <%= link_to raw('<span class="navtext">Profile</span>'), home_profile_path %>
+    </div>
+
+    <div>
       <span class="navtext">Wallet</span>
-      <span class="w-[30px] h-[30px] text-white cursor-pointer"><i class="fa-solid fa-caret-down"></i></span>
     </div>
 
     <div>
       <span class="navtext">Orders</span>
-      <span class="w-[30px] h-[30px] text-white cursor-pointer"><i class="fa-solid fa-caret-down"></i></span>
     </div>
+
     <span class="bg-white h-[20px] w-[1px]"></span>
     <%= button_to "Logout", signout_path, data: { turbo: true }, class: "text-[#f890e7] hover:text-[#03e9f4] transition duration-300 ease-in" %>
   </div>

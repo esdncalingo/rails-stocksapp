@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get "/home/buy-sell" => "home#buysell"
   get "/home/market" => "home#market"
   get "/home/trade" => "home#trade"
+  get "/home/profile" => "home#profile"
   # --- btn actions
   post "/home/deposit/addbalance" => "home#add_balance"
   post "/home/buy-sell" => "home#user_buysell"

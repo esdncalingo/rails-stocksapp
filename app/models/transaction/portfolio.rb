@@ -3,7 +3,7 @@ class Transaction
     def self.display(user_id)  
       stocks_transactions =  my_transactions(user_id)
       my_portfolios = stocks_transactions.map { |transaction|
-        stock_details(transaction["user_id"], transaction["stock_code"])
+        stock_details(user_id, transaction["stock_code"])
         # stock_details(transaction["user_id"], transaction["stock_code"])
       }
       
@@ -12,7 +12,8 @@ class Transaction
 
     private
     def self.my_transactions(user_id)
-      stock_transactions = Transaction.distinct.select("user_id","stock_code").where("user_id" == user_id)
+      user = User.find(user_id)
+      stock_transactions = user.transactions.distinct.select("stock_code").where.not(stock_code: nil)
     end
 
     def self.stock_details(user_id, stock_symbol)

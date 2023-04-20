@@ -15,7 +15,6 @@ class StocksRepository
       latest_price: "",
       change_percent: ""
     }
-    binding.pry
     client = @iex_client.company(stock_symbol)
     logo = @iex_client.logo(stock_symbol)
     quote = @iex_client.quote(stock_symbol)

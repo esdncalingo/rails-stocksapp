@@ -8,8 +8,7 @@ class HomeController < ApplicationController
   helper_method :get_logo, :get_quote, :check_url, :check_quote
 
   def index
-    # URL: https://cloud.iexapis.com/v1
-    #store in global variable stocks masterlist
+    
     response = Faraday.get('https://cloud.iexapis.com/v1/stock/market/list/mostactive?token=pk_06f0670b09884fe5aa66d394e4263f00') 
     @most_active = JSON.parse(response.body)   
 
@@ -28,14 +27,10 @@ class HomeController < ApplicationController
   end
 
   def buysell
-    @paginated_items = Kaminari.paginate_array($stocks_master).page(1).per(10)
+    @paginated_items = Kaminari.paginate_array($stocks_master).page(2).per(10)
   end
 
   def market
-    #response = Faraday.get('https://api.iex.cloud/v1/data/CORE/REF_DATA?token=pk_06f0670b09884fe5aa66d394e4263f00')
-    #@stocks_master = JSON.parse(response.body)
-
-    @testingmarket = @iex_client.company('TSLA')
 
     response = Faraday.get('https://cloud.iexapis.com/v1//stock/market/list/mostactive?token=pk_06f0670b09884fe5aa66d394e4263f00&listLimit=5')
     @mostactive = JSON.parse(response.body)
@@ -49,6 +44,10 @@ class HomeController < ApplicationController
   end
 
   def trade
+  end
+
+  def profile 
+    @portfolio= Transaction::Portfolio.display(current_user.id)
   end
 
   # ------ balance transactions ------

@@ -12,12 +12,16 @@
     </div>
   </div>
   
-  <div class="flex-1 text-white">
+  <div class="flex-1 text-white text-center min-w-[70px]">
     <span><%= item['currency'] %></span>
   </div>
 
-  <div class="flex-1 text-white">
+  <div class="flex-1 text-white text-center min-w-[70px]">
     <span class="<%=quote['change_percent'] >= 0 ? 'text-green-500' : 'text-red-500'%>"><%= quote['change_percent_s'] %></span>
+  </div>
+
+  <div class="flex-1 text-white text-center min-w-[70px]">
+    <span><%= quote['latest_price'] %></span>
   </div>
 
 </div>
