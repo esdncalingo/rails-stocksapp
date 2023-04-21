@@ -47,7 +47,23 @@ class HomeController < ApplicationController
   end
 
   def profile 
+    @user_details = User.find(current_user.id)
     @portfolio= Transaction::Portfolio.display(current_user.id)
+  end
+
+  def transaction
+    @user_history = Transaction::History.show(current_user.id, params[:kind])    
+  end
+
+  def filter_transaction
+    @user_history = Transaction::History.show(current_user.id, params[:kind])
+    respond_to do | format |
+      format.turbo_stream{
+        render turbo_stream: turbo_stream.update("transaction_history", partial: "home/user/transaction", locals:{
+          user_history: @user_history
+        })
+      }
+    end    
   end
 
   # ------ balance transactions ------

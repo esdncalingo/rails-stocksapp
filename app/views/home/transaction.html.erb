@@ -1,0 +1,13 @@
+<%= render "navbar" %>
+
+<div style="color: #ccc">
+<div>
+  <%= button_to "Buy", home_transaction_path(:kind => "Buy") %>
+   <%= button_to "Sell", home_transaction_path(:kind => "Sell") %>
+    <%= button_to "Deposit", home_transaction_path(:kind => "Deposit") %>
+    <%= button_to "All", home_transaction_path(:kind => "All") %>
+</div>
+  <turbo-frame id="transaction_history" class="flex flex-col gap-4 min-w-[500px] px-2 m-8">    
+    <%= render "home/user/transaction" %>
+  </turbo-frame>
+</div>

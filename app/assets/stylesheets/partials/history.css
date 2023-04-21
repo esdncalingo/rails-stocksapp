@@ -1,0 +1,12 @@
+
+.history-table-cell {
+  width: 6.5rem;
+  height: 6.5rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

@@ -1,0 +1,22 @@
+<% @user_history.each do | data |%>
+      <div class="flex items-left bg-[#0b0f16] p-2 rounded-lg text-gray-500 text-lg">
+        <div class="history-table-cell">
+          <%= data["kind"]%>
+        </div class="history-table-cell">
+        <div class="history-table-cell">
+          <%= data["stock_code"]%>
+        </div>
+        <div class="history-table-cell">
+          <%= data["price"]%>
+        </div>
+        <div class="history-table-cell">
+          <%= data["qty"]%>
+        </div>
+        <div class="history-table-cell" style="width: 8rem;">
+          <%= number_to_currency(data["amount"])%>
+        </div>
+        <div class="history-table-cell">
+          <%= data["created_at"].strftime("%m/%d/%y")%>
+        </div>
+      </div>
+<% end %>

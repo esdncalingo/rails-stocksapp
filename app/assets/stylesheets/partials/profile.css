@@ -1,0 +1,26 @@
+
+.profile-table-cell {
+  width: 6.5rem;
+  height: 8.5rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.profile-table-header {
+  width: 6.5rem;
+  /* height: 6.5rem; */
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  margin: 0 0.5rem;
+  padding: 0 0.5rem;
+}
+
+.profile-link {
+  color: #ccc !important;
+}
