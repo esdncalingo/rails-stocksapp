@@ -1,16 +1,40 @@
-<% @user_history.each do | data |%>
-      <div class="flex items-left bg-[#0b0f16] p-2 rounded-lg text-gray-500 text-lg">
+<div class="flex items-left rounded-lg text-gray-500 text-lg
+  justify-between
+">
+    <div class="history-table-cell" style="height: 2rem">
+      Type
+    </div>
+     <div class="history-table-cell" style="height: 2rem">
+      Code
+    </div>
+     <div class="history-table-cell" style="height: 2rem">
+      Price
+    </div>
+     <div class="history-table-cell" style="height: 2rem">
+      Quantity
+    </div>
+     <div class="history-table-cell" style="height: 2rem">
+      Amount
+    </div>
+     <div class="history-table-cell text-center w-fit" style="height: 2rem">
+      Transaction Date
+    </div>
+</div>
+<%@user_history.each do | data |%>
+      <div class="flex items-left bg-[#0b0f16] p-2 rounded-lg text-gray-500 text-lg hover:text-white
+      transition-all duration-300 ease-in hover:ring hover:ring-[#03e9f4] justify-between
+      ">
         <div class="history-table-cell">
           <%= data["kind"]%>
         </div class="history-table-cell">
         <div class="history-table-cell">
           <%= data["stock_code"]%>
         </div>
-        <div class="history-table-cell">
-          <%= data["price"]%>
+        <div class="history-table-cell">          
+           <%= data['kind'] == "Deposit" ? nil : data["price"]%>   
         </div>
         <div class="history-table-cell">
-          <%= data["qty"]%>
+          <%= data['kind'] == "Deposit" ? nil : data["qty"].abs()%>         
         </div>
         <div class="history-table-cell" style="width: 8rem;">
           <%= number_to_currency(data["amount"])%>

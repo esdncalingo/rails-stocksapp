@@ -1,7 +1,7 @@
 
 .history-table-cell {
   width: 6.5rem;
-  height: 6.5rem;
+  height: 4.5rem;
   padding: 0.5rem;
   display: flex;
   align-items: center;
@@ -9,4 +9,19 @@
   margin: 0.5rem;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.widget-container {
+  position: fixed;
+}
+.transaction-widget {  
+  min-width: 10rem;
+  background-color: #0b0f16;
+  display: flex;
+  flex-direction: column;
+}
+
+.widget-button:hover {
+  color: #fff;
+  text-decoration: underline;
 }

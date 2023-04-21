@@ -1,13 +1,26 @@
 <%= render "navbar" %>
-
 <div style="color: #ccc">
-<div>
-  <%= button_to "Buy", home_transaction_path(:kind => "Buy") %>
-   <%= button_to "Sell", home_transaction_path(:kind => "Sell") %>
-    <%= button_to "Deposit", home_transaction_path(:kind => "Deposit") %>
-    <%= button_to "All", home_transaction_path(:kind => "All") %>
+  <div class="flex container">
+    <div class="flex flex-col m-8 " style="width: 15%">
+      <div class="widget-container">
+        <div class="transaction-widget rounded-lg  text-gray-500 text-2xl  items-center p-2 my-2">
+          Transaction Filter
+        </div>
+        <div class="transaction-widget rounded-lg text-gray-500 justify-center p-2 my-2 text-xl">
+          <%= button_to "Buy", home_transaction_path(:kind => "Buy"), :class => "widget-button container" %>
+          <%= button_to "Sell", home_transaction_path(:kind => "Sell"), :class => "widget-button container" %>
+          <%= button_to "Deposit", home_transaction_path(:kind => "Deposit"), :class => "widget-button container" %>
+          <%= button_to "All", home_transaction_path(:kind => "All"), :class => "widget-button container" %>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <turbo-frame id="transaction_history" class="flex flex-col gap-4 min-w-[500px] px-2 m-8">    
+        <%= render "home/user/transaction" %>
+      </turbo-frame>
+    </div>
+  </div>
 </div>
-  <turbo-frame id="transaction_history" class="flex flex-col gap-4 min-w-[500px] px-2 m-8">    
-    <%= render "home/user/transaction" %>
-  </turbo-frame>
-</div>
+  
+   
+  
