@@ -1,14 +1,22 @@
 
 <div style="color: #ccc">
-<div class="flex flex-col gap-4 min-w-[500px] px-2 m-8">
+<div class="flex flex-col gap-4 min-w-[500px] px-2 m-8 text-lg">
   <div class="flex flex-col items-left bg-[#0b0f16] p-4 rounded-lg text-gray-500">
     <div class= "py-2">
       <%=@user_details["lname"].titleize()%>,
       <%=@user_details["fname"].titleize()%>
       <%=@user_details["mname"].titleize()%>
     </div>
-    <div class="py-2">
-      Balance :  <%= number_to_currency(@user_details["balance"])%>
+    <div class="flex justify-between">
+      <div class="py-2">
+        Balance :  <%= number_to_currency(@user_details["balance"])%>
+      </div>
+      <div class="py-2">
+        Account Level :  <%= @auth_lvl['user_level'] == 2 ? "Administrator" : "Standard User"%>
+      </div>
+      <div class="py-2">
+        Last Login :  <%= @latest_login["login_time"]%>
+      </div>
     </div>
   </div>
   <div class="flex text-white text-2xl">

@@ -47,7 +47,10 @@ class HomeController < ApplicationController
   end
 
   def profile 
+
     @user_details = User.find(current_user.id)
+    @latest_login = @user_details.logins.last
+    @auth_lvl = @user_details.authentication
     @portfolio= Transaction::Portfolio.display(current_user.id)
   end
 
