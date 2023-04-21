@@ -8,7 +8,7 @@
   <div class="flex flex-col">
     <input type="checkbox" id="useractions" class="peer/useractions hidden">
     <label for="useractions" class="peer/useractions flex gap-2 select-none cursor-pointer">
-      <i class="fa-solid fa-user-group"></i>
+      <span><i class="fa-solid fa-user-group"></i></span>
       Users
       <span class="ml-auto"><i class="fa-solid fa-chevron-down"></i></span>
     </label>
@@ -38,6 +38,10 @@
     <span>Messages</span>
   </div>
 
+  <div class="flex gap-2 items-center">
+    <i class="fa-solid fa-door-open"></i>
+    <%= button_to "Logout", signout_path, data: { turbo: true }, class: "text-white h-[40px] w-[40px] bg-[#0b0f16]" %>
+  </div>
 
   <!-- temporary hidden -->
   <div class="mt-auto hidden">

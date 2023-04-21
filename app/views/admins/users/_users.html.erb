@@ -1,10 +1,10 @@
 <%= turbo_frame_tag "ud#{user.id}" do %>
 <div class="user-list">
-  <span class="text-white ml-1">
+  <span class="text-white mx-2">
     <%= user.id %>
   </span>
   
-  <span class="flex text-white">
+  <span class="flex text-white min-w-[250px]">
     <div class="h-[25px] w-[25px] flex justify-center items-center rounded-full border-white border-[1px]">
       <i class="fa-solid fa-user "></i>
     </div>
@@ -13,19 +13,19 @@
     </div>
   </span>
   
-  <span class="text-white">
+  <span class="flex-1 text-white">
     <%= user.email %>
   </span>
   
-  <span class="text-white">
+  <span class="text-white flex-1 w-[100px] ">
     <%= user.status %>
   </span>
 
-  <span class="text-white border-r-[1px] border-[#f890e7] min-w-[220px]">
+  <span class="flex-1 w-[100px] text-white">
     <%= user.created_at %>
   </span>
 
-  <div class="flex gap-4 ml-2 border-r-[1px] border-[#f890e7]">
+  <div class="flex gap-4 ml-2 ">
     <%= button_to "view", admin_user_show_path(email: user.email), class: "text-white" %>
 
     <%= button_to "edit", edit_user_path(email: user.email), 

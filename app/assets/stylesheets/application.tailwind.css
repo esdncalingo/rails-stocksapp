@@ -89,12 +89,12 @@ th, td {
 }
 
 .table-header {
-  @apply grid grid-cols-[30px_260px_200px_100px_auto_175px] p-2 text-white font-bold;
+  @apply flex p-2 text-gray-500 font-bold;
 }
 
 .user-list {
-  @apply grid grid-cols-[30px_260px_200px_100px_auto_175px] bg-slate-500 bg-opacity-20 mb-2 p-2 border-solid border-[1px] border-[#f890e7] rounded-md
-  hover:border-[#03e9f4] hover:drop-shadow-[0_5px_5px_rgba(3,233,244,1.25)] transition-all duration-300 select-none min-w-[820px] -skew-x-12;
+  @apply flex bg-[#0b0f16] mb-1 p-2 rounded-md
+  hover:drop-shadow-[0_2px_2px_rgba(3,233,244,1.25)] transition-all duration-300 select-none;
 }
 
 .btn-create {
@@ -105,7 +105,7 @@ th, td {
 }
 
 .searchbar {
-  @apply flex border-[#f890e7] border-[1px] p-2 mb-8 min-w-[820px];
+  @apply flex bg-[#0b0f16] rounded-md p-4 mb-8 min-w-[820px];
 }
 
 .pagination {
