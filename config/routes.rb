@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   # ---- Users View
   post "/admin/user/waiting" => "admins#waiting_list"
   post "/admin/user/active" => "admins#active_users"
+  post "/admin/user/filter_order" => "admins#filter_order"
 
   # Homepage
   get "/home" => "home#index"

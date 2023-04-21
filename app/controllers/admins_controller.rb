@@ -1,6 +1,6 @@
 class AdminsController < ApplicationController
   before_action :require_admin
-  before_action :set_user, only: [:update_user, :edit_user, :show_user]
+  before_action :set_user, only: [:update_user, :edit_user, :show_user, :filter_order]
   before_action :user_display, only: [:userpage, :waiting_list, :active_users, :search_user]
 
   def index; end
@@ -32,7 +32,7 @@ class AdminsController < ApplicationController
       format.turbo_stream { render turbo_stream: [
         turbo_stream.update("dashboard", partial: "admins/users/show_user", locals: { user: @user }),
         turbo_stream.update("portfolio", partial: "admins/users/portfolio", locals: { portfolio: @portfolio }),
-        turbo_stream.update("transaction_history", partial: "admins/users/transaction", locals: { user_history: @user_history })
+        turbo_stream.update("transaction_history", partial: "admins/users/transaction", locals: { user_history: @user_history, user: @user })
         ]}
     end
   end
@@ -70,6 +70,15 @@ class AdminsController < ApplicationController
     end
   end
 
+  def filter_order 
+    @user_history = Transaction::History.show(params[:user_id], params[:commit])
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: 
+        turbo_stream.update("transaction_history", partial: "admins/users/transaction", locals: { user_history: @user_history })
+      }
+    end
+  end
+
   def active_users 
     respond_to do |format|
       format.turbo_stream { render turbo_stream:
@@ -79,7 +88,6 @@ class AdminsController < ApplicationController
   end
 
   def search_user
-    #binding.pry
     @user =  User.where('fname LIKE (?) OR lname LIKE (?) OR mname LIKE (?)', "%#{params[:user_search]}%", "%#{params[:user_search]}%", "%#{params[:user_search]}%")
     respond_to do |format|
       format.turbo_stream do
