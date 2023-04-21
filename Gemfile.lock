@@ -290,6 +290,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kaminari
+  mail
   mailslurp_client (~> 15.17, >= 15.17.5)
   pg (~> 1.1)
   pry-byebug

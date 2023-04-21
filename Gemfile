@@ -40,6 +40,7 @@ gem 'kaminari'
 gem 'pry-byebug'
 
 gem 'mailslurp_client', '~> 15.17', '>= 15.17.5'
+gem 'mail'
 
 # railsjazz
 gem "rails_charts"

@@ -43,6 +43,7 @@ class AdminsController < ApplicationController
     respond_to do |format|
       user = User.find_by(email: params[:email])
       if user.update(status: "approved")
+        UserMailer.send_activated_email(params[:email]).deliver_later
         format.turbo_stream { render turbo_stream:
           [
             turbo_stream.update("ud#{user.id}", partial: "admins/users/users", locals: { user: user }),

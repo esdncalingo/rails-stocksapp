@@ -1,7 +1,7 @@
 <%= link_to home_buy_sell_path(symbol: item['symbol']) do %>
-<div class="flex bg-[#0b0f16] gap-2 p-2">
+<div class="flex bg-[#0b0f16] mb-1 p-2 transition-all duration-300 ease-in hover:ring hover:ring-[#03e9f4] rounded-md">
   
-  <div class="flex flex-1 gap-2 min-w-[300px]">
+  <div class="flex flex-1 gap-2 min-w-[300px] rounded-md">
     <div>
       <%= image_tag(url, class: "w-[60px] h-[60px] select-none") %>
     </div>
@@ -12,16 +12,24 @@
     </div>
   </div>
   
-  <div class="flex-1 text-white text-center min-w-[70px]">
+  <div class="flex-1 text-white text-center min-w-[100px] self-center">
     <span><%= item['currency'] %></span>
   </div>
 
-  <div class="flex-1 text-white text-center min-w-[70px]">
+  <div class="flex-1 text-white text-center min-w-[100px] self-center">
     <span class="<%=quote['change_percent'] >= 0 ? 'text-green-500' : 'text-red-500'%>"><%= quote['change_percent_s'] %></span>
   </div>
 
-  <div class="flex-1 text-white text-center min-w-[70px]">
+  <div class="flex-1 text-white text-center min-w-[100px] self-center">
     <span><%= quote['latest_price'] %></span>
+  </div>
+
+  <div class="flex-1 text-white text-right min-w-[150px] self-center">
+    <span><%= quote['avg_total_volume'] %></span>
+  </div>
+
+  <div class="flex-1 text-white text-right min-w-[200px] self-center mr-5">
+    <span><%= quote['market_cap'] %></span>
   </div>
 
 </div>

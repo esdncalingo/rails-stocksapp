@@ -52,6 +52,7 @@ class SessionsController < ApplicationController
       if (auth_params[:password] === params[:password_confirmation])
         if @user = User.create_user(auth_params)
           format.html { redirect_to new_userinfo_path(id: @user.id) }
+          UserMailer.send_pending_email(params[:email]).deliver_later
         end
       else
         render :signup, status: :unprocessable_entity

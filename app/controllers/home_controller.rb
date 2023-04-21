@@ -27,7 +27,7 @@ class HomeController < ApplicationController
   end
 
   def buysell
-    @paginated_items = Kaminari.paginate_array($stocks_master).page(2).per(10)
+    @paginated_items = Kaminari.paginate_array($stocks_master).page(params[:page]).per(10)
   end
 
   def market

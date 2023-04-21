@@ -108,6 +108,22 @@ th, td {
   @apply flex border-[#f890e7] border-[1px] p-2 mb-8 min-w-[820px];
 }
 
+.pagination {
+  @apply text-white justify-center flex mx-8;
+}
+
+.pagination span {
+  @apply flex-1 text-center rounded-md;
+}
+
+.pagination span:hover {
+  @apply drop-shadow-[0_2px_2px_rgba(3,233,244,1.25)];
+}
+
+.pagination .current {
+  @apply ring-2 ring-[#03e9f4];
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
