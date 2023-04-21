@@ -1,7 +1,7 @@
 
 <div style="color: #ccc">
-<div class="flex flex-col gap-4 min-w-[500px] px-2 m-8 text-lg">
-  <div class="flex flex-col items-left bg-[#0b0f16] p-4 rounded-lg text-gray-500">
+<div class="flex flex-col items-center gap-4 min-w-[500px] px-2 m-8 text-lg">
+  <div class="flex flex-col bg-[#0b0f16] w-full px-4 rounded-lg text-gray-500">
     <div class= "py-2">
       <%=@user_details["lname"].titleize()%>,
       <%=@user_details["fname"].titleize()%>
@@ -19,36 +19,39 @@
       </div>
     </div>
   </div>
-  <div class="flex text-white text-2xl">
-    My Stocks
-  </div>
-   <div class="flex flex-col items-center">
-    <div class="flex items-center text-gray-500">
-      <div class="profile-table-header "></div>
-      <div class="profile-table-header ">Code</div>
-      <div class="profile-table-header ">Name</div>
-      <div class="profile-table-header ">On Hand</div>
-      <div class="profile-table-header ">Price</div>
-      <div class="profile-table-header ">Percentage Change</div>
-      <div class="profile-table-header "></div>
+  
+  <div class="flex flex-col">
+    <span class="text-white text-4xl font-bold mb-8">My Stocks</span>
+    <div class="flex items-center text-gray-500 mb-2">
+      <div class="flex-1 "></div>
+      <div class="flex-1 min-w-[100px] text-center">Code</div>
+      <div class="flex-1 min-w-[300px]">Name</div>
+      <div class="flex-1 min-w-[100px]">On Hand</div>
+      <div class="flex-1  min-w-[100px]">Price</div>
+      <div class="flex-1 min-w-[100px]">Percentage Change</div>
+      <div class="flex-1 min-w-[100px]"></div>
     </div>
-    <% @portfolio.each do | data |%>
-      <div class="flex items-center">
-        <div class="profile-table-cell ">
-          <img src=<%= data["logo"]%> >
+    
+    <div class="flex flex-col">
+      <% @portfolio.each do | data |%>
+        <div class="flex mb-2">
+          <div class="flex-1">
+            <img src=<%= data["logo"]%> class="w-[60px] h-[60px] select-none">
+          </div>
+
+          <div class="flex-1 min-w-[100px] text-center"><%=data["code"]%></div>
+          <div class="flex-1 min-w-[300px]"><%=data["name"]%></div>
+          <div class="flex-1 min-w-[100px]"><%=data["qty"]%></div>
+          <div class="flex-1 min-w-[100px]"><%=data["latest_price"]%></div>
+          <div class="flex-1 min-w-[100px]
+            <%=data['change_percent'].to_f >= 0 ? 'text-green-500' : 'text-red-500'%>
+          "><%=data["change_percent"]%></div>
+          <div class="flex-1 min-w-[100px]">
+            <a class=" text-yellow-500 hover:text-yellow-600 " href="/home/buy-sell?symbol=<%=data["code"]%>">Trade</a>
+          </div>  
         </div>
-        <div class="profile-table-cell "><%=data["code"]%></div>
-        <div class="profile-table-cell "><%=data["name"]%></div>
-        <div class="profile-table-cell "><%=data["qty"]%></div>
-        <div class="profile-table-cell "><%=data["latest_price"]%></div>
-        <div class="profile-table-cell
-          <%=data['change_percent'].to_f >= 0 ? 'text-green-500' : 'text-red-500'%>
-        "><%=data["change_percent"]%></div>
-        <div class="profile-table-cell">
-          <a class=" text-yellow-500 hover:text-yellow-600 " href="/home/buy-sell?symbol=<%=data["code"]%>">Trade</a>
-        </div>
-      </div>
-    <%end%>
+      <%end%>
+    </div>
 
   </div>
 </div>
