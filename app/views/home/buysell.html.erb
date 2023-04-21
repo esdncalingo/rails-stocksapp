@@ -19,6 +19,18 @@
 
     <div class="mb-12">
       <div class="mb-2">
+        <div class="flex text-gray-500">
+          <div class="flex flex-1 gap-2 min-w-[300px]">
+            <span class="w-[60px]"></span>
+            <span class="">Name</span>
+          </div>
+          <span class="flex-1 text-center min-w-[100px] self-center">Currency</span>
+          <span class="flex-1 text-center min-w-[100px] self-center">Change</span>
+          <span class="flex-1 text-center min-w-[100px] self-center">Price</span>
+          <span class="flex-1 text-right min-w-[150px] self-center">Avg. Vol</span>
+          <span class="flex-1 text-right min-w-[200px] self-center mr-5">Market Cap</span>
+        </div>
+
         <% @paginated_items.each do |item| %>
           <%= render "home/components/paginated_frame", 
             item: item, 

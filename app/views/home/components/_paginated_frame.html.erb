@@ -25,11 +25,11 @@
   </div>
 
   <div class="flex-1 text-white text-right min-w-[150px] self-center">
-    <span><%= quote['avg_total_volume'] %></span>
+    <span><%= number_to_currency(quote['avg_total_volume'], unit: "", precision: 0) %></span>
   </div>
 
   <div class="flex-1 text-white text-right min-w-[200px] self-center mr-5">
-    <span><%= quote['market_cap'] %></span>
+    <span><%= number_to_currency(quote['market_cap']) %></span>
   </div>
 
 </div>
