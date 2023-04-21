@@ -1,2 +1,10 @@
-<span class="text-white">Waiting for Approval</span>
-<%= button_to "Logout", signout_path, class: "btn-primary" %>
+
+<div class="emoji flex-col ">
+  <%= @display_emoji %>
+  <div style="font-size: 1rem;">   
+    Waiting for Approval from Account Administrator use Logout Button and try again later
+  </div>
+</div>
+<div class="flex flex-col items-center">
+  <%= button_to "Logout", signout_path, class: "btn-primary" %>
+</div>
