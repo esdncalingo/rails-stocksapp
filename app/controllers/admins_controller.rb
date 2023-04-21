@@ -26,10 +26,14 @@ class AdminsController < ApplicationController
   end
 
   def show_user
+    @portfolio = Transaction::Portfolio.display(params[:user_id])
+    @user_history = Transaction::History.show(params[:user_id], params[:kind])   
     respond_to do |format|
-      format.turbo_stream { render turbo_stream:
-        turbo_stream.update("dashboard", partial: "admins/users/show_user", locals: {user: @user})
-      }
+      format.turbo_stream { render turbo_stream: [
+        turbo_stream.update("dashboard", partial: "admins/users/show_user", locals: { user: @user }),
+        turbo_stream.update("portfolio", partial: "admins/users/portfolio", locals: { portfolio: @portfolio }),
+        turbo_stream.update("transaction_history", partial: "admins/users/transaction", locals: { user_history: @user_history })
+        ]}
     end
   end
 

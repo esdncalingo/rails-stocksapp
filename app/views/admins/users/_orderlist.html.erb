@@ -1,0 +1,14 @@
+<div class="flex gap-4">
+  <div class="bg-[#0b0f16] rounded-lg text-gray-500 text-xl items-center py-2 px-3">
+    Transaction Filter
+  </div>
+  <div class="flex gap-4 bg-[#0b0f16] rounded-lg text-gray-500 py-2 px-3 text-xl">
+    <%= button_to "Buy", admin_user_show_path(:kind => "Buy") %>
+    <%= button_to "Sell", admin_user_show_path(:kind => "Sell") %>
+    <%= button_to "Deposit", admin_user_show_path(:kind => "Deposit") %>
+    <%= button_to "All", admin_user_show_path(:kind => "All") %>
+  </div>
+</div>
+
+<turbo-frame id="transaction_history" class="flex flex-col px-1"></turbo-frame>
+

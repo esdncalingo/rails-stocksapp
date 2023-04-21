@@ -1,0 +1,34 @@
+<span class="text-white text-4xl font-bold mb-8">Stocks</span>
+
+<div class="flex rounded-lg text-gray-500 text-lg mb-2">
+    <span class="flex-1">Type</span>
+     <span class="flex-1">Code</span>
+     <span class="flex-1">Price</span>
+     <span class="flex-1">Quantity</span>
+     <span class="flex-1">Amount</span>
+     <span class="flex-1">Transaction Date</span>
+</div>
+<% user_history.each do |data|%>
+  <div class="flex bg-[#0b0f16] p-2 rounded-lg text-gray-500 text-lg hover:text-white
+  transition-all duration-300 ease-in hover:ring hover:ring-[#03e9f4] mb-1
+  ">
+    <div class="flex-1">
+      <%= data["kind"]%>
+    </div class="flex-1">
+    <div class="flex-1">
+      <%= data["stock_code"]%>
+    </div>
+    <div class="flex-1">          
+        <%= data['kind'] == "Deposit" ? nil : data["price"]%>   
+    </div>
+    <div class="flex-1">
+      <%= data['kind'] == "Deposit" ? nil : data["qty"].abs()%>         
+    </div>
+    <div class="flex-1" style="width: 8rem;">
+      <%= number_to_currency(data["amount"])%>
+    </div>
+    <div class="flex-1">
+      <%= data["created_at"].strftime("%m/%d/%y")%>
+    </div>
+  </div>
+<% end %>

@@ -30,7 +30,7 @@ class StocksRepository
     stock_details["latest_price"] = quote.latest_price # 90.165    
     stock_details["change_percent"] = quote.change_percent_s # '+0.42%'  
     
-    return stock_details
+    stock_details
   end
 
   private

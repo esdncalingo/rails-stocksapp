@@ -6,14 +6,13 @@ class Transaction
         stock_details(user_id, transaction["stock_code"])
         # stock_details(transaction["user_id"], transaction["stock_code"])
       }
-      
-      return my_portfolios;   
+      my_portfolios   
     end
 
     private
     def self.my_transactions(user_id)
       user = User.find(user_id)
-      stock_transactions = user.transactions.distinct.select("stock_code").where.not(stock_code: nil)
+      user.transactions.distinct.select("stock_code").where.not(stock_code: nil)
     end
 
     def self.stock_details(user_id, stock_symbol)
@@ -35,7 +34,7 @@ class Transaction
       stock_portfolio["latest_price"] =  details["latest_price"]   
       stock_portfolio["change_percent"] =  details["change_percent"]
       
-      return stock_portfolio
+      stock_portfolio
     end
 
     def self.stock_inventory(user_id, stock_symbol)

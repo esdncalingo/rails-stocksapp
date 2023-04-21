@@ -1,0 +1,33 @@
+<div class="flex flex-col mb-4">
+  <span class="text-white text-4xl font-bold mb-8">Stocks</span>
+  <div class="flex items-center text-gray-500 mb-2">
+    <div class="flex-1 "></div>
+    <div class="flex-1 min-w-[100px] text-center">Code</div>
+    <div class="flex-1 min-w-[300px]">Name</div>
+    <div class="flex-1 min-w-[100px]">On Hand</div>
+    <div class="flex-1  min-w-[100px]">Price</div>
+    <div class="flex-1 min-w-[100px]">Percentage Change</div>
+    <div class="flex-1 min-w-[100px]"></div>
+  </div>
+    
+  <div class="flex flex-col">
+    <% portfolio.each do | item |%>
+      <div class="flex mb-2 text-white">
+        <div class="flex-1">
+          <img src=<%= item["logo"]%> class="w-[60px] h-[60px] select-none">
+        </div>
+
+        <div class="flex-1 min-w-[100px] text-center"><%=item["code"]%></div>
+        <div class="flex-1 min-w-[300px]"><%=item["name"]%></div>
+        <div class="flex-1 min-w-[100px]"><%=item["qty"]%></div>
+        <div class="flex-1 min-w-[100px]"><%=item["latest_price"]%></div>
+        <div class="flex-1 min-w-[100px]
+          <%=item['change_percent'].to_f >= 0 ? 'text-green-500' : 'text-red-500'%>
+        "><%=item["change_percent"]%>
+        </div>
+  
+      </div>
+    <%end%>
+  </div>
+</div>
+

@@ -1,6 +1,23 @@
-<%= turbo_stream.update "dashboard" do%>
-  <div class="text-white">
-    <%= user.inspect %>
-    <%= user.email %>
+
+<div class="text-white mb-4">
+  <div class="flex gap-4">
+    <span class="text-gray-500">Name: </span>
+    <div>
+      <span><%= (user.fname).capitalize() %></span>
+      <span><%= (user.mname).capitalize() %></span>
+      <span><%= (user.lname).capitalize() %></span>
+    </div>
   </div>
+
+  <div class="flex gap-4">
+    <span class="text-gray-500">Email:</span>
+    <span><%= user.email %></span>
+  </div>
+</div>
+
+<%= turbo_frame_tag "portfolio" do %>
 <% end %>
+
+<div>
+  <%= render "admins/users/orderlist" %>
+</div>
