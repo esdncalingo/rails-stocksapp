@@ -63,7 +63,7 @@ class HomeController < ApplicationController
 
   def filter_transaction
     @user_history = Transaction::History.show(current_user.id, params[:kind])
-    respond_to do | format |
+    respond_to do |format|
       format.turbo_stream{
         render turbo_stream: turbo_stream.update("transaction_history", partial: "home/user/transaction", locals:{
           user_history: @user_history
@@ -124,7 +124,6 @@ class HomeController < ApplicationController
       This is a test galing sa mailslurp
     MESSAGE_END
 
-    binding.pry
     # configure NET SMTP with plain auth
     Net::SMTP.start(smtp_access.smtp_server_host, smtp_access.smtp_server_port, 'greeting.your.domain',
                 smtp_access.smtp_username, smtp_access.smtp_password, :plain) do |smtp|
