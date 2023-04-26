@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "trader#index"
+  root "traders#index"
 
   # Session routes
   get "/signin" => "sessions#signin", as: :signin_page
@@ -29,19 +29,19 @@ Rails.application.routes.draw do
   post "/admin/user/filter_order" => "admins#filter_order"
 
   # Homepage
-  get "/home" => "trader#index"
-  get "/pending" => "trader#pending", as: :pending_page
+  get "/home" => "traders#index"
+  get "/pending" => "traders#pending", as: :pending_page
   # -- Pages
-  get "/deposit" => "trader#deposit"
-  get "/buy-sell" => "trader#buysell"
-  get "/market" => "trader#market"
-  get "/trade" => "trader#trade"
-  get "/profile" => "trader#profile"
-  get "/transaction" => "trader#transaction"
+  get "/deposit" => "traders#deposit"
+  get "/buy-sell" => "traders#buysell"
+  get "/market" => "traders#market"
+  get "/trade" => "traders#trade"
+  get "/profile" => "traders#profile"
+  get "/transaction" => "traders#transaction"
   # --- btn actions
-  post "/deposit/addbalance" => "trader#add_balance"
-  post "/buy-sell" => "trader#user_buysell"
-  post "/transaction" => "trader#filter_transaction"
+  post "/deposit/addbalance" => "traders#add_balance"
+  post "/buy-sell" => "traders#user_buysell"
+  post "/transaction" => "traders#filter_transaction"
 
   # Stocks 
   get "/stocks/show" => "stocks#show", as: :stocks_page

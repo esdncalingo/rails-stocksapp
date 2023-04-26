@@ -1,4 +1,4 @@
-class TraderController < ApplicationController
+class TradersController < ApplicationController
   include ActionView::Helpers::NumberHelper
   before_action :require_user
   before_action :initialize_stocks_master
@@ -64,7 +64,7 @@ class TraderController < ApplicationController
     @user_history = Transaction::History.show(current_user.id, params[:kind])
     respond_to do |format|
       format.turbo_stream{
-        render turbo_stream: turbo_stream.update("transaction_history", partial: "trader/user/transaction", locals:{
+        render turbo_stream: turbo_stream.update("transaction_history", partial: "traders/user/transaction", locals:{
           user_history: @user_history
         })
       }
