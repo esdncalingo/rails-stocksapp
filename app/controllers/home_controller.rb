@@ -172,7 +172,8 @@ class HomeController < ApplicationController
     symbol = params[:symbol] ? params[:symbol] : 'TSLA'
     @quote = @iex_client.quote(symbol)
     @logo = @iex_client.logo(symbol)['url']
-    @chart_data = get_chart_data(symbol)
+    # @chart_data = get_chart_data(symbol)
+    @chart_data = Stock::Chart.candle(symbol)
     @balance = TransactionRepository.show_balance(current_user.id)
     @onhand = Transaction::Inventory.stock_count(current_user.id, symbol)
   end

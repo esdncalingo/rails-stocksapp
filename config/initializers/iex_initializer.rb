@@ -5,4 +5,4 @@ IEX::Api.configure do |config|
   config.endpoint = 'https://cloud.iexapis.com/v1' # use 'https://sandbox.iexapis.com/v1' for Sandbox
 end
 
-@iex_client = IEX::Api::Client.new
+IEX_CLIENT = IEX::Api::Client.new

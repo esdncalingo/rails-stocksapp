@@ -25,7 +25,8 @@ class Transaction
         "latest_price" => 0.00,
         "change_percent" => ""
       }  
-      details = StocksRepository.stock_details(stock_symbol)
+      # details = StocksRepository.stock_details(stock_symbol)
+      details = Stock::Profile.details(stock_symbol)
       # pp details
       stock_portfolio["logo"] = details["logo"]
       stock_portfolio["code"] =  details["code"]

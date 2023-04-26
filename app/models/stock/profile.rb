@@ -1,5 +1,6 @@
-class Stocks
+class Stock   
   class Profile
+    IEX_CLIENT = IEX::Api::Client.new
     def self.details(stock_symbol)
       stock_details = {
         code: "",
@@ -14,10 +15,10 @@ class Stocks
         change_percent: ""
       }
       
-      client = @iex_client.company(stock_symbol)
-      logo = @iex_client.logo(stock_symbol)
-      quote = @iex_client.quote(stock_symbol)
-      income_statements = @iex_client.income(stock_symbol)
+      client = IEX_CLIENT.company(stock_symbol)
+      logo = IEX_CLIENT.logo(stock_symbol)
+      quote = IEX_CLIENT.quote(stock_symbol)
+      income_statements = IEX_CLIENT.income(stock_symbol)
       
       stock_details["code"] = client.symbol
       stock_details["name"] = client.company_name 
