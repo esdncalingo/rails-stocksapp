@@ -1,9 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
-  
-  def initialize_iex_client
-    @iex_client = IEX::Api::Client.new
-  end
 
   def initialize_stocks_master
     if ($stocks_master.blank?)

@@ -1,5 +1,4 @@
 class StocksController < ApplicationController
-  before_action :initialize_iex_client
   #before_action :verify_stock_master
   
 
@@ -9,7 +8,7 @@ class StocksController < ApplicationController
     # $stocks_master = response
     # top 10 list
     response = Faraday.get('https://cloud.iexapis.com/v1/stock/market/list/mostactive?token=pk_ed7475c0c153436587bd10b8f1da9916')
-    logo = @iex_client.logo("TSLA")
+    logo = IEX_CLIENT.logo("TSLA")
   #     conn = Faraday.new(:url => 'https://rest.coinapi.io') 
 
   #     # send request
@@ -73,7 +72,7 @@ class StocksController < ApplicationController
 
   def get_chart_data(stock_symbol)
     # puts stock_symbol    
-    chart = @iex_client.chart(stock_symbol)
+    chart = IEX_CLIENT.chart(stock_symbol)
     chart_arr = chart.reduce([]) { |init, curr| 
       init.push([curr['label'], curr['open'], curr['close'], curr['high'], curr['low']]);     
     }.inject({}) do |res, k|
@@ -101,10 +100,10 @@ class StocksController < ApplicationController
     $stocks_master = JSON.parse(response.body)
     stock_data =  $stocks_master.find { |s| s['name'] == stocks_params['stock_name']}
     
-    client = @iex_client.company(stock_symbol)
-    logo = @iex_client.logo(stock_symbol)
-    quote = @iex_client.quote(stock_symbol)
-    income_statements = @iex_client.income(stock_symbol)
+    client = IEX_CLIENT.company(stock_symbol)
+    logo = IEX_CLIENT.logo(stock_symbol)
+    quote = IEX_CLIENT.quote(stock_symbol)
+    income_statements = IEX_CLIENT.income(stock_symbol)
     
     stock_details["code"] = client.symbol
     stock_details["name"] = client.company_name 

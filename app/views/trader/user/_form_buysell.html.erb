@@ -1,5 +1,5 @@
 
-<%= form_with(scope: @user, url: home_buy_sell_path, method: :post, class: "flex flex-col gap-4 min-w-[500px] px-2") do |form| %>
+<%= form_with(scope: @user, url: buy_sell_path, method: :post, class: "flex flex-col gap-4 min-w-[500px] px-2") do |form| %>
   <input type="hidden" name="symbol" value="<%= @quote['symbol'] %>"/>
   <input type="hidden" name="price" value="<%= @quote['latest_price'] %>"/>
   <div class="flex items-center bg-[#0b0f16] p-4 rounded-lg">

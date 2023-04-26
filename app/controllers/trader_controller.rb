@@ -1,7 +1,6 @@
-class HomeController < ApplicationController
+class TraderController < ApplicationController
   include ActionView::Helpers::NumberHelper
   before_action :require_user
-  before_action :initialize_iex_client
   before_action :initialize_stocks_master
   before_action :company_dashboard
 
@@ -65,7 +64,7 @@ class HomeController < ApplicationController
     @user_history = Transaction::History.show(current_user.id, params[:kind])
     respond_to do |format|
       format.turbo_stream{
-        render turbo_stream: turbo_stream.update("transaction_history", partial: "home/user/transaction", locals:{
+        render turbo_stream: turbo_stream.update("transaction_history", partial: "trader/user/transaction", locals:{
           user_history: @user_history
         })
       }
@@ -135,11 +134,11 @@ class HomeController < ApplicationController
   private
 # ---------- Helpers ----------
   def get_logo(stock_symbol)
-    @iex_client.logo(stock_symbol)['url']
+    IEX_CLIENT.logo(stock_symbol)['url']
   end
 
   def get_quote(stock_symbol)
-    @iex_client.quote(stock_symbol)
+    IEX_CLIENT.quote(stock_symbol)
   end 
 
   def check_url(stock_symbol)
@@ -147,7 +146,7 @@ class HomeController < ApplicationController
       if newarray['url']
         newarray['url']
       else
-        newarray['url'] = @iex_client.logo(stock_symbol)['url']
+        newarray['url'] = IEX_CLIENT.logo(stock_symbol)['url']
         $stocks_master.find { |item| item['symbol'] == stock_symbol ? item.replace(newarray) : '' }
         File.write('./app/helpers/stock_master.json', JSON.dump($stocks_master))
         newarray['url']
@@ -160,7 +159,7 @@ class HomeController < ApplicationController
       if newarray['quote']
         newarray['quote']
       else
-        newarray['quote'] = @iex_client.quote(stock_symbol)
+        newarray['quote'] = IEX_CLIENT.quote(stock_symbol)
         $stocks_master.find { |item| item['symbol'] == stock_symbol ? item.replace(newarray) : '' }
         File.write('./app/helpers/stock_master.json', JSON.dump($stocks_master))
         newarray['quote']
@@ -170,17 +169,16 @@ class HomeController < ApplicationController
 #-----------------------------
   def company_dashboard
     symbol = params[:symbol] ? params[:symbol] : 'TSLA'
-    @quote = @iex_client.quote(symbol)
-    @logo = @iex_client.logo(symbol)['url']
-    # @chart_data = get_chart_data(symbol)
-    @chart_data = Stock::Chart.candle(symbol)
+    @quote = IEX_CLIENT.quote(symbol)
+    @logo = IEX_CLIENT.logo(symbol)['url']
+    @chart_data = get_chart_data(symbol)
     @balance = TransactionRepository.show_balance(current_user.id)
     @onhand = Transaction::Inventory.stock_count(current_user.id, symbol)
   end
 
   def get_chart_data(stock_symbol)
     # puts stock_symbol    
-    chart = @iex_client.chart(stock_symbol)
+    chart = IEX_CLIENT.chart(stock_symbol)
     chart_arr = chart.reduce([]) { |init, curr| 
       init.push([curr['label'], curr['open'], curr['close'], curr['high'], curr['low']]);     
     }.inject({}) do |res, k|
