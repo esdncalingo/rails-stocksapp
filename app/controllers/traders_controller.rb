@@ -2,7 +2,7 @@ class TradersController < ApplicationController
   include ActionView::Helpers::NumberHelper
   before_action :require_user
   before_action :initialize_stocks_master
-  #before_action :company_dashboard
+  before_action :company_dashboard
 
   def index
     @most_active = Stock::Marketlist.mostactive
