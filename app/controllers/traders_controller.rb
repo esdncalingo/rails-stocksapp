@@ -59,7 +59,6 @@ class TradersController < ApplicationController
     else
       head :not_acceptable, { msg: transaction_result }
     end
-    # TransactionRepository.record_transaction(current_user.id, params)
   end
 
   def user_buysell
@@ -89,7 +88,7 @@ class TradersController < ApplicationController
     @quote = IEX_CLIENT.quote(symbol)
     @logo = IEX_CLIENT.logo(symbol)['url']
     @chart_data = get_chart_data(symbol)
-    @balance = TransactionRepository.show_balance(current_user.id)
+    @balance = Transaction::Balance.compute(current_user.id)
     @onhand = Transaction::Inventory.stock_count(current_user.id, symbol)
   end
 
