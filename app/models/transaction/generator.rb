@@ -24,7 +24,7 @@ class Transaction
       end  
       # business logic area
 
-      # recording transaction
+      # recording transaction 
         new_transaction = Transaction.new(
           "user_id": user_id,
           "qty": qty ,
