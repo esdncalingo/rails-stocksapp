@@ -110,13 +110,15 @@ class AdminsController < ApplicationController
 
   def user_display
     @current_user = current_user
-    case params[:action]
-    when "userpage"
-      @user = User.order(created_at: :desc)
-    when "waiting_list"
-      @user = User.order(created_at: :desc).where(status: "pending")
-    when "active_users"
-      @user = User.joins(:authentication).where( authentication: { is_active: true })
-    end
+
+    @user = User::Admin.user_list(params[:action])
+    # case params[:action]
+    # when "userpage"
+    #   @user = User.order(created_at: :desc)
+    # when "waiting_list"
+    #   @user = User.order(created_at: :desc).where(status: "pending")
+    # when "active_users"
+    #   @user = User.joins(:authentication).where( authentication: { is_active: true })
+    # end
   end
 end

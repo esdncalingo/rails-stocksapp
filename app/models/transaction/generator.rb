@@ -1,70 +1,87 @@
 class Transaction
   class Generator
-    def self.process(user_id)   # commit, price, qty, amount   => params
-      # user_balance = Transaction.where("user_id" == user_id).sum(&:amount)    
-      # user_balance = 0 if !user_balance 
+    def self.receipt(user_id,params)  
+      # initialize variable area
+      amount = params[:amount].gsub(/[^\d\.]/, '').to_f          
+      user_balance = Transaction::Balance.compute(user_id) || 0 
+      qty =  params[:qty]  || 0
+      on_hand =  Transaction::Inventory.update(user_id,params[:symbol])      
+      # initialize variable area
 
-      user_balance = Transaction::balance.compute(user_id)
-      #implement computations
-      valid_transaction = true
-      # transaction_qty  = transaction_params['qty'] == "" ? 0 :  transaction_params['qty']
-      # transaction_amount = latest_price.to_f * transaction_qty.to_f   
-      # transaction_kind = params[:commit]
-    
-      #verify kind of transaction
-      if transaction_kind == 'Withdraw' || transaction_kind == 'Deposit'
-        transaction_amount = transaction_params['tAmount']
+      # validation area     
+      return "Amount cannot be less than zero" if amount < 0 
+      return "Not enough balance" if ((amount > user_balance) && (params[:commit] == "Buy")  )
+      return "Not enough on hand to sell" if ((qty.to_f > on_hand.to_f ) && (params[:commit] == "Sell") )
+      return "No Stock was selected" if params[:symbol] == nil
+      # validation area
+      
+      # business logic area
+      if params[:commit] == 'Buy' || params[:commit] == 'Withdraw'  
+        amount = amount > 0 ? amount * -1 : 0         
       end
-      if transaction_kind == 'Buy' || transaction_kind == 'Withdraw'               
-        if params["amount"]> user_balance #condition for balance validation
-          valid_transaction = false
-        end
-        transaction_amount = transaction_amount > 0 ? transaction_amount * -1 : transaction_amount   
-      elsif transaction_kind == 'Sell' || transaction_kind == 'Deposit'
-        if transaction_kind == 'Sell' && transaction_qty > on_hand
-          valid_transaction = false
-        end
-        transaction_qty = transaction_qty.to_i > 0 ? transaction_qty.to_i * -1 : transaction_qty.to_i              
-      end
-        return user_balance 
-      end
+      if params[:commit] == 'Sell'
+        qty =  qty.to_f * -1
+      end  
+      # business logic area
 
-    def self.buy(user_id, params)
-      amount = params[:amount].gsub(/[^\d\.]/, '').to_f
-      
-      if amount > 0
-        user = User.find(user_id)
-        user_balance = user.balance - amount
-        user.update(balance: user_balance)
-        TransactionRepository.record_transaction(user_id, params)
-      else
-        # --- error:  ---
-      end
-    end
-  
-    def self.sell(user_id, params) 
-      amount = params[:amount].gsub(/[^\d\.]/, '').to_f
-      
-      if amount > 0
-        user = User.find(user_id)
-        user_balance = user.balance + amount
-        user.update(balance: user_balance)
-        TransactionRepository.record_transaction(user_id, params)
-      else
-        # --- error:  ---
-      end
-    end
-  
-    def self.deposit(user_id, amount)
-      amount = amount.gsub(/[^\d\.]/, '').to_f
-      
-      if amount > 0
-        user = User.find(user_id)
-        user_balance = user.balance + amount
-        user.update(balance: user_balance)
-      else
-        # --- error: amount input is lessthan the requirements ---
-      end
+      # recording transaction
+        new_transaction = Transaction.new(
+          "user_id": user_id,
+          "qty": qty ,
+          "price": params[:price] ? params[:price] : 0,
+          "amount": amount,
+          "kind": params[:commit],
+          "stock_code": params[:symbol],
+          "crypto_code": params[:crypto_code],
+        )
+
+        if new_transaction.save
+          puts user_balance
+          user = User.find(user_id)          
+          user.update(balance: user_balance + amount)
+          return "OK"
+        else 
+          return new_transaction.errors_full_messages 
+        end
     end
   end
 end 
+
+
+# def self.buy(user_id, params)
+#   amount = params[:amount].gsub(/[^\d\.]/, '').to_f
+  
+#   if amount > 0
+#     user = User.find(user_id)
+#     user_balance = user.balance - amount
+#     user.update(balance: user_balance)
+#     TransactionRepository.record_transaction(user_id, params)
+#   else
+#     # --- error:  ---
+#   end
+# end
+
+# def self.sell(user_id, params) 
+#   amount = params[:amount].gsub(/[^\d\.]/, '').to_f
+  
+#   if amount > 0
+#     user = User.find(user_id)
+#     user_balance = user.balance + amount
+#     user.update(balance: user_balance)
+#     TransactionRepository.record_transaction(user_id, params)
+#   else
+#     # --- error:  ---
+#   end
+# end
+
+# def self.deposit(user_id, amount)
+#   amount = amount.gsub(/[^\d\.]/, '').to_f
+  
+#   if amount > 0
+#     user = User.find(user_id)
+#     user_balance = user.balance + amount
+#     user.update(balance: user_balance)
+#   else
+#     # --- error: amount input is lessthan the requirements ---
+#   end
+# end

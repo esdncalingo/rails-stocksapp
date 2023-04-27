@@ -74,29 +74,44 @@ class TradersController < ApplicationController
   # ------ balance transactions ------
 
   def add_balance
-    Transaction::Generator.deposit(current_user.id, params[:amount])
-    TransactionRepository.record_transaction(current_user.id, params)
+    transaction_result = Transaction::Generator.receipt(current_user.id, params)
+    if transaction_result == "OK"
+      head :ok, { msg: "Transaction Complete" }
+    else
+      head :not_acceptable, { msg: transaction_result }
+    end
+    # TransactionRepository.record_transaction(current_user.id, params)
   end
 
   def user_buysell
     # --- params[:commit] Buy or Sell
-    case params[:commit]
-    when "Buy"
-      Transaction::Generator.buy(current_user.id, params)
-    when "Sell"
-      Transaction::Generator.sell(current_user.id, params)
-    end
-    user = User.find(current_user.id)   
+    # case params[:commit]
+    # when "Buy"
+    #   Transaction::Generator.buy(current_user.id, params)
+    # when "Sell"
+    #   Transaction::Generator.sell(current_user.id, params)
+    # end
+    # Transaction::Generator.buy(current_user.id, params)
+    # Transaction::Generator.receipt(current_user.id, params)
+    transaction_result = Transaction::Generator.receipt(current_user.id, params)
+    if transaction_result == "OK"
+      user = User.find(current_user.id)   
 
-    symbol = params[:symbol] ? params[:symbol] : 'TSLA'
+      symbol = params[:symbol] ? params[:symbol] : 'TSLA'
 
-    onhand = Transaction::Inventory.stock_count(current_user.id, symbol)
-    respond_to do |format|
-      format.turbo_stream { render turbo_stream: [
-        turbo_stream.update("balance", number_to_currency(user.balance)),
-        turbo_stream.update("onhand", onhand)
-      ]}
+      onhand = Transaction::Inventory.stock_count(current_user.id, symbol)
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: [
+         turbo_stream.update("balance", number_to_currency(user.balance)),
+         turbo_stream.update("onhand", onhand)
+       ]}
+      end
+
+      head :ok, { msg: "Transaction Complete" }
+    else
+      head :not_acceptable, { msg: transaction_result }
     end
+    
   end
 
   # -------------------- Testing Purpose Only

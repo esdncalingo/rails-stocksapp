@@ -37,7 +37,7 @@
           <%= data['kind'] == "Deposit" ? nil : data["qty"].abs()%>         
         </div>
         <div class="history-table-cell" style="width: 8rem;">
-          <%= number_to_currency(data["amount"])%>
+          <%= number_to_currency(data["amount"].abs())%>
         </div>
         <div class="history-table-cell">
           <%= data["created_at"].strftime("%m/%d/%y")%>
