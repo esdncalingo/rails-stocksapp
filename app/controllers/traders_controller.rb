@@ -76,7 +76,7 @@ class TradersController < ApplicationController
     
         #head :ok, { msg: "Transaction Complete" }
       else
-        #head :not_acceptable, { msg: transaction_result }
+        head :not_acceptable, { msg: transaction_result }
       end
     end
   end
