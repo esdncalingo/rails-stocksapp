@@ -66,9 +66,7 @@ class TradersController < ApplicationController
       Transaction::Generator.sell(current_user.id, params)
     end
     user = User.find(current_user.id)   
-
     symbol = params[:symbol] ||= 'TSLA'
-
     onhand = Transaction::Inventory.stock_count(current_user.id, symbol)
     respond_to do |format|
       format.turbo_stream { render turbo_stream: [
@@ -81,7 +79,7 @@ class TradersController < ApplicationController
   private
 #-----------------------------
   def company_dashboard
-    symbol = params[:symbol] ? params[:symbol] : 'TSLA'
+    symbol = params[:symbol] ||= 'TSLA'
     @quote = IEX_CLIENT.quote(symbol)
     @logo = IEX_CLIENT.logo(symbol)['url']
     @chart_data = get_chart_data(symbol)
