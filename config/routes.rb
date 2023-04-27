@@ -28,14 +28,13 @@ Rails.application.routes.draw do
   post "/admin/user/active" => "admins#active_users"
   post "/admin/user/filter_order" => "admins#filter_order"
 
-  # Homepage
+  # Trader Homepage
   get "/home" => "traders#index"
   get "/pending" => "traders#pending", as: :pending_page
   # -- Pages
   get "/deposit" => "traders#deposit"
   get "/buy-sell" => "traders#buysell"
   get "/market" => "traders#market"
-  get "/trade" => "traders#trade"
   get "/profile" => "traders#profile"
   get "/transaction" => "traders#transaction"
   # --- btn actions
@@ -43,13 +42,4 @@ Rails.application.routes.draw do
   post "/buy-sell" => "traders#user_buysell"
   post "/transaction" => "traders#filter_transaction"
 
-  # Stocks 
-  get "/stocks/show" => "stocks#show", as: :stocks_page
-  get "/stocks/profile" => "stocks#profile", as: :stocks_profile
-  post "/stocks/purchase:stock_code" => "stocks#transact", as: :transact_stocks
-  # post "/stocks/purchase" => "stocks#details", as: :stocks_details
-  post "/stocks/search" => "stocks#search", as: :search_stocks
- 
-  # Transactions
-  post "/transact/record" => "transactions#record", as: :record_transaction
 end

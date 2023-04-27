@@ -34,7 +34,7 @@
         <% @paginated_items.each do |item| %>
           <%= render "traders/components/paginated_frame", 
             item: item, 
-            url: check_url(item['symbol']), 
+            url: check_logo(item['symbol']), 
             quote: check_quote(item['symbol'])
           %>
         <% end %>

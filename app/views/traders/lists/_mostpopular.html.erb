@@ -1,10 +1,10 @@
 <div class="flex p-4">
   <div class="flex w-[330px] gap-2">
-    <span class="text-white font-bold"><%= company["companyName"] %>   </span>
+    <span class="text-white font-bold"><%= company["company_name"] %>   </span>
     <span class="text-gray-500"><%= company["symbol"] %></span>
   </div>
 
-  <span class="min-w-[200px] text-white text-center">$<%= company["latestPrice"] %></span>
+  <span class="min-w-[200px] text-white text-center">$<%= company["latest_price"] %></span>
   <span class="min-w-[200px] text-center <%= company["change"] >= 0 ? 'text-green-500' : 'text-red-500' %>"><%= company["change"] %>%</span>
-  <span class="min-w-[200px] text-white text-right"><%= number_to_currency(company["marketCap"]) %></span>
+  <span class="min-w-[200px] text-white text-right"><%= number_to_currency(company["market_cap"]) %></span>
 </div>
