@@ -63,34 +63,23 @@ class TradersController < ApplicationController
   end
 
   def user_buysell
-    # --- params[:commit] Buy or Sell
-    # case params[:commit]
-    # when "Buy"
-    #   Transaction::Generator.buy(current_user.id, params)
-    # when "Sell"
-    #   Transaction::Generator.sell(current_user.id, params)
-    # end
-    # Transaction::Generator.buy(current_user.id, params)
-    # Transaction::Generator.receipt(current_user.id, params)
-    transaction_result = Transaction::Generator.receipt(current_user.id, params)
-    if transaction_result == "OK"
-      user = User.find(current_user.id)   
-
-    symbol = params[:symbol] ||= 'TSLA'
-
-      onhand = Transaction::Inventory.stock_count(current_user.id, symbol)
-      respond_to do |format|
+    respond_to do |format|
+      transaction_result = Transaction::Generator.receipt(current_user.id, params)
+      if transaction_result == "OK"
+        user = User.find(current_user.id)   
+        symbol = params[:symbol] ||= 'TSLA'
+        onhand = Transaction::Inventory.stock_count(current_user.id, symbol)
+        
         format.turbo_stream { render turbo_stream: [
-         turbo_stream.update("balance", number_to_currency(user.balance)),
-         turbo_stream.update("onhand", onhand)
-       ]}
-      end
-
-      head :ok, { msg: "Transaction Complete" }
-    else
-      head :not_acceptable, { msg: transaction_result }
-    end
+          turbo_stream.update("balance", number_to_currency(user.balance)),
+          turbo_stream.update("onhand", onhand)
+        ]}
     
+        #head :ok, { msg: "Transaction Complete" }
+      else
+        #head :not_acceptable, { msg: transaction_result }
+      end
+    end
   end
 
   private

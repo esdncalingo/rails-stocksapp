@@ -31,15 +31,12 @@ class Transaction
       stock_portfolio["logo"] = details["logo"]
       stock_portfolio["code"] =  details["code"]
       stock_portfolio["name"] =  details["name"]    
-      stock_portfolio["qty"] = stock_inventory(user_id, stock_symbol)        
+      stock_portfolio["qty"] = Transaction::Inventory.stock_count(user_id, stock_symbol)        
       stock_portfolio["latest_price"] =  details["latest_price"]   
       stock_portfolio["change_percent"] =  details["change_percent"]
       
       stock_portfolio
     end
 
-    def self.stock_inventory(user_id, stock_symbol)
-      Transaction::Inventory.update(user_id, stock_symbol)
-    end
   end
 end 
