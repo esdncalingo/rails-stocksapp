@@ -10,3 +10,6 @@ User.new(email: "admin@email.com", fname: "daniel", mname: "nav", lname: "caling
 Authentication.signup(email: "admin@email.com", username: "admin", password: "12345678")
 admin = Authentication.find_by(username: "admin")
 admin.update(user_level: 2)
+
+User.create_user({:username => "danielc", :password => "12345678", :email => "daniel@email.com", :status => "approved"})
+User.create_user({:username => "henri", :password => "12345678", :email => "henri@email.com", :status => "approved"})
