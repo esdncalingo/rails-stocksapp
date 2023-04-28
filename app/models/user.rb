@@ -14,7 +14,6 @@ class User < ApplicationRecord
       email: params[:email],
       status: "pending",
     ).save
-    
     Authentication.signup(params)
   end
 

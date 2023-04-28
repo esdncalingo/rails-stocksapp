@@ -11,7 +11,7 @@ class Authentication < ApplicationRecord
   def self.login(login_params)
     account = find_by(username: login_params[:username])
     
-    if account.present? && account.is_active? == false
+    if account.present? && !account.is_active? 
       if Password.new(account.password) == login_params[:password]
         account.update(
           is_active: true
