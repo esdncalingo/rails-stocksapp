@@ -7,7 +7,7 @@ class Transaction
       qty =  params[:qty].to_i  || 0
       on_hand =  Transaction::Inventory.stock_count(user_id,params[:symbol])      
       # initialize variable area
-
+      
       # business logic area
       case params[:commit]
       when "Deposit"
