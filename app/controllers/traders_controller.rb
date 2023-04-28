@@ -87,20 +87,9 @@ class TradersController < ApplicationController
     symbol = params[:symbol] ||= 'TSLA'
     @quote = IEX_CLIENT.quote(symbol)
     @logo = IEX_CLIENT.logo(symbol)['url']
-    @chart_data = get_chart_data(symbol)
+    @chart_data = Stock::Chart.candle(symbol)
     @balance = Transaction::Balance.compute(current_user.id)
     @onhand = Transaction::Inventory.stock_count(current_user.id, symbol)
-  end
-
-  def get_chart_data(stock_symbol)
-    # puts stock_symbol    
-    chart = IEX_CLIENT.chart(stock_symbol)
-    chart_arr = chart.reduce([]) { |init, curr| 
-      init.push([curr['label'], curr['open'], curr['close'], curr['high'], curr['low']]);     
-    }.inject({}) do |res, k|
-        res[k[0]] = k[1..-1]
-        res
-      end
   end
   
 end

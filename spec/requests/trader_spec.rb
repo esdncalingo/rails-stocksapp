@@ -40,6 +40,8 @@ RSpec.describe "Traders", type: :request do
   end
 
   it 'load Portfolio return status 200' do
+    post '/deposit/addbalance', params: {commit: "Deposit", amount: 200000}
+    post '/buy-sell', params: {commit: "Buy", amount: 200, qty: 1, symbol: 'TSLA'}, as: :turbo_stream
     get '/profile'
     expect(response).to have_http_status(200)
   end
