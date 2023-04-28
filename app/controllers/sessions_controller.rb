@@ -55,7 +55,7 @@ class SessionsController < ApplicationController
           UserMailer.send_pending_email(params[:email]).deliver_later
         end
       else
-        render :signup, status: :unprocessable_entity
+        format.html {render :signup, status: :unprocessable_entity}
       end
     end
   end
