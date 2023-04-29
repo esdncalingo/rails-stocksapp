@@ -1,4 +1,4 @@
-class IexCloud
+module IexCloud
   BASE_URL = 'https://cloud.iexapis.com/v1/stock/market'
   TOKEN = Rails.application.credentials.config[:publishable_token]  
 
