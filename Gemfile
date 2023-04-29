@@ -63,6 +63,7 @@ gem "bootsnap", require: false
 # gem "sassc-rails"
 
 gem 'simplecov', require: false, group: :test
+gem 'simple-http', '~> 0.3.7'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -97,3 +98,4 @@ end
 gem 'iex-ruby-client'
 gem 'faraday'
 gem "typhoeus", "~> 1.4"
+gem 'rest-client'
