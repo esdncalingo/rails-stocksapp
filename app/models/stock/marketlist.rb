@@ -13,9 +13,8 @@ class Stock
 			IEX_CLIENT.stock_market_list(:losers)
 		end
 
-		def self.latest_news
-			response = Faraday.get('https://cloud.iexapis.com/v1/stock/market/batch?types=news&range=1m&last=5&token=pk_06f0670b09884fe5aa66d394e4263f00')
-    	JSON.parse(response.body)
+		def self.latest_news		
+			IexCloud.news('/batch?types=news&range=1m&last=5&')
 		end
 	end
 end
