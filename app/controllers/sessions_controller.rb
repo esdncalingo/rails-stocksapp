@@ -67,9 +67,6 @@ class SessionsController < ApplicationController
   end
 
   private
-  def admin_params
-    params.permit(:username, :password)
-  end
 
   def auth_params
     params.permit(:username, :password, :email)
