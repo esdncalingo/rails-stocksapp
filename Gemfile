@@ -86,6 +86,11 @@ group :development do
   # gem "spring"
 end
 
+group :production do
+  gem 'rspec-rails', '~> 6.0.0'
+  gem 'factory_bot_rails'
+end
+
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
