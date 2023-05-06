@@ -3,7 +3,6 @@ class Transaction
     def self.display(user_id)  
       stocks_transactions =  my_transactions(user_id)
       my_portfolios = stocks_transactions.map { |transaction|
-        # binding.pry
         stock_details(user_id, transaction[0], transaction[1]) 
         # stock_details(transaction["user_id"], transaction["stock_code"])
       }
