@@ -16,6 +16,4 @@ test:
 
 production:
   <<: *default
-  database: rails_stocksapp_production
-  username: rails_stocksapp
-  password: <%= ENV["RAILS_STOCKSAPP_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
